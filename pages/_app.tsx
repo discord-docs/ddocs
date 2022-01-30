@@ -22,7 +22,7 @@ const ContentWrapper = styled("main", {
   flex: "1 1 auto",
   flexDirection: "column",
   minHeight: "min-content",
-  padding: "40px 40px 40px 40px",
+  // padding: "40px 40px 40px 40px",
   width: "100%",
   overflowY: "auto",
   height: "100%",

@@ -3,7 +3,7 @@ import type { SidebarItem } from "../components/Sidebar";
 export const DEFAULT_SIDEBAR_ITEMS: SidebarItem[] = [
   {
     label: "Summaries",
-    href: "/",
+    href: "/summaries",
     icon: "summaries",
   },
   {
