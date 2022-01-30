@@ -7,7 +7,7 @@ export const { getCssText, styled, globalCss, css } = createStitches({
       backgroundSecondary: '#2f3136',
       headerPrimary: '#fff',
       textNormal: '#dcddde',
-      brand: '#5468ff',
+      brand: '#5865f2',
     },
   },
   prefix: 'ddocs',

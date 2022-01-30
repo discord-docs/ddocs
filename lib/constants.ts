@@ -1,25 +1,25 @@
-import type { SidebarItem } from '../components/Sidebar';
+import type { SidebarItem } from "../components/Sidebar";
 
 export const DEFAULT_SIDEBAR_ITEMS: SidebarItem[] = [
   {
-    label: 'Overview',
-    href: '/',
-    icon: 'house',
+    label: "Summaries",
+    href: "/",
+    icon: "summaries",
   },
   {
-    label: 'Build History',
-    href: '/builds',
-    icon: 'clock',
+    label: "Features",
+    href: "/features",
+    icon: "features",
   },
   {
-    label: 'Experiments',
-    href: '/experiments',
-    icon: 'science',
+    label: "API Documentation",
+    href: "/documentation",
+    icon: "documentation",
   },
   {
-    label: 'API Documentation',
-    href: '/documentation',
-    icon: 'documentation',
+    label: "Privacy Policy",
+    href: "/privacy",
+    icon: "privacypolicy",
   },
 ];
 
