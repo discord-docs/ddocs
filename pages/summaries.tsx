@@ -3,20 +3,17 @@ import DatePicker from "../components/DatePicker";
 import { styled } from "../stitches.config";
 
 const Banner = styled("div", {
-  position: "relative",
   display: "flex",
-  height: "35.19vh",
+  height: "35.2vh",
   background:
-    "url('/assets/images/summaries-banner.svg') bottom left, linear-gradient(90deg, #5865F2 0%, #414EDE 100%);",
+    "url('/assets/images/summaries-banner.svg'), linear-gradient(90deg, #5865F2 0%, #414EDE 100%);",
+  backgroundPosition: "bottom center",
   overflow: "hidden",
 });
 
 const BannerContainer = styled("div", {
-  display: "block",
   alignSelf: "flex-end",
-  height: "fit-content",
-  margin: "auto",
-  marginLeft: 100,
+  margin: "auto auto auto 2.5%",
 });
 
 const BannerTitle = styled("h1", {
