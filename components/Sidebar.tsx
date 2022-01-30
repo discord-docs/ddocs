@@ -15,7 +15,13 @@ StyledSidebar.displayName = "Sidebar";
 
 const StyledSidebarHeader = styled("header", {
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "row",
+  columnGap: 12,
+  marginLeft: 12,
+  marginTop: 13,
+  marginBottom: 26,
+  cursor: "pointer",
+  userSelect: "none",
 });
 
 StyledSidebarHeader.displayName = "SidebarHeader";
@@ -94,10 +100,12 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
 
   return (
     <StyledSidebar>
-      {/* <StyledSidebarHeader>
-        <h2>Discord Previews</h2>
-        <h3>Build #12345</h3>
-      </StyledSidebarHeader> */}
+      <Link passHref href="/">
+        <StyledSidebarHeader>
+          <Icon icon="Discord-Logo-White" />
+          <strong>ddocs.io</strong>
+        </StyledSidebarHeader>
+      </Link>
       <StyledSidebarNavBar>
         {items.map((item) => {
           if (!item.hasOwnProperty("title")) {
