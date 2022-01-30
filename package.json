@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "luxon": "^2.1.1",
     "next": "^12.0.2",
     "react": "17.0.2",
