@@ -1,8 +1,10 @@
 import React from "react";
 import { FC } from "react";
+import Card from "../components/Card";
+import CardList from "../components/CardList";
 import { AuthContext } from "../components/context/AuthContext";
 import DatePicker from "../components/DatePicker";
-import { styled } from "../stitches.config";
+import { css, styled } from "../stitches.config";
 
 const Banner = styled("div", {
   display: "flex",
@@ -31,6 +33,27 @@ const BannerSubtitle = styled("h3", {
 
 Banner.displayName = "Banner";
 
+const SummaryList = styled("div", {
+  position: "relative",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(250px, max-content))",
+  gridTemplateRows: "290px",
+  gap: 40,
+  marginLeft: "auto",
+  marginRight: "auto",
+  width: "100%",
+  justifyContent: "center",
+});
+
+const Summary = styled(Card, {
+  height: 290,
+  width: 250,
+});
+
+const wrapper = css({
+  padding: 40,
+});
+
 interface SummaryProps {
   description: string;
   summaries: SummaryBody;
@@ -39,6 +62,16 @@ interface SummaryProps {
 const Summaries: FC<SummaryProps> = ({ summaries }) => {
   const context = React.useContext(AuthContext);
   console.log(context); // just a test of context
+
+  const SummaryElements = () => (
+    <>
+      {summaries.items.map((i, idx) => (
+        <Summary key={idx} title={i.title} image={i.previewImage}>
+          {i.description}
+        </Summary>
+      ))}
+    </>
+  );
 
   return (
     <>
@@ -57,8 +90,12 @@ const Summaries: FC<SummaryProps> = ({ summaries }) => {
           />
         </BannerContainer>
       </Banner>
-      <h1>Summaries</h1>
-      <p>{summaries.items[0].title}</p>
+
+      <div className={wrapper()}>
+        <CardList>
+          <SummaryElements />
+        </CardList>
+      </div>
     </>
   );
 };
@@ -71,7 +108,7 @@ interface SummaryItem {
   title: string;
   description: string;
   id: string;
-  previewImage: string;
+  previewImage?: string;
 }
 
 export async function getServerSideProps() {
@@ -88,26 +125,25 @@ export async function getServerSideProps() {
         title: "This is a title",
         description: "This is a description",
         id: "100000",
-        previewImage: "https://i.imgur.com/wSTFkRM.png",
+        previewImage: "/assets/images/sample-summary-preview.png",
       },
       {
         title: "This is a title",
         description: "This is a description",
         id: "100000",
-        previewImage: "https://i.imgur.com/wSTFkRM.png",
       },
       {
         title: "This is a title",
         description: "This is a description",
         id: "100000",
-        previewImage: "https://i.imgur.com/wSTFkRM.png",
+        previewImage: "/assets/images/sample-summary-preview.png",
       },
     ],
   };
 
   return {
     props: {
-      description: `Discord Docs`,
+      description: `Stage Summaries`,
       summaries: response,
     },
   };

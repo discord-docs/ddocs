@@ -70,6 +70,9 @@ const Text = styled("div", {
       },
     },
     size: {
+      normal: {
+        fontSize: "initial",
+      },
       large: {
         fontSize: 28,
         lineHeight: "34px",
