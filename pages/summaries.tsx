@@ -1,4 +1,6 @@
+import React from "react";
 import { FC } from "react";
+import { AuthContext } from "../components/context/AuthContext";
 import DatePicker from "../components/DatePicker";
 import { styled } from "../stitches.config";
 
@@ -35,6 +37,9 @@ interface SummaryProps {
 }
 
 const Summaries: FC<SummaryProps> = ({ summaries }) => {
+  const context = React.useContext(AuthContext);
+  console.log(context); // just a test of context
+
   return (
     <>
       <Banner>
