@@ -1,10 +1,9 @@
-import { relative } from "node:path/win32";
 import React from "react";
 import { FC } from "react";
 import Card from "../components/Card";
+import CardList from "../components/CardList";
 import { AuthContext } from "../components/context/AuthContext";
 import DatePicker from "../components/DatePicker";
-import Metric from "../components/Metric";
 import { css, styled } from "../stitches.config";
 
 const Banner = styled("div", {
@@ -49,8 +48,6 @@ const SummaryList = styled("div", {
 const Summary = styled(Card, {
   height: 290,
   width: 250,
-  textOverflow: "ellipsis",
-  whiteSpace: "pre-wrap",
 });
 
 const wrapper = css({
@@ -65,6 +62,16 @@ interface SummaryProps {
 const Summaries: FC<SummaryProps> = ({ summaries }) => {
   const context = React.useContext(AuthContext);
   console.log(context); // just a test of context
+
+  const SummaryElements = () => (
+    <>
+      {summaries.items.map((i, idx) => (
+        <Summary key={idx} title={i.title} image={i.previewImage}>
+          {i.description}
+        </Summary>
+      ))}
+    </>
+  );
 
   return (
     <>
@@ -85,155 +92,9 @@ const Summaries: FC<SummaryProps> = ({ summaries }) => {
       </Banner>
 
       <div className={wrapper()}>
-        <SummaryList>
-          <Summary
-            title="This is a title"
-            image="/assets/images/sample-summary-preview.png"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary title="This is a title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary
-            title="This is a title"
-            image="/assets/images/sample-summary-preview.png"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary title="This is a title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary
-            title="This is a title"
-            image="/assets/images/sample-summary-preview.png"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary title="This is a title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary
-            title="This is a title"
-            image="/assets/images/sample-summary-preview.png"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary title="This is a title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary
-            title="This is a title"
-            image="/assets/images/sample-summary-preview.png"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary title="This is a title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary
-            title="This is a title"
-            image="/assets/images/sample-summary-preview.png"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary title="This is a title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary
-            title="This is a title"
-            image="/assets/images/sample-summary-preview.png"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-          <Summary title="This is a title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Summary>
-        </SummaryList>
+        <CardList>
+          <SummaryElements />
+        </CardList>
       </div>
     </>
   );
@@ -247,7 +108,7 @@ interface SummaryItem {
   title: string;
   description: string;
   id: string;
-  previewImage: string;
+  previewImage?: string;
 }
 
 export async function getServerSideProps() {
@@ -264,26 +125,25 @@ export async function getServerSideProps() {
         title: "This is a title",
         description: "This is a description",
         id: "100000",
-        previewImage: "https://i.imgur.com/wSTFkRM.png",
+        previewImage: "/assets/images/sample-summary-preview.png",
       },
       {
         title: "This is a title",
         description: "This is a description",
         id: "100000",
-        previewImage: "https://i.imgur.com/wSTFkRM.png",
       },
       {
         title: "This is a title",
         description: "This is a description",
         id: "100000",
-        previewImage: "https://i.imgur.com/wSTFkRM.png",
+        previewImage: "/assets/images/sample-summary-preview.png",
       },
     ],
   };
 
   return {
     props: {
-      description: `Discord Docs`,
+      description: `Stage Summaries`,
       summaries: response,
     },
   };
