@@ -3,7 +3,6 @@ import { css, styled } from "../stitches.config";
 import Panel from "./Panel";
 import Image from "next/image";
 import Text from "./Text";
-import Truncate from "react-truncate";
 
 interface MetricProps {
   title: string;
