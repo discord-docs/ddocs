@@ -6,6 +6,7 @@ const Panel = styled("div", {
   boxSizing: "border-box",
   borderColor: "$border",
   borderRadius: 5,
+  overflow: "hidden",
   borderStyle: "solid",
   transition: "border .125s",
   variants: {
@@ -29,7 +30,10 @@ const Panel = styled("div", {
         borderColor: "#ed4245",
       },
     },
-    size: {
+    padding: {
+      nopad: {
+        padding: 0,
+      },
       small: {
         padding: 12,
       },
@@ -41,7 +45,7 @@ const Panel = styled("div", {
   defaultVariants: {
     color: "light",
     border: "none",
-    size: "small",
+    padding: "small",
   },
 });
 
