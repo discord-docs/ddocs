@@ -1,6 +1,7 @@
 import axios from "axios";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import AuthenticationContextProvider from "../components/context/AuthContext";
 import Sidebar from "../components/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
 import { globalCss, styled } from "../stitches.config";
@@ -44,20 +45,22 @@ function DiscordDocsApp({ Component, pageProps }: AppProps) {
   const description = pageProps.description || "Discord Docs";
 
   return (
-    <Wrapper>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="og:title" content={title} />
-        <meta name="og:description" content={description} />
-      </Head>
-      <Sidebar
-        items={[...DEFAULT_SIDEBAR_ITEMS, ...(pageProps.sidebarItems || [])]}
-      />
-      <ContentWrapper>
-        <Component {...pageProps} />
-      </ContentWrapper>
-    </Wrapper>
+    <AuthenticationContextProvider>
+      <Wrapper>
+        <Head>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta name="og:title" content={title} />
+          <meta name="og:description" content={description} />
+        </Head>
+        <Sidebar
+          items={[...DEFAULT_SIDEBAR_ITEMS, ...(pageProps.sidebarItems || [])]}
+        />
+        <ContentWrapper>
+          <Component {...pageProps} />
+        </ContentWrapper>
+      </Wrapper>
+    </AuthenticationContextProvider>
   );
 }
 
