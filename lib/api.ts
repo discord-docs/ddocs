@@ -1,8 +1,7 @@
 import AuthenticationContext from "../components/context/AuthContext";
 import CurrentUser from "./currentUser";
 
-//export const BaseApiURl = "https://api.ddocs.io";
-export const BaseApiURl = "http://localhost:8080";
+export const BaseApiURl = "https://api.ddocs.io";
 
 export const Routes = {
   Login: "/auth/login",
