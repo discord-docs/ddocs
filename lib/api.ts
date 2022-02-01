@@ -1,5 +1,5 @@
 import AuthenticationContext from "../components/context/AuthContext";
-import CurrentUser from "./currentUser";
+import CurrentUser from "./api-models/currentUser";
 
 export const BaseApiURL = "https://api.ddocs.io";
 
