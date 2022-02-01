@@ -13,6 +13,7 @@ const Banner = styled("div", {
     "url('/assets/images/summaries-banner.svg'), linear-gradient(90deg, #5865F2 0%, #414EDE 100%);",
   backgroundPosition: "bottom center",
   overflow: "hidden",
+  backgroundRepeat: "no-repeat",
 });
 
 const BannerContainer = styled("div", {
