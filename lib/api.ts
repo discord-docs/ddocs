@@ -1,7 +1,7 @@
 import AuthenticationContext from "../components/context/AuthContext";
 import CurrentUser from "./currentUser";
 
-export const BaseApiURl = "https://api.ddocs.io";
+export const BaseApiURL = "https://api.ddocs.io";
 
 export const Routes = {
   Login: "/auth/login",
@@ -11,15 +11,10 @@ export const Routes = {
 };
 
 export default class API {
-  private _jwt?: string;
   private _context: AuthenticationContext;
 
   constructor(context: AuthenticationContext) {
     this._context = context;
-  }
-
-  public setJWT(jwt: string) {
-    this._jwt = jwt;
   }
 
   public async getCurrentUser(): Promise<CurrentUser | undefined> {
@@ -37,8 +32,29 @@ export default class API {
     }
   }
 
+  public async logout(): Promise<void> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Logout)
+    );
+
+    if (!result.ok) this.handleUnknownError(result);
+  }
+
+  public async login(code: string): Promise<string | undefined> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Login) + "?code=" + code
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return;
+    }
+
+    return (await result.json()).token;
+  }
+
   public static getRoute(route: string) {
-    return `${BaseApiURl}${route}`;
+    return `${BaseApiURL}${route}`;
   }
 
   private handleUnknownError(response: Response) {

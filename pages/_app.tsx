@@ -1,6 +1,7 @@
 import axios from "axios";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import AccountHeader from "../components/AccountHeader";
 import AuthenticationContextProvider from "../components/context/AuthContext";
 import Sidebar from "../components/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
@@ -36,7 +37,9 @@ const globalStyles = globalCss({
   "*": { boxSizing: "border-box" },
 });
 
-function DiscordDocsApp({ Component, pageProps }: AppProps) {
+const dontRenderSidebarOn = ["/login"];
+
+function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   globalStyles();
 
   const title = `Discord Docs ${
@@ -53,9 +56,18 @@ function DiscordDocsApp({ Component, pageProps }: AppProps) {
           <meta name="og:title" content={title} />
           <meta name="og:description" content={description} />
         </Head>
-        <Sidebar
-          items={[...DEFAULT_SIDEBAR_ITEMS, ...(pageProps.sidebarItems || [])]}
-        />
+        {dontRenderSidebarOn.includes(router.pathname) ? undefined : (
+          <>
+            <Sidebar
+              items={[
+                ...DEFAULT_SIDEBAR_ITEMS,
+                ...(pageProps.sidebarItems || []),
+              ]}
+            />
+            <AccountHeader />
+          </>
+        )}
+
         <ContentWrapper>
           <Component {...pageProps} />
         </ContentWrapper>

@@ -63,7 +63,7 @@ const StyledTableDataCell = styled("td", {
   padding: 8,
   fontWeight: 300,
   maxWidth: 272,
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 });
 
 StyledTableDataCell.displayName = "TableDataCell";
