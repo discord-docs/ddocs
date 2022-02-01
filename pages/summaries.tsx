@@ -40,10 +40,7 @@ const SummaryList = styled("div", {
   gridTemplateColumns: "repeat(auto-fit, minmax(250px, max-content))",
   gridTemplateRows: "290px",
   gap: 40,
-  marginLeft: "auto",
-  marginRight: "auto",
   width: "100%",
-  justifyContent: "center",
 });
 
 const Summary = styled(Card, {
