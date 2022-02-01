@@ -43,7 +43,6 @@ interface AuthenticationContextProps {}
 
 interface AuthenticationContextState {
   account?: Account;
-  loginCallback?: (isAuthed: boolean, details?: Account) => void;
   hasChecked: boolean;
 }
 
@@ -52,33 +51,25 @@ class AuthenticationContext extends React.Component<
   AuthenticationContextState
 > {
   public Api: API;
+  private loginCallback: (IsAuthed: boolean, details?: Account) => void =
+    () => {};
+  private hasCheckedInternal: boolean = false;
+  private _jwt: string | undefined;
 
   async componentDidMount() {
     if (!this.isAuthed) {
-      const refresh = this.refreshCookie;
-
-      if (!refresh) {
-        this.state.loginCallback ? this.state.loginCallback(false) : undefined;
-        this.setState({ hasChecked: true });
-        return;
-      }
-
       await this.refreshToken();
+
+      this.loginCallback(this.state.account !== undefined, this.state.account);
     }
+
+    this.hasCheckedInternal = true;
+    this.setState({ hasChecked: true });
   }
 
   public get isAuthed(): boolean {
     const isAuthed = this.state.account !== undefined;
     return isAuthed;
-  }
-
-  public get refreshCookie(): string | undefined {
-    return (
-      document.cookie
-        .split(";")
-        .find((c) => c.startsWith("r_"))
-        ?.split("=")[1] ?? undefined
-    );
   }
 
   constructor(props: AuthenticationContextProps) {
@@ -94,7 +85,12 @@ class AuthenticationContext extends React.Component<
   ): Promise<Response> {
     const r = await fetch(input, {
       ...init,
-      headers: { Authorization: "Bearer " + this.state.account?.jwt },
+      headers: {
+        Authorization:
+          this.state.account?.jwt || this._jwt
+            ? `Bearer ${this.state.account?.jwt ?? this._jwt}`
+            : "",
+      },
     });
 
     if (
@@ -115,13 +111,12 @@ class AuthenticationContext extends React.Component<
 
   private async refreshToken() {
     const url = API.getRoute(Routes.Refresh);
-
     const r = await fetch(url, {
       credentials: "include",
     });
 
     if (!r.ok) {
-      throw new Error("failed to refresh token");
+      return;
     }
 
     const data = (await r.json()) as { token: string };
@@ -142,9 +137,10 @@ class AuthenticationContext extends React.Component<
   }
 
   private setUser = async (uid: string, jwt: string) => {
+    this._jwt = jwt;
     const details = await this.Api.getCurrentUser();
     if (details) {
-      await this.setState({
+      await this.setStateAsync({
         ...this.state,
         account: {
           uid,
@@ -153,21 +149,24 @@ class AuthenticationContext extends React.Component<
         },
       });
     } else {
+      this._jwt = undefined;
       throw new Error("failed to get user details");
     }
   };
 
   private clearUser = async () => {
-    await fetch(API.getRoute(Routes.Logout), {
+    await this.makeAuthedRequest(API.getRoute(Routes.Logout), {
       method: "POST",
       credentials: "include",
     });
-
+    this._jwt = undefined;
     this.setState({ account: undefined });
   };
 
   public setLoginCallback = (callback: (IsAuthed: boolean) => void) => {
-    this.setState({ loginCallback: callback });
+    this.loginCallback = callback;
+    if (this.hasCheckedInternal || this.state.hasChecked)
+      callback(this.isAuthed);
   };
 
   render() {
