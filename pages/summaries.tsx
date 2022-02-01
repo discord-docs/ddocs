@@ -1,9 +1,13 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
 import { AuthContext } from "../components/context/AuthContext";
 import DatePicker from "../components/DatePicker";
+import API, { Routes } from "../lib/api";
+import PartialEvent from "../lib/api-models/partialEvent";
+import Summary from "../lib/api-models/summary";
 import { css, styled } from "../stitches.config";
 
 const Banner = styled("div", {
@@ -54,17 +58,28 @@ const wrapper = css({
 
 interface SummaryProps {
   description: string;
-  summaries: SummaryBody;
+  currentEvents: PartialEvent[];
 }
 
-const Summaries: FC<SummaryProps> = ({ summaries }) => {
-  const context = React.useContext(AuthContext);
-  console.log(context); // just a test of context
+const Summaries: FC<SummaryProps> = ({ currentEvents }) => {
+  const [year, setYear] = useState<string>(`${new Date().getFullYear()}`);
+  const [events, setEvents] = useState<PartialEvent[]>(currentEvents);
+  const auth = React.useContext(AuthContext);
+
+  const getEvents = async () => {
+    const events = await auth.Api!.getEvents(year);
+
+    setEvents(events);
+  };
+
+  useEffect(() => {
+    getEvents();
+  }, [year]);
 
   const SummaryElements = () => (
     <>
-      {summaries.items.map((i, idx) => (
-        <Summary key={idx} title={i.title} image={i.previewImage}>
+      {events.map((i, idx) => (
+        <Summary key={idx} title={i.title} image={i.thumbnail}>
           {i.description}
         </Summary>
       ))}
@@ -81,9 +96,9 @@ const Summaries: FC<SummaryProps> = ({ summaries }) => {
           </BannerSubtitle>
           <DatePicker
             onChange={(h) => {
-              console.log(h);
+              setYear(h);
             }}
-            current="2022"
+            current={year}
             values={["2019", "2020", "2021", "2022", "2023", "2024"]}
           />
         </BannerContainer>
@@ -98,17 +113,6 @@ const Summaries: FC<SummaryProps> = ({ summaries }) => {
   );
 };
 
-interface SummaryBody {
-  items: SummaryItem[];
-}
-
-interface SummaryItem {
-  title: string;
-  description: string;
-  id: string;
-  previewImage?: string;
-}
-
 export async function getServerSideProps() {
   // TODO: Use api
   // const response = await axios.get<SummaryBody>("https://api.ddocs.io/...");
@@ -117,32 +121,14 @@ export async function getServerSideProps() {
   const yearsAvailable = [2021, 2022];
 
   // grab items from selected year
-  const response: SummaryBody = {
-    items: [
-      {
-        title: "This is a title",
-        description: "This is a description",
-        id: "100000",
-        previewImage: "/assets/images/sample-summary-preview.png",
-      },
-      {
-        title: "This is a title",
-        description: "This is a description",
-        id: "100000",
-      },
-      {
-        title: "This is a title",
-        description: "This is a description",
-        id: "100000",
-        previewImage: "/assets/images/sample-summary-preview.png",
-      },
-    ],
-  };
+  const result = await axios.get(
+    API.getRoute(Routes.Events + `?year=${new Date().getFullYear()}`)
+  );
 
   return {
     props: {
       description: `Stage Summaries`,
-      summaries: response,
+      currentEvents: result.status === 200 ? result.data : [],
     },
   };
 }
