@@ -85,6 +85,7 @@ class AuthenticationContext extends React.Component<
   ): Promise<Response> {
     const r = await fetch(input, {
       ...init,
+      credentials: "include",
       headers: {
         Authorization:
           this.state.account?.jwt || this._jwt

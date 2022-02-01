@@ -2,17 +2,12 @@ import { styled } from "@stitches/react";
 import Link from "next/link";
 import { FunctionComponent } from "react";
 
-interface LoginButtonProps {
-  onClick: () => void;
-}
+interface LoginButtonProps {}
 
 const Container = styled("div", {
   "&:hover": {
     boxShadow: "0px 4px 5px 2px #0202024f",
   },
-  top: "40px",
-  right: "40px",
-  position: "absolute",
   borderRadius: "8px",
   cursor: "pointer",
   display: "flex",

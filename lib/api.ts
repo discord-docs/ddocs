@@ -1,7 +1,7 @@
 import AuthenticationContext from "../components/context/AuthContext";
 import CurrentUser from "./currentUser";
 
-export const BaseApiURl = "https://api.ddocs.io";
+export const BaseApiURL = "https://api.ddocs.io";
 
 export const Routes = {
   Login: "/auth/login",
@@ -54,7 +54,7 @@ export default class API {
   }
 
   public static getRoute(route: string) {
-    return `${BaseApiURl}${route}`;
+    return `${BaseApiURL}${route}`;
   }
 
   private handleUnknownError(response: Response) {

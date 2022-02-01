@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { styled } from "../stitches.config";
 import AccountButton from "./AccountButton";
 import { useAuth } from "./context/AuthContext";
@@ -13,19 +13,27 @@ const Container = styled("div", {
 });
 
 const AccountHeader: FunctionComponent<AccountHeaderProps> = () => {
+  const [initialized, setInitialized] = useState(false);
+
   const auth = useAuth();
+
+  useEffect(() => {
+    auth.loginCallback(() => {
+      setInitialized(true);
+    });
+  }, []);
 
   return (
     <Container>
-      {auth.isAuthenticated ? (
-        <AccountButton account={auth.account!} />
-      ) : (
-        <LoginButton
-          onClick={() => {
-            // todo
-          }}
-        />
-      )}
+      {initialized ? (
+        <>
+          {auth.isAuthenticated ? (
+            <AccountButton account={auth.account!} />
+          ) : (
+            <LoginButton />
+          )}
+        </>
+      ) : undefined}
     </Container>
   );
 };
