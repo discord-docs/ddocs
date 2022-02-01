@@ -33,7 +33,7 @@ const DiscordSVG = styled("svg", {
 
 const LoginButton: FunctionComponent<LoginButtonProps> = (props) => {
   return (
-    <Link href="https://discord.com/api/oauth2/authorize?client_id=937229289882021969&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin&response_type=code&scope=identify">
+    <Link href="https://discord.com/api/oauth2/authorize?client_id=937229289882021969&redirect_uri=https%3A%2F%2Fddocs-git-feature-signin-signout-discord-docs.vercel.app%2Flogin&response_type=code&scope=identify">
       <Container>
         <DiscordSVG
           width="26"
