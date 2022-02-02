@@ -101,7 +101,7 @@ const Summaries: FC<SummaryProps> = ({ currentEvents }) => {
   const SummaryElements = () => (
     <>
       {events.map((i, idx) => (
-        <Link href={`/events/${i.id}`}>
+        <Link key={i.id} href={`/events/${i.id}`}>
           <SummaryWrapper>
             <Summary key={idx} title={i.title} image={i.thumbnail}>
               {i.description}
