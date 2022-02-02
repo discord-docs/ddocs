@@ -10,6 +10,8 @@ const PageWrapper = styled("div", {
 const HeadingContainer = styled("div", {
   marginLeft: 80,
   marginTop: 40,
+  position: "relative",
+  zIndex: 1,
 });
 
 const MainHeading = styled("h1", {
