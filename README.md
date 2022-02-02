@@ -1,3 +1,7 @@
+# DDocs Frontend
+
+[![Support Server Invite](https://img.shields.io/discord/936725123724111953.svg?color=7289da&label=DDocs&logo=discord&style=flat-square)](https://discord.gg/HzJfeuUM5h)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
