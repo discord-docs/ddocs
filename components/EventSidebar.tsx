@@ -1,8 +1,11 @@
-import { FunctionComponent } from "react";
+import Link from "next/link";
+import { FunctionComponent, useState } from "react";
 import PartialEvent from "../lib/api-models/partialEvent";
 import { styled } from "../stitches.config";
 import Card from "./Card";
+import { useAuth } from "./context/AuthContext";
 import Searchbar from "./Searchbar";
+import SidebarEventCard from "./SidebarEventCard";
 
 interface EventSidebarProps {
   initialEvents: PartialEvent[];
@@ -11,12 +14,35 @@ interface EventSidebarProps {
 const Container = styled("div", {
   paddingLeft: "1rem",
   marginLeft: "auto",
-  marginRight: "1rem",
+  marginRight: "0.5rem",
+  paddingRight: "0.5rem",
+  marginTop: "2rem",
+  marginBottom: "2rem",
   borderLeft: "1px solid #ccc",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "282px",
+  width: "332px",
+  position: "fixed",
+  right: 0,
+  bottom: 0,
+  top: 0,
+  overflowY: "scroll",
+  "&::-webkit-scrollbar": {
+    width: "0.5rem",
+  },
+
+  "&::-webkit-scrollbar-track": {
+    background: "var(--ddocs-colors-backgroundSecondary)",
+    borderRadius: "0.25rem",
+    marginTop: "4rem",
+    marginBottom: "2rem",
+  },
+
+  "&::-webkit-scrollbar-thumb": {
+    background: "#202225",
+    borderRadius: "0.25rem",
+  },
 });
 
 const SearchResultContainer = styled("div", {
@@ -24,27 +50,70 @@ const SearchResultContainer = styled("div", {
   display: "grid",
   margin: "2rem 0",
   gridTemplateColumns: "repeat(auto-fit, minmax(100%, max-content))",
-  gridTemplateRows: "290px",
-  gap: 40,
+  gap: 20,
+
   width: "100%",
 });
+
+interface SearchHistyory {
+  query: string;
+  events: PartialEvent[];
+}
 
 const EventSidebar: FunctionComponent<EventSidebarProps> = ({
   initialEvents,
 }) => {
-  console.log(initialEvents);
+  const auth = useAuth();
+  const [events, setEvents] = useState(initialEvents);
+  const [searching, setSearching] = useState(false);
+  const [searchHistory, setSearchHistory] = useState<SearchHistyory[]>([
+    {
+      query: "",
+      events: initialEvents,
+    },
+  ]);
+
+  const handleSearch = async (query: string) => {
+    setSearching(true);
+    if (searchHistory.some((x) => x.query === query)) {
+      setEvents(searchHistory.find((x) => x.query === query)!.events);
+      setSearching(false);
+      return;
+    }
+
+    const result = await auth.Api?.searchEvents(query)!;
+
+    const newHistory = searchHistory.concat({ query, events: result });
+    setSearchHistory(newHistory);
+    setEvents(result);
+    setSearching(false);
+  };
+
   return (
     <Container>
       <Searchbar
+        loading={searching}
         onSearch={(v) => {
-          console.log(v);
+          handleSearch(v);
         }}
-      ></Searchbar>
+        onChange={(v) => {
+          if (searchHistory.some((x) => x.query === v)) {
+            setEvents(searchHistory.find((x) => x.query === v)!.events);
+          }
+        }}
+      />
       <SearchResultContainer>
-        {initialEvents.map((event) => (
-          <Card title={event.title} image={event.thumbnail}>
-            {event.description}
-          </Card>
+        {events.map((event) => (
+          <Link key={event.id} href={`/events/${event.id}`}>
+            <div
+              style={{
+                userSelect: "none",
+                cursor: "pointer",
+              }}
+            >
+              <SidebarEventCard event={event} />
+            </div>
+          </Link>
         ))}
       </SearchResultContainer>
     </Container>

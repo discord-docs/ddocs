@@ -112,19 +112,17 @@ const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
           >
             {event.contributors.map((contributor, i) => {
               return (
-                <>
-                  <ContributorAvatarContainer
-                    data-tip={`${contributor.username}#${contributor.discriminator}`}
-                    style={{
-                      zIndex: event.contributors.length - i,
-                      position: i === 0 ? "relative" : "absolute",
-                      left: `${i * (expanded ? 40 : 20)}px`,
-                    }}
-                    key={contributor.id}
-                  >
-                    <ContributorAvatar src={contributor.avatar} />
-                  </ContributorAvatarContainer>
-                </>
+                <ContributorAvatarContainer
+                  data-tip={`${contributor.username}#${contributor.discriminator}`}
+                  style={{
+                    zIndex: event.contributors.length - i,
+                    position: i === 0 ? "relative" : "absolute",
+                    left: `${i * (expanded ? 40 : 20)}px`,
+                  }}
+                  key={contributor.id}
+                >
+                  <ContributorAvatar src={contributor.avatar} />
+                </ContributorAvatarContainer>
               );
             })}
           </AvatarsContainer>

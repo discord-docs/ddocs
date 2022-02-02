@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import AccountHeader from "../../components/AccountHeader";
 import EventHeader from "../../components/EventHeader";
 import EventSidebar from "../../components/EventSidebar";
@@ -11,6 +11,8 @@ import { styled } from "../../stitches.config";
 import Text from "../../components/Text";
 import Summary from "../../components/Summary";
 import PartialEvent from "../../lib/api-models/partialEvent";
+import ApiSummary from "../../lib/api-models/summary";
+import ToggleableArrow from "../../components/ToggleableArrow";
 
 interface EventProps {
   event: Event;
@@ -28,12 +30,10 @@ const Container = styled("div", {
 const ContentContainer = styled("div", {
   width: "100%",
   position: "relative",
-  marginLeft: "auto",
-  paddingLeft: "2rem",
-  marginRight: "2rem",
   display: "flex",
   flexDirection: "column",
   maxWidth: "1100px",
+  marginBottom: "2rem",
 });
 
 const PageHeader = styled("h3", {
@@ -53,40 +53,137 @@ const EventBanner = styled("img", {
   marginRight: "auto",
 });
 
-const SummaryContainer = styled("div", {
-  marginTop: "2rem",
-  paddingTop: "2rem",
-  borderTop: "1px solid #ccc",
+const EventSidebarContainer = styled("div", {
+  paddingLeft: "1rem",
+  marginLeft: "auto",
+  marginRight: "1rem",
+  minWidth: "316px",
+  position: "unset",
+});
+
+const SummaryItemContainer = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  gap: "0.75rem",
+});
+
+const SummaryHeading = styled("h4", {
+  fontWeight: "bold",
+  fontSize: "26px",
+
+  marginTop: "1.25rem",
+  marginBottom: "1rem",
+});
+
+const ScrollableContainer = styled("div", {
+  overflowY: "auto",
+  width: "100%",
+  marginRight: "1rem",
+  paddingRight: "1rem",
+  marginLeft: "2rem",
+  marginBottom: "4rem",
+  display: "flex",
+  justifyContent: "center",
+
+  "&::-webkit-scrollbar": {
+    width: "0.5rem",
+  },
+
+  "&::-webkit-scrollbar-track": {
+    background: "var(--ddocs-colors-backgroundSecondary)",
+    borderRadius: "0.25rem",
+  },
+
+  "&::-webkit-scrollbar-thumb": {
+    background: "#202225",
+    borderRadius: "0.25rem",
+  },
 });
 
 const Event: FunctionComponent<EventProps> = ({ event, related }) => {
+  const [whatsNewExpanded, setWhatsNewExpanded] = useState(false);
+  const [whatsChangedExpanded, setWhatsChangedExpanded] = useState(false);
+  const [qnaEpanded, setQnaExpanded] = useState(false);
+
   console.log(event);
+
+  const getWhatsNew = () => {
+    return event.summaries.filter((x) => x.isNew);
+  };
+
+  const getWhatsChanged = () => {
+    return event.summaries.filter((x) => x.type === "feature");
+  };
+
+  const getQNA = () => {
+    return event.summaries.filter((x) => x.type === "qnaanswer");
+  };
+
+  const renderSection = (
+    summaries: ApiSummary[],
+    title: string,
+    fullExpanded: boolean,
+    setExpanded: (expanded: boolean) => void
+  ) => {
+    return (
+      <>
+        <div
+          style={{ userSelect: "none", cursor: "pointer", display: "flex" }}
+          onClick={() => setExpanded(!fullExpanded)}
+        >
+          <SummaryHeading>{title}</SummaryHeading>
+          <ToggleableArrow
+            style={{
+              marginTop: "1.25rem",
+              marginBottom: "1rem",
+            }}
+            expanded={fullExpanded}
+          />
+        </div>
+        <SummaryItemContainer>
+          {summaries.map((x) => (
+            <Summary key={x.id} fullExpanded={fullExpanded} summary={x} />
+          ))}
+        </SummaryItemContainer>
+      </>
+    );
+  };
+
   return (
     <Container>
-      <ContentContainer>
-        <AccountHeader
-          style={{ top: "0px !important", right: "0px !important" }}
-        />
-        <EventHeader event={event} />
-        <PageHeader>{event.title}</PageHeader>
-        <EventBanner src="https://s3-alpha-sig.figma.com/img/29be/1a71/0486e49300b467e39356856a8d45c5b7?Expires=1644796800&Signature=LSOgUDrouk7emA8gV2H06QP~nhnu~Lw3JMrw~MzkyHn3LqG2CxgoKH8~COuiNYT0hbD~4OfSGoy9P~8JqUSd09ePq0BZYCgBz9m~Ee8i8XQ8SllqnkrKhHWSWyvgRFVhPPqRrQsz8dRvDLFn-AVBgNT1G7ETlwoscHzibVS7R2z5oaEl6ZIWS35Fx8-ZKmZtEWBqKDnBe0QUKhIxH7yPrvPe~nf9SGXpAXcymUXbYedhMO2pDGLyV4u8bI02jXlJf2PNNyK8bVJ3B3ycSMlaTijs0xQahyOq1I2Y0VkFQ5-MJ6wiutPaA~4ZJkJ731BMI21WI5sBe75AB5ah4cxG7A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" />
-        <Text size={"medium"}>
-          This is the main description of the event. This is the text that will
-          show up if a description has been written. The title is what is above
-          this. If a title has not been written, it will default to what is
-          currently showing. <br />
-          <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla
-          porttitor massa id neque aliquam vestibulum. Est ullamcorper eget
-          nulla facilisi etiam. Sed lectus vestibulum mattis ullamcorper velit.
-        </Text>
-        <SummaryContainer>
-          {event.summaries.map((summary) => (
-            <Summary summary={summary}></Summary>
-          ))}
-        </SummaryContainer>
-      </ContentContainer>
-      <EventSidebar initialEvents={related} />
+      <ScrollableContainer>
+        <ContentContainer>
+          <AccountHeader
+            style={{ top: "0px !important", right: "0px !important" }}
+          />
+          <EventHeader event={event} />
+          <PageHeader>{event.title}</PageHeader>
+          {event.thumbnail && <EventBanner src={event.thumbnail} />}
+          <Text size={"medium"}>{event.description}</Text>
+          {renderSection(
+            getWhatsNew(),
+            "What's New",
+            whatsNewExpanded,
+            setWhatsNewExpanded
+          )}
+          {renderSection(
+            getWhatsChanged(),
+            "What's Changed",
+            whatsChangedExpanded,
+            setWhatsChangedExpanded
+          )}
+          {renderSection(
+            getQNA(),
+            "Questions and Answers",
+            qnaEpanded,
+            setQnaExpanded
+          )}
+        </ContentContainer>
+      </ScrollableContainer>
+      <EventSidebarContainer>
+        <EventSidebar initialEvents={related} />
+      </EventSidebarContainer>
     </Container>
   );
 };

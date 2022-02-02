@@ -26,8 +26,8 @@ const ContentWrapper = styled("main", {
   minHeight: "min-content",
   // padding: "40px 40px 40px 40px",
   width: "100%",
-  overflowY: "auto",
-  height: "100%",
+  overflowY: "hidden",
+  height: "100vh",
 });
 
 ContentWrapper.displayName = "ContentWrapper";

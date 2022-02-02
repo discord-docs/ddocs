@@ -84,6 +84,19 @@ export default class API {
     }
   }
 
+  public async searchEvents(query: string): Promise<PartialEvent[]> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Events) + "?search=" + query
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return [];
+    }
+
+    return (await result.json()) as PartialEvent[];
+  }
+
   public static getRoute(route: string) {
     return `${BaseApiURL}${route}`;
   }
