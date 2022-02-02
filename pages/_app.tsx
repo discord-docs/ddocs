@@ -39,6 +39,8 @@ const globalStyles = globalCss({
 
 const dontRenderSidebarOn = ["/login"];
 
+const hideLoginButtonOn = ["/events/[id]"];
+
 function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   globalStyles();
 
@@ -46,6 +48,8 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
     pageProps.title ? " — " + pageProps.title : ""
   }`;
   const description = pageProps.description || "Discord Docs";
+
+  console.log(router);
 
   return (
     <AuthenticationContextProvider>
@@ -57,15 +61,18 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
           <meta name="og:description" content={description} />
         </Head>
         {dontRenderSidebarOn.includes(router.pathname) ? undefined : (
-          <>
-            <Sidebar
-              items={[
-                ...DEFAULT_SIDEBAR_ITEMS,
-                ...(pageProps.sidebarItems || []),
-              ]}
-            />
-            <AccountHeader />
-          </>
+          <Sidebar
+            items={[
+              ...DEFAULT_SIDEBAR_ITEMS,
+              ...(pageProps.sidebarItems || []),
+            ]}
+          />
+        )}
+
+        {hideLoginButtonOn.includes(router.pathname) ? (
+          <></>
+        ) : (
+          <AccountHeader />
         )}
 
         <ContentWrapper>

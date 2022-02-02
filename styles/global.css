@@ -77,3 +77,11 @@
   src: local("ABC Ginto Nord Regular"),
     url("../public/assets/fonts/ABCGintoNordTrial.woff") format("woff");
 }
+
+.ddocs-tooltip {
+  padding: 5px 10px !important;
+  border-radius: 5px !important;
+  background: rgb(24, 25, 28) !important;
+  font-size: 16px !important;
+  opacity: 1 !important;
+}

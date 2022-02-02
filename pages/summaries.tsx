@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import Card from "../components/Card";
@@ -56,20 +57,41 @@ const wrapper = css({
   padding: 40,
 });
 
+const SummaryWrapper = styled("div", {
+  userSelect: "none",
+  cursor: "pointer",
+});
+
 interface SummaryProps {
   description: string;
   currentEvents: PartialEvent[];
 }
 
+interface LoadedEvents {
+  events: PartialEvent[];
+  year: string;
+}
+
 const Summaries: FC<SummaryProps> = ({ currentEvents }) => {
   const [year, setYear] = useState<string>(`${new Date().getFullYear()}`);
   const [events, setEvents] = useState<PartialEvent[]>(currentEvents);
+  const [loadedEvents, setLoadedEvents] = useState<LoadedEvents[]>([]);
+
   const auth = React.useContext(AuthContext);
 
   const getEvents = async () => {
+    console.log(loadedEvents);
+    if (loadedEvents?.some((x) => x.year === year)) {
+      setEvents(loadedEvents.find((x) => x.year === year)!.events);
+      return;
+    }
+
     const events = await auth.Api!.getEvents(year);
 
     setEvents(events);
+
+    const l = loadedEvents?.concat({ events, year });
+    setLoadedEvents(l);
   };
 
   useEffect(() => {
@@ -79,9 +101,13 @@ const Summaries: FC<SummaryProps> = ({ currentEvents }) => {
   const SummaryElements = () => (
     <>
       {events.map((i, idx) => (
-        <Summary key={idx} title={i.title} image={i.thumbnail}>
-          {i.description}
-        </Summary>
+        <Link href={`/events/${i.id}`}>
+          <SummaryWrapper>
+            <Summary key={idx} title={i.title} image={i.thumbnail}>
+              {i.description}
+            </Summary>
+          </SummaryWrapper>
+        </Link>
       ))}
     </>
   );

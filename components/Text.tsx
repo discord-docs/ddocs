@@ -73,6 +73,10 @@ const Text = styled("div", {
       normal: {
         fontSize: "initial",
       },
+      medium: {
+        fontSize: 20,
+        fontWeight: 200,
+      },
       large: {
         fontSize: 28,
         lineHeight: "34px",

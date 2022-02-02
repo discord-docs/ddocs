@@ -1,10 +1,13 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { CSSProperties, FunctionComponent, useEffect, useState } from "react";
 import { styled } from "../stitches.config";
 import AccountButton from "./AccountButton";
 import { useAuth } from "./context/AuthContext";
 import LoginButton from "./LoginButton";
 
-interface AccountHeaderProps {}
+interface AccountHeaderProps {
+  style?: CSSProperties;
+}
 
 const Container = styled("div", {
   top: "40px",
@@ -13,7 +16,7 @@ const Container = styled("div", {
   zIndex: 10,
 });
 
-const AccountHeader: FunctionComponent<AccountHeaderProps> = () => {
+const AccountHeader: FunctionComponent<AccountHeaderProps> = ({ style }) => {
   const [initialized, setInitialized] = useState(false);
 
   const auth = useAuth();
@@ -25,7 +28,7 @@ const AccountHeader: FunctionComponent<AccountHeaderProps> = () => {
   }, []);
 
   return (
-    <Container>
+    <Container style={{ ...style }}>
       {initialized ? (
         <>
           {auth.isAuthenticated ? (
