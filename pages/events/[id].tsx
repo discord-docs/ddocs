@@ -81,6 +81,7 @@ const ScrollableContainer = styled("div", {
   marginRight: "1rem",
   paddingRight: "1rem",
   marginLeft: "2rem",
+  marginBottom: "2rem",
   display: "flex",
   justifyContent: "center",
 
