@@ -101,6 +101,50 @@ const ScrollableContainer = styled("div", {
   },
 });
 
+const Details = styled("details", {
+  summary: {
+    listStyle: "none",
+    backgroundColor: "#2F3136",
+    padding: "1rem",
+    fontSize: "20px",
+    zIndex: 2,
+    userSelect: "none",
+    transition: "all 0.15s ease-in-out",
+    display: "flex",
+    cursor: "pointer",
+    borderRadius: 6,
+  },
+  "summary::-webkit-details-marker": {
+    display: "none",
+  },
+  "&[open]": {
+    summary: {
+      borderRadius: "6px 6px 0px 0px",
+    },
+  },
+  backgroundColor: "#18191C",
+  // padding: "1rem 2rem",
+  borderRadius: 6,
+  "& > div": {
+    padding: "1rem",
+  },
+});
+
+const NewSummary = styled("summary", {
+  // "&:after": {
+  //   content: "",
+  //   borderWidth: ".4rem",
+  //   borderStyle: "solid",
+  //   borderColor: "transparent transparent transparent #fff",
+  //   position: "absolute",
+  //   top: "1.3rem",
+  //   left: "1rem",
+  //   transform: "rotate(0)",
+  //   transformOrigin: ".2rem 50%",
+  //   transition: ".25s transform ease",
+  // },
+});
+
 const Event: FunctionComponent<EventProps> = ({ event, related }) => {
   const [whatsNewExpanded, setWhatsNewExpanded] = useState(false);
   const [whatsChangedExpanded, setWhatsChangedExpanded] = useState(false);
@@ -134,11 +178,12 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
         >
           <SummaryHeading>{title}</SummaryHeading>
         </div>
-        <SummaryItemContainer>
-          {summaries.map((x) => (
-            <Summary key={x.id} fullExpanded={fullExpanded} summary={x} />
-          ))}
-        </SummaryItemContainer>
+        {summaries.map((x) => (
+          <Details>
+            <NewSummary>{x.title}</NewSummary>
+            <Summary summary={x} />
+          </Details>
+        ))}
       </>
     );
   };
@@ -154,12 +199,11 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
           <PageHeader>{event.title}</PageHeader>
           {event.thumbnail && <EventBanner src={event.thumbnail} />}
           <Text size={"medium"}>{event.description}</Text>
-          {renderSection(
-            getWhatsNew(),
-            "What's New",
-            whatsNewExpanded,
-            setWhatsNewExpanded
-          )}
+          <Details>
+            <NewSummary>Long Text</NewSummary>
+            <Summary summary={event.summaries[0]} />
+          </Details>
+
           {renderSection(
             getWhatsChanged(),
             "What's Changed",
