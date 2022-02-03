@@ -28,7 +28,7 @@ const AccountHeader: FunctionComponent<AccountHeaderProps> = ({ style }) => {
   }, []);
 
   return (
-    <Container style={{ ...style }}>
+    <Container style={style}>
       {initialized ? (
         <>
           {auth.isAuthenticated ? (

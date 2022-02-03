@@ -27,7 +27,7 @@ const Icon = styled("svg", {
   width: "20px",
   height: "20px",
   position: "absolute",
-  top: "50%",
+  top: "30%",
   transform: "translateY(-50%)",
   right: "0.5rem",
   cursor: "pointer",
@@ -35,7 +35,8 @@ const Icon = styled("svg", {
 
 const Container = styled("div", {
   position: "sticky",
-  height: "32px",
+  height: "56px",
+  paddingBottom: "1.5rem",
   width: "100%",
   top: "0",
   zIndex: "5",

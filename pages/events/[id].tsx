@@ -24,7 +24,6 @@ const Container = styled("div", {
   height: "100%",
   display: "flex",
   flexDirection: "row",
-  marginTop: "2rem",
 });
 
 const ContentContainer = styled("div", {
@@ -34,6 +33,7 @@ const ContentContainer = styled("div", {
   flexDirection: "column",
   maxWidth: "1100px",
   marginBottom: "2rem",
+  marginTop: "2rem",
 });
 
 const PageHeader = styled("h3", {
@@ -71,8 +71,7 @@ const SummaryItemContainer = styled("div", {
 const SummaryHeading = styled("h4", {
   fontWeight: "bold",
   fontSize: "26px",
-
-  marginTop: "1.25rem",
+  marginTop: "1.75rem",
   marginBottom: "1rem",
 });
 
@@ -82,7 +81,6 @@ const ScrollableContainer = styled("div", {
   marginRight: "1rem",
   paddingRight: "1rem",
   marginLeft: "2rem",
-  marginBottom: "4rem",
   display: "flex",
   justifyContent: "center",
 
@@ -93,6 +91,7 @@ const ScrollableContainer = styled("div", {
   "&::-webkit-scrollbar-track": {
     background: "var(--ddocs-colors-backgroundSecondary)",
     borderRadius: "0.25rem",
+    margin: "2rem 0",
   },
 
   "&::-webkit-scrollbar-thumb": {
@@ -133,13 +132,6 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
           onClick={() => setExpanded(!fullExpanded)}
         >
           <SummaryHeading>{title}</SummaryHeading>
-          <ToggleableArrow
-            style={{
-              marginTop: "1.25rem",
-              marginBottom: "1rem",
-            }}
-            expanded={fullExpanded}
-          />
         </div>
         <SummaryItemContainer>
           {summaries.map((x) => (

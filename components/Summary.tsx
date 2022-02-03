@@ -18,7 +18,7 @@ const Container = styled("div", {
 
 const SummaryHeader = styled("div", {
   backgroundColor: "#2F3136",
-  padding: "1rem 2rem",
+  padding: "1rem",
   fontSize: "20px",
   zIndex: 2,
   userSelect: "none",

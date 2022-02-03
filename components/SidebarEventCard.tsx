@@ -11,6 +11,7 @@ interface SidebarEventCardProps {
 const Header = styled("header", {
   fontWeight: "700",
   fontSize: 20,
+  marginBottom: "0.25rem",
 });
 
 const Image = styled("img", {
@@ -29,7 +30,7 @@ const SidebarEventCard: FunctionComponent<SidebarEventCardProps> = ({
       <Image src={event.thumbnail} />
       <Padding>
         <Header>{event.title}</Header>
-        <Text>{event.description}</Text>
+        <Text size={"normal"}>{event.description}</Text>
       </Padding>
     </Panel>
   );

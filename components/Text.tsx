@@ -72,6 +72,8 @@ const Text = styled("div", {
     size: {
       normal: {
         fontSize: "initial",
+        fontWeight: "100",
+        lineHeight: 1.2,
       },
       medium: {
         fontSize: 20,

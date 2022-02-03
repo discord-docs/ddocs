@@ -35,8 +35,7 @@ const Container = styled("div", {
   "&::-webkit-scrollbar-track": {
     background: "var(--ddocs-colors-backgroundSecondary)",
     borderRadius: "0.25rem",
-    marginTop: "4rem",
-    marginBottom: "2rem",
+    marginTop: "3.5rem",
   },
 
   "&::-webkit-scrollbar-thumb": {
@@ -48,7 +47,6 @@ const Container = styled("div", {
 const SearchResultContainer = styled("div", {
   position: "relative",
   display: "grid",
-  margin: "2rem 0",
   gridTemplateColumns: "repeat(auto-fit, minmax(100%, max-content))",
   gap: 20,
 
