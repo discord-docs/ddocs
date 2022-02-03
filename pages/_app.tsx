@@ -7,6 +7,7 @@ import Sidebar from "../components/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
 import { globalCss, styled } from "../stitches.config";
 import "../styles/global.css";
+import NextNprogress from "nextjs-progressbar";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -53,6 +54,7 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
 
   return (
     <AuthenticationContextProvider>
+      <NextNprogress color="#EB459E" />
       <Wrapper>
         <Head>
           <title>{title}</title>

@@ -14,6 +14,7 @@ specifiers:
   jsonwebtoken: ^8.5.1
   luxon: ^2.1.1
   next: ^12.0.10
+  nextjs-progressbar: ^0.0.13
   react: 17.0.2
   react-dom: 17.0.2
   react-markdown: ^8.0.0
@@ -31,6 +32,7 @@ dependencies:
   jsonwebtoken: 8.5.1
   luxon: 2.3.0
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
+  nextjs-progressbar: 0.0.13_next@12.0.10+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-markdown: 8.0.0_b08e3c15324cbe90a6ff8fcd416c932c
@@ -3776,6 +3778,18 @@ packages:
       - babel-plugin-macros
     dev: false
 
+  /nextjs-progressbar/0.0.13_next@12.0.10+react@17.0.2:
+    resolution: {integrity: sha512-vuE9/j1yaFyHhMVwdlPZbGbcwnvoZZMH8fXUG+HCa+w5uojRNOMO43EL+o9YZ53QwQHsjWdfUapz+J8D/u3jFw==}
+    peerDependencies:
+      next: '>= 6.0.0 <=12.x.x'
+      react: '>= 16.0.0 <= 17.x.x'
+    dependencies:
+      next: 12.0.10_react-dom@17.0.2+react@17.0.2
+      nprogress: 0.2.0
+      prop-types: 15.8.1
+      react: 17.0.2
+    dev: false
+
   /node-abi/3.7.0:
     resolution: {integrity: sha512-3J+U4CvxVNEk9+lGdJkmYbN8cIN0HMTDT9R0ezX7pmp7aD6BaKsfAHwVn3IvVg6pYIRUuQ+gHW1eawrvywnSQQ==}
     engines: {node: '>=10'}
@@ -3798,6 +3812,10 @@ packages:
       console-control-strings: 1.1.0
       gauge: 2.7.4
       set-blocking: 2.0.0
+    dev: false
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha1-y480xTIT2JVyP8urkH6UIq28r7E=}
     dev: false
 
   /nth-check/2.0.1:
