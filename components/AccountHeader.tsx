@@ -5,18 +5,13 @@ import AccountButton from "./AccountButton";
 import { useAuth } from "./context/AuthContext";
 import LoginButton from "./LoginButton";
 
-interface AccountHeaderProps {
-  style?: CSSProperties;
-}
+interface AccountHeaderProps {}
 
 const Container = styled("div", {
-  top: "40px",
-  right: "40px",
-  position: "absolute",
   zIndex: 10,
 });
 
-const AccountHeader: FunctionComponent<AccountHeaderProps> = ({ style }) => {
+const AccountHeader: FunctionComponent<AccountHeaderProps> = () => {
   const [initialized, setInitialized] = useState(false);
 
   const auth = useAuth();
@@ -28,7 +23,7 @@ const AccountHeader: FunctionComponent<AccountHeaderProps> = ({ style }) => {
   }, []);
 
   return (
-    <Container style={style}>
+    <Container>
       {initialized ? (
         <>
           {auth.isAuthenticated ? (

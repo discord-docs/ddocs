@@ -31,6 +31,12 @@ const ContentWrapper = styled("main", {
   height: "100vh",
 });
 
+const AccountHeaderContainer = styled("div", {
+  position: "absolute",
+  top: "40px",
+  right: "40px",
+});
+
 ContentWrapper.displayName = "ContentWrapper";
 
 const globalStyles = globalCss({
@@ -74,7 +80,9 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
         {hideLoginButtonOn.includes(router.pathname) ? (
           <></>
         ) : (
-          <AccountHeader />
+          <AccountHeaderContainer>
+            <AccountHeader />
+          </AccountHeaderContainer>
         )}
 
         <ContentWrapper>

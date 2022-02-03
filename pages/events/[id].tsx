@@ -101,12 +101,16 @@ const ScrollableContainer = styled("div", {
   },
 });
 
+const AccountHeaderContainer = styled("div", {
+  position: "absolute",
+  top: "0",
+  right: "0",
+});
+
 const Event: FunctionComponent<EventProps> = ({ event, related }) => {
   const [whatsNewExpanded, setWhatsNewExpanded] = useState(false);
   const [whatsChangedExpanded, setWhatsChangedExpanded] = useState(false);
   const [qnaEpanded, setQnaExpanded] = useState(false);
-
-  console.log(event);
 
   const getWhatsNew = () => {
     return event.summaries.filter((x) => x.isNew);
@@ -128,12 +132,12 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
   ) => {
     return (
       <>
-        <div
+        <SummaryHeading
           style={{ userSelect: "none", cursor: "pointer", display: "flex" }}
           onClick={() => setExpanded(!fullExpanded)}
         >
-          <SummaryHeading>{title}</SummaryHeading>
-        </div>
+          {title}
+        </SummaryHeading>
         <SummaryItemContainer>
           {summaries.map((x) => (
             <Summary key={x.id} fullExpanded={fullExpanded} summary={x} />
@@ -147,13 +151,15 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
     <Container>
       <ScrollableContainer>
         <ContentContainer>
-          <AccountHeader
-            style={{ top: "0px !important", right: "0px !important" }}
-          />
+          <AccountHeaderContainer>
+            <AccountHeader key={event.id} />
+          </AccountHeaderContainer>
           <EventHeader event={event} />
           <PageHeader>{event.title}</PageHeader>
           {event.thumbnail && <EventBanner src={event.thumbnail} />}
-          <Text size={"medium"}>{event.description}</Text>
+          <Text size={"medium"} weight={"light"}>
+            {event.description}
+          </Text>
           {renderSection(
             getWhatsNew(),
             "What's New",

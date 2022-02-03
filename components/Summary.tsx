@@ -16,67 +16,177 @@ const Container = styled("div", {
   borderRadius: "6px",
 });
 
-const SummaryHeader = styled("div", {
+const SummaryHeader = styled("summary", {
   backgroundColor: "#2F3136",
   padding: "1rem",
   fontSize: "20px",
   zIndex: 2,
   userSelect: "none",
-  transition: "all 0.15s ease-in-out",
   display: "flex",
   cursor: "pointer",
 });
 
 const SummaryBody = styled("div", {
-  transition: "all 0.15s ease-in-out",
   backgroundColor: "#18191C",
   padding: "1rem 2rem",
   borderRadius: "0px 0px 6px 6px",
 });
 
+const Details = styled("details", {});
+
 const Summary: FunctionComponent<SummaryProps> = ({
   summary,
   fullExpanded,
 }) => {
-  const [expanded, setExpanded] = useState(false);
   const [init, setInit] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [fixedHeight, setFixedHeight] = useState(false);
+  const [overflow, setOverflow] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [isExpanding, setIsExpanding] = useState(false);
   const [bodyHeight, setBodyHeight] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [detailHeight, setDetailHeight] = useState(0);
+  const [animation, setAnimation] = useState<Animation | undefined>();
   const bodyRef = createRef<HTMLDivElement>();
+  const headerRef = createRef<HTMLElement>();
+  const detailsRef = createRef<HTMLDetailsElement>();
 
   useEffect(() => {
-    setExpanded(fullExpanded);
+    if (init) {
+      if (fullExpanded) open();
+      else shrink();
+    }
   }, [fullExpanded]);
 
   useEffect(() => {
-    setBodyHeight(bodyRef.current?.clientHeight || 0);
+    if (bodyRef.current) {
+      if (bodyRef.current.clientHeight > headerHeight) {
+        setBodyHeight(bodyRef.current.clientHeight - headerHeight);
+      }
+
+      if (!init) setInit(true);
+    }
   }, [bodyRef]);
 
   useEffect(() => {
-    setTimeout(() => setInit(true), 200);
-  }, []);
+    setHeaderHeight(headerRef.current?.clientHeight || 0);
+  }, [headerRef]);
+
+  useEffect(() => {
+    setDetailHeight(detailsRef.current?.clientHeight || 0);
+  }, [detailsRef]);
+
+  const shrink = () => {
+    const startHeight = detailsRef.current?.offsetHeight!;
+    const endHeight = headerHeight;
+
+    animation?.cancel();
+
+    const an = detailsRef.current!.animate(
+      [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+      {
+        duration: 250,
+        easing: "ease-in-out",
+      }
+    );
+
+    an.onfinish = () => onAnimationComplete(false);
+    an.oncancel = () => setIsClosing(false);
+    setAnimation(an);
+  };
+
+  const open = () => {
+    expand();
+  };
+
+  const expand = () => {
+    const startHeight = detailsRef.current?.offsetHeight!;
+
+    const endHeight = bodyHeight + headerHeight;
+
+    animation?.cancel();
+
+    const an = detailsRef.current!.animate(
+      [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+      {
+        duration: 250,
+        easing: "ease-in-out",
+      }
+    );
+    an.onfinish = () => onAnimationComplete(true);
+    an.oncancel = () => setIsExpanding(false);
+
+    setAnimation(an);
+
+    setFixedHeight(true);
+    setExpanded(true);
+    setIsExpanding(true);
+  };
+
+  const onAnimationComplete = (open: boolean) => {
+    setExpanded(open);
+    setFixedHeight(false);
+    setOverflow(false);
+    setIsClosing(false);
+    setIsExpanding(false);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+
+    if (isClosing || !detailsRef.current?.open) {
+      open();
+    } else if (isExpanding || detailsRef.current.open) {
+      shrink();
+    }
+    setOverflow(true);
+  };
+
   return (
     <Container>
-      <SummaryHeader
+      <Details
+        open={expanded}
         style={{
-          borderRadius: expanded ? "6px 6px 0px 0px" : "6px",
+          overflow: overflow ? "hidden" : "",
+          height: fixedHeight ? `${detailHeight}px` : "",
         }}
-        onClick={() => {
-          setExpanded(!expanded);
-        }}
+        ref={detailsRef}
       >
-        {summary.title}
-        <ToggleableArror expanded={expanded} />
-      </SummaryHeader>
-      <SummaryBody
-        style={{
-          marginTop: expanded ? "0px" : `-${bodyHeight + 1}px`,
-          position: init ? "relative" : "absolute",
-          zIndex: init ? 1 : -5,
-        }}
-        ref={bodyRef}
-      >
-        <Markdown content={summary.content} />
-      </SummaryBody>
+        <SummaryHeader
+          onClick={handleClick}
+          ref={headerRef}
+          style={{
+            borderRadius: expanded ? "6px 6px 0px 0px" : "6px",
+          }}
+        >
+          {summary.title}
+          <ToggleableArror expanded={expanded} />
+        </SummaryHeader>
+        {init && (
+          <SummaryBody
+            style={{
+              height: expanded ? "100%" : 0,
+            }}
+            ref={bodyRef}
+          >
+            <Markdown content={summary.content} />
+          </SummaryBody>
+        )}
+      </Details>
+
+      {!init && (
+        <SummaryBody
+          style={{
+            zIndex: -255,
+            position: "absolute",
+            opacity: "0",
+          }}
+          ref={bodyRef}
+        >
+          <Markdown content={summary.content} />
+        </SummaryBody>
+      )}
     </Container>
   );
 };

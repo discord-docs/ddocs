@@ -13,7 +13,6 @@ interface MarkdownProps {
 const Image = styled("img", {
   width: "100%",
   borderRadius: "10px",
-  maxHeight: "400px",
   objectFit: "contain",
 });
 
@@ -48,14 +47,23 @@ const H6 = styled("h6", {
 });
 
 const Link = styled("a", {
-  color: "White",
+  color: "var(--ddocs-colors-brand)",
 });
 
 const Quote = styled("blockquote", {
   borderLeft: "5px solid #444",
   borderRadius: "5px",
   margin: "0.5rem 0.25rem",
-  paddingLeft: "0.5rem",
+  padding: "0.25rem 0.5rem",
+  background: "#222",
+});
+
+const UnorderedList = styled("ul", {
+  paddingLeft: "1.5rem",
+});
+
+const OrderedList = styled("ol", {
+  paddingLeft: "1.5rem",
 });
 
 const HR = styled("hr", {
@@ -65,6 +73,7 @@ const HR = styled("hr", {
 const ListItem = styled("li", {
   fontSize: "20px",
   fontWeight: "200",
+  lineHeight: "1.2",
   "&::marker": {
     unicodeBidi: "isolate",
     fontVariantNumeric: "tabular-nums",
@@ -104,6 +113,12 @@ const Markdown: FunctionComponent<MarkdownProps> = ({ content }) => {
               {props.children}
             </Text>
           );
+        },
+        ul({ children, ...props }) {
+          return <UnorderedList {...props}>{children}</UnorderedList>;
+        },
+        ol({ children, ...props }) {
+          return <OrderedList {...props}>{children}</OrderedList>;
         },
         a({ node, className, children, ...props }) {
           return <Link {...props}>{children}</Link>;

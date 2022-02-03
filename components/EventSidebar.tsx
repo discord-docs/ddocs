@@ -53,6 +53,8 @@ const SearchResultContainer = styled("div", {
   width: "100%",
 });
 
+const NoItemsFound = styled("div", {});
+
 interface SearchHistyory {
   query: string;
   events: PartialEvent[];
@@ -101,18 +103,27 @@ const EventSidebar: FunctionComponent<EventSidebarProps> = ({
         }}
       />
       <SearchResultContainer>
-        {events.map((event) => (
-          <Link key={event.id} href={`/events/${event.id}`}>
-            <div
-              style={{
-                userSelect: "none",
-                cursor: "pointer",
-              }}
-            >
-              <SidebarEventCard event={event} />
-            </div>
-          </Link>
-        ))}
+        {events.length > 0 ? (
+          <>
+            {events.map((event) => (
+              <Link key={event.id} href={`/events/${event.id}`}>
+                <div
+                  style={{
+                    userSelect: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <SidebarEventCard event={event} />
+                </div>
+              </Link>
+            ))}
+          </>
+        ) : (
+          <NoItemsFound>
+            After searching around we couldn't find any events matching your
+            query :(. Try searching with a different keyword instead!
+          </NoItemsFound>
+        )}
       </SearchResultContainer>
     </Container>
   );
