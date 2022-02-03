@@ -65,6 +65,12 @@ const Text = styled("div", {
       },
     },
     weight: {
+      light: {
+        fontWeight: "100",
+      },
+      medium: {
+        fontWeight: 200,
+      },
       bold: {
         fontWeight: 700,
       },
@@ -72,12 +78,10 @@ const Text = styled("div", {
     size: {
       normal: {
         fontSize: "initial",
-        fontWeight: "100",
         lineHeight: 1.2,
       },
       medium: {
         fontSize: 20,
-        fontWeight: 200,
       },
       large: {
         fontSize: 28,

@@ -52,7 +52,7 @@ const Summary: FunctionComponent<SummaryProps> = ({
   }, [bodyRef]);
 
   useEffect(() => {
-    setTimeout(() => setInit(true), 150);
+    setTimeout(() => setInit(true), 200);
   }, []);
   return (
     <Container>
@@ -71,7 +71,7 @@ const Summary: FunctionComponent<SummaryProps> = ({
         style={{
           marginTop: expanded ? "0px" : `-${bodyHeight + 1}px`,
           position: init ? "relative" : "absolute",
-          opacity: init ? 1 : 0,
+          zIndex: init ? 1 : -5,
         }}
         ref={bodyRef}
       >
