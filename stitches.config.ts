@@ -33,6 +33,6 @@ export const lightTheme = createTheme("light-theme", {
     backgroundAccent: "#747f8d",
     scrollbarTrack: "#f2f3f5",
     scrollbarThumb: "#747f8d",
-    itemUnactive: "#747474",
+    itemUnactive: "#2e3338",
   },
 });

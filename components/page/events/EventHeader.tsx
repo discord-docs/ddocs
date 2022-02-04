@@ -1,4 +1,4 @@
-import { styled } from "../../../stitches.config";
+import { css, styled } from "../../../stitches.config";
 import { FunctionComponent, useState } from "react";
 import Author from "../../../lib/api-models/author";
 import Event from "../../../lib/api-models/event";
@@ -84,6 +84,15 @@ const AvatarsContainer = styled("div", {
   display: "flex",
 });
 
+const TooltipStyles = css({
+  padding: "5px 10px !important",
+  borderRadius: "5px !important",
+  background: "$backgroundSecondaryAlt !important",
+  color: "$textPrimary !important",
+  fontSize: "1rem !important",
+  opacity: "1 !important",
+});
+
 const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -130,7 +139,7 @@ const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
               })}
           </AvatarsContainer>
           <ReactTooltip
-            className="ddocs-tooltip"
+            className={TooltipStyles()}
             place="top"
             type="dark"
             effect="solid"

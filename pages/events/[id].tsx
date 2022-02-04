@@ -22,9 +22,10 @@ interface EventProps {
 
 const Container = styled("div", {
   width: "100%",
-  height: "100%",
   display: "flex",
   flexDirection: "row",
+  marginBottom: "2rem",
+  height: "100vh",
 });
 
 const ContentContainer = styled("div", {
@@ -33,7 +34,6 @@ const ContentContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   maxWidth: "1100px",
-  marginBottom: "2rem",
   marginTop: "2rem",
 });
 
@@ -85,7 +85,6 @@ const ScrollableContainer = styled("div", {
   display: "flex",
   justifyContent: "center",
   overflowY: "auto",
-  height: "100vh",
 });
 
 const AccountHeaderContainer = styled("div", {
@@ -136,7 +135,7 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
 
   return (
     <Container>
-      <ScrollableContainer className={`${Scrollbar("2rem", "2rem")}`}>
+      <ScrollableContainer className={`${Scrollbar("2rem")}`}>
         <ContentContainer>
           <AccountHeaderContainer>
             <AccountHeader key={event.id} />
