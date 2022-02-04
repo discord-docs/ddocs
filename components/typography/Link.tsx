@@ -38,7 +38,7 @@ const Link: FunctionComponent<LinkProps> = ({
       className={styles({ textDecoration: decorator ?? false })}
       href={href}
       target="_blank"
-      rel="external"
+      rel="external noreferrer"
     >
       <Text weight={weight} size={size}>
         {children}
