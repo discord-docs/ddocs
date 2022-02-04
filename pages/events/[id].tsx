@@ -77,7 +77,6 @@ const SummaryHeading = styled("h4", {
 });
 
 const ScrollableContainer = styled("div", {
-  overflowY: "auto",
   width: "100%",
   marginRight: "1rem",
   paddingRight: "1rem",
@@ -85,6 +84,8 @@ const ScrollableContainer = styled("div", {
   marginBottom: "2rem",
   display: "flex",
   justifyContent: "center",
+  overflowY: "auto",
+  height: "100vh",
 });
 
 const AccountHeaderContainer = styled("div", {

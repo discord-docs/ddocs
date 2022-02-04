@@ -7,14 +7,14 @@ export default function Scrollbar(marginTop?: string, marginBottom?: string) {
     },
 
     "&::-webkit-scrollbar-track": {
-      background: "var(--ddocs-colors-backgroundSecondary)",
+      background: "$backgroundSecondary",
       borderRadius: "0.25rem",
       marginTop,
       marginBottom,
     },
 
     "&::-webkit-scrollbar-thumb": {
-      background: "#202225",
+      background: "$backgroundAccent",
       borderRadius: "0.25rem",
     },
   });

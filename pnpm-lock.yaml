@@ -14,6 +14,7 @@ specifiers:
   jsonwebtoken: ^8.5.1
   luxon: ^2.1.1
   next: ^12.0.10
+  next-themes: ^0.0.15
   nextjs-progressbar: ^0.0.13
   react: 17.0.2
   react-dom: 17.0.2
@@ -32,6 +33,7 @@ dependencies:
   jsonwebtoken: 8.5.1
   luxon: 2.3.0
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
+  next-themes: 0.0.15_61390be992b634a688f7c2555547b55b
   nextjs-progressbar: 0.0.13_next@12.0.10+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -3735,6 +3737,18 @@ packages:
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
     dev: true
+
+  /next-themes/0.0.15_61390be992b634a688f7c2555547b55b:
+    resolution: {integrity: sha512-LTmtqYi03c4gMTJmWwVK9XkHL7h0/+XrtR970Ujvtu3s0kZNeJN24aJsi4rkZOI8i19+qq6f8j+8Duwy5jqcrQ==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 12.0.10_react-dom@17.0.2+react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
 
   /next/12.0.10_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-1y3PpGzpb/EZzz1jgne+JfZXKAVJUjYXwxzrADf/LWN+8yi9o79vMLXpW3mevvCHkEF2sBnIdjzNn16TJrINUw==}

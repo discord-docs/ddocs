@@ -21,6 +21,7 @@ const Banner = styled("div", {
   backgroundPosition: "bottom center",
   overflow: "hidden",
   backgroundRepeat: "no-repeat",
+  color: "white",
 });
 
 const BannerContainer = styled("div", {
@@ -40,15 +41,6 @@ const BannerSubtitle = styled("h3", {
 });
 
 Banner.displayName = "Banner";
-
-const SummaryList = styled("div", {
-  position: "relative",
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, max-content))",
-  gridTemplateRows: "290px",
-  gap: 40,
-  width: "100%",
-});
 
 const Summary = styled(Card, {
   height: 290,

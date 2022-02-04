@@ -60,7 +60,7 @@ const sections = [
 const Container = styled("div", {
   marginTop: "auto",
   display: "flex",
-  backgroundColor: "$backgroundSecondary",
+  backgroundColor: "$backgroundSecondaryAlt",
   paddingBottom: "1rem",
 });
 
@@ -98,7 +98,12 @@ const Footer: FunctionComponent<FooterProps> = () => {
           return (
             <>
               {item.url ? (
-                <Link external={!item.isLocalLink} href={item.url}>
+                <Link
+                  color="white"
+                  external={!item.isLocalLink}
+                  darkenHover
+                  href={item.url}
+                >
                   {item.content}
                 </Link>
               ) : (
@@ -119,8 +124,8 @@ const Footer: FunctionComponent<FooterProps> = () => {
       <RightContentContainer>
         <Heading>ddocs.io</Heading>
         <Text>
-          Where we present to you our shi-we mean ingenious design to your
-          brittle eyes.
+          Where we present to you our shi-<em>we mean ingenious</em> design to
+          your brittle eyes.
           <br />
           <br />
           {"©️"} 2022 All rights are reserved.

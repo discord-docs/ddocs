@@ -9,17 +9,41 @@ interface LinkProps {
   decorator?: boolean;
   weight?: "bold" | "medium" | "light";
   size?: "normal" | "medium" | "large";
+  color?: "white" | "blue";
+  darkenHover?: boolean;
 }
 
 const styles = css({
   color: "$brand",
+  transition: "color 0.1s ease-in-out",
   variants: {
+    darkenHover: {
+      true: {
+        color: "#b9bbbe !important",
+
+        "&:hover": {
+          color: "$brand !important",
+        },
+      },
+    },
+    color: {
+      blue: {
+        color: "$brand",
+      },
+      white: {
+        color: "white",
+      },
+    },
     textDecoration: {
       true: {
         textDecoration: "underline",
       },
       false: {
         textDecoration: "none",
+
+        "&:hover": {
+          textDecoration: "underline",
+        },
       },
     },
   },
@@ -32,10 +56,16 @@ const Link: FunctionComponent<LinkProps> = ({
   children,
   weight,
   size,
+  color,
+  darkenHover,
 }) => {
   return external ? (
     <a
-      className={styles({ textDecoration: decorator ?? false })}
+      className={styles({
+        textDecoration: decorator ?? false,
+        color: color,
+        darkenHover,
+      })}
       href={href}
       target="_blank"
       rel="external noreferrer"
@@ -52,7 +82,11 @@ const Link: FunctionComponent<LinkProps> = ({
         css={{
           cursor: "pointer",
         }}
-        className={styles({ textDecoration: decorator ?? false })}
+        className={styles({
+          textDecoration: decorator ?? false,
+          color,
+          darkenHover,
+        })}
       >
         {children}
       </Text>

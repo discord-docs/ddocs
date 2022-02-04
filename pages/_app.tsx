@@ -5,10 +5,12 @@ import AccountHeader from "../components/layout/account/AccountHeader";
 import AuthenticationContextProvider from "../components/context/AuthContext";
 import Sidebar from "../components/layout/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
-import { globalCss, styled } from "../stitches.config";
+import { globalCss, styled, lightTheme, css } from "../stitches.config";
 import "../styles/global.css";
 import NextNprogress from "nextjs-progressbar";
 import Footer from "../components/layout/footer/Footer";
+import ScrollBar from "../components/layout/Scrollbar";
+import { ThemeProvider } from "next-themes";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -28,14 +30,22 @@ const ContentWrapper = styled("main", {
   minHeight: "min-content",
   // padding: "40px 40px 40px 40px",
   width: "100%",
-  overflowY: "hidden",
-  height: "100vh",
+  position: "relative",
 });
 
 const AccountHeaderContainer = styled("div", {
   position: "absolute",
   top: "40px",
   right: "40px",
+  zIndex: "10",
+});
+
+const MainContentWrapper = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  height: "100vh",
+  position: "relative",
+  width: "100%",
 });
 
 ContentWrapper.displayName = "ContentWrapper";
@@ -47,7 +57,11 @@ const globalStyles = globalCss({
 
 const dontRenderSidebarOn = ["/login"];
 
-const hideLoginButtonOn = ["/events/[id]"];
+const dontRenderLoginButtonOn = ["/events/[id]"];
+
+const dontRenderFooterOn = ["/events/[id]"];
+
+const dontOverflowOn = ["/events/[id]"];
 
 function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   globalStyles();
@@ -61,36 +75,49 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
 
   return (
     <AuthenticationContextProvider>
-      <NextNprogress color="#EB459E" />
-      <Wrapper>
-        <Head>
-          <title>{title}</title>
-          <meta name="description" content={description} />
-          <meta name="og:title" content={title} />
-          <meta name="og:description" content={description} />
-        </Head>
-        {dontRenderSidebarOn.includes(router.pathname) ? undefined : (
-          <Sidebar
-            items={[
-              ...DEFAULT_SIDEBAR_ITEMS,
-              ...(pageProps.sidebarItems || []),
-            ]}
-          />
-        )}
+      <ThemeProvider
+        disableTransitionOnChange
+        attribute="class"
+        value={{ light: lightTheme.className, dark: "dark-theme" }}
+        defaultTheme="system"
+      >
+        <NextNprogress color="#EB459E" />
+        <Wrapper>
+          <Head>
+            <title>{title}</title>
+            <meta name="description" content={description} />
+            <meta name="og:title" content={title} />
+            <meta name="og:description" content={description} />
+          </Head>
+          {!dontRenderSidebarOn.includes(router.pathname) && (
+            <Sidebar
+              items={[
+                ...DEFAULT_SIDEBAR_ITEMS,
+                ...(pageProps.sidebarItems || []),
+              ]}
+            />
+          )}
 
-        {hideLoginButtonOn.includes(router.pathname) ? (
-          <></>
-        ) : (
-          <AccountHeaderContainer>
-            <AccountHeader />
-          </AccountHeaderContainer>
-        )}
-
-        <ContentWrapper>
-          <Component {...pageProps} />
-          <Footer />
-        </ContentWrapper>
-      </Wrapper>
+          <MainContentWrapper
+            className={`${ScrollBar()}`}
+            css={{
+              overflow: dontOverflowOn.includes(router.pathname)
+                ? "hidden"
+                : "auto",
+            }}
+          >
+            {!dontRenderLoginButtonOn.includes(router.pathname) && (
+              <AccountHeaderContainer>
+                <AccountHeader />
+              </AccountHeaderContainer>
+            )}
+            <ContentWrapper>
+              <Component {...pageProps} />
+            </ContentWrapper>
+            {!dontRenderFooterOn.includes(router.pathname) && <Footer />}
+          </MainContentWrapper>
+        </Wrapper>
+      </ThemeProvider>
     </AuthenticationContextProvider>
   );
 }

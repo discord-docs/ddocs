@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react";
+import { styled } from "../../../stitches.config";
 import { createRef, FunctionComponent, useEffect, useState } from "react";
 import Summary from "../../../lib/api-models/summary";
 import Markdown from "../../typography/Markdown";
@@ -17,7 +17,7 @@ const Container = styled("div", {
 });
 
 const SummaryHeader = styled("summary", {
-  backgroundColor: "#2F3136",
+  backgroundColor: "$backgroundSecondary",
   padding: "1rem",
   fontSize: "20px",
   zIndex: 2,
@@ -27,7 +27,7 @@ const SummaryHeader = styled("summary", {
 });
 
 const SummaryBody = styled("div", {
-  backgroundColor: "#18191C",
+  backgroundColor: "$backgroundSecondaryAlt",
   padding: "1rem 2rem",
   borderRadius: "0px 0px 6px 6px",
 });

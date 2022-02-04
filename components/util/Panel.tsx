@@ -9,15 +9,8 @@ const Panel = styled("div", {
   overflow: "hidden",
   borderStyle: "solid",
   transition: "border .125s",
+  backgroundColor: "$backgroundSecondaryAlt",
   variants: {
-    color: {
-      light: {
-        backgroundColor: "#2f3136",
-      },
-      dark: {
-        backgroundColor: "#18191c",
-      },
-    },
     border: {
       none: {
         borderStyle: "none",
@@ -43,7 +36,6 @@ const Panel = styled("div", {
     },
   },
   defaultVariants: {
-    color: "light",
     border: "none",
     padding: "small",
   },

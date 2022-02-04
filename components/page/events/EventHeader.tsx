@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react";
+import { styled } from "../../../stitches.config";
 import { FunctionComponent, useState } from "react";
 import Author from "../../../lib/api-models/author";
 import Event from "../../../lib/api-models/event";
@@ -41,7 +41,7 @@ const ContributorAvatarContainer = styled("div", {
   justifyContent: "center",
   alignItems: "center",
   borderRadius: "20px",
-  backgroundColor: "#36393f",
+  backgroundColor: "$backgroundPrimary",
   width: "40px",
   height: "40px",
   transition: "all 0.15s ease-in-out",
