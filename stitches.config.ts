@@ -11,6 +11,8 @@ const stitches = createStitches({
       backgroundSecondaryAlt: "rgb(24, 25, 28)",
       backgroundTeritialy: "#222",
       backgroundAccent: "#444",
+      scrollbarTrack: "#2f3136",
+      scrollbarThumb: "#1f2022",
     },
   },
   prefix: "ddocs",
@@ -28,5 +30,7 @@ export const lightTheme = createTheme("light-theme", {
     backgroundSecondaryAlt: "#ebedef",
     backgroundTeritialy: "#e3e5e8",
     backgroundAccent: "#747f8d",
+    scrollbarTrack: "#f2f3f5",
+    scrollbarThumb: "#747f8d",
   },
 });

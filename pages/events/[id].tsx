@@ -136,7 +136,7 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
 
   return (
     <Container>
-      <ScrollableContainer className={`${Scrollbar("2rem")}`}>
+      <ScrollableContainer className={`${Scrollbar("2rem", "2rem")}`}>
         <ContentContainer>
           <AccountHeaderContainer>
             <AccountHeader key={event.id} />
