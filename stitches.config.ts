@@ -13,7 +13,7 @@ const stitches = createStitches({
       backgroundAccent: "#444",
       scrollbarTrack: "#2f3136",
       scrollbarThumb: "#1f2022",
-      sidebarItemUnactive: "#b9bbbe",
+      itemUnactive: "#b9bbbe",
     },
   },
   prefix: "ddocs",
@@ -33,6 +33,6 @@ export const lightTheme = createTheme("light-theme", {
     backgroundAccent: "#747f8d",
     scrollbarTrack: "#f2f3f5",
     scrollbarThumb: "#747f8d",
-    sidebarItemUnactive: "#747474",
+    itemUnactive: "#747474",
   },
 });

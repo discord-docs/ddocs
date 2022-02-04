@@ -42,7 +42,7 @@ const StyledSidebarNavBarItem = styled("a", {
   fontSize: 16,
   lineHeight: "20px",
   textDecoration: "none",
-  color: "$sidebarItemUnactive",
+  color: "$itemUnactive",
   transition: "color .125s, background .125s",
   "&:hover": {
     color: "$headerPrimary",

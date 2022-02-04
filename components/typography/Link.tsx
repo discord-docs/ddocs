@@ -19,7 +19,7 @@ const styles = css({
   variants: {
     darkenHover: {
       true: {
-        color: "#b9bbbe !important",
+        color: "$itemUnactive !important",
 
         "&:hover": {
           color: "$brand !important",
