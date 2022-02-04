@@ -1,8 +1,8 @@
 import { styled } from "@stitches/react";
 import { createRef, FunctionComponent, useEffect, useState } from "react";
-import Summary from "../lib/api-models/summary";
-import Markdown from "./Markdown";
-import ToggleableArror from "./ToggleableArrow";
+import Summary from "../../../lib/api-models/summary";
+import Markdown from "../../typography/Markdown";
+import ToggleableArror from "../../util/ToggleableArrow";
 
 interface SummaryProps {
   summary: Summary;

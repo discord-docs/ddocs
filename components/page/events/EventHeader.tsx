@@ -1,8 +1,8 @@
 import { styled } from "@stitches/react";
 import { FunctionComponent, useState } from "react";
-import Author from "../lib/api-models/author";
-import Event from "../lib/api-models/event";
-import relativeDate from "../lib/relativeDate";
+import Author from "../../../lib/api-models/author";
+import Event from "../../../lib/api-models/event";
+import relativeDate from "../../../lib/relativeDate";
 import ReactTooltip from "react-tooltip";
 
 interface EventHeaderProps {

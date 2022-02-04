@@ -1,8 +1,8 @@
 import React, { FC, ReactChild } from "react";
 import Link from "next/link";
 
-import { styled } from "../stitches.config";
-import Icon from "./Icon";
+import { styled } from "../../stitches.config";
+import Icon from "../util/Icon";
 import { useRouter } from "next/dist/client/router";
 
 const StyledSidebar = styled("aside", {

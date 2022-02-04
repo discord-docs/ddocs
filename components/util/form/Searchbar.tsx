@@ -1,6 +1,6 @@
 import { styled } from "@stitches/react";
 import { FunctionComponent, useEffect, useState } from "react";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 interface SearchbarProps {
   onSearch?: (query: string) => void;

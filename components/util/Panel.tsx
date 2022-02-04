@@ -1,4 +1,4 @@
-import { styled } from "../stitches.config";
+import { styled } from "../../stitches.config";
 
 const Panel = styled("div", {
   padding: 16,

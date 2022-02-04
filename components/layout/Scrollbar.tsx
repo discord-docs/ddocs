@@ -1,4 +1,4 @@
-import { css } from "../stitches.config";
+import { css } from "../../stitches.config";
 
 export default function Scrollbar(marginTop?: string, marginBottom?: string) {
   return css({

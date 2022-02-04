@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { styled } from "../stitches.config";
+import { styled } from "../../stitches.config";
 
 interface ToggleableArrorProps {
   expanded: boolean;

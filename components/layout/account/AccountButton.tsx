@@ -6,8 +6,8 @@ import {
   useRef,
   useState,
 } from "react";
-import { styled } from "../stitches.config";
-import { Account, AuthContextType } from "./context/AuthContext";
+import { styled } from "../../../stitches.config";
+import { Account, AuthContextType } from "../../context/AuthContext";
 
 interface AccountButtonProps {
   account: Account;

@@ -1,13 +1,14 @@
 import axios from "axios";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import AccountHeader from "../components/AccountHeader";
+import AccountHeader from "../components/layout/account/AccountHeader";
 import AuthenticationContextProvider from "../components/context/AuthContext";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/layout/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
 import { globalCss, styled } from "../stitches.config";
 import "../styles/global.css";
 import NextNprogress from "nextjs-progressbar";
+import Footer from "../components/layout/footer/Footer";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -87,6 +88,7 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
 
         <ContentWrapper>
           <Component {...pageProps} />
+          <Footer />
         </ContentWrapper>
       </Wrapper>
     </AuthenticationContextProvider>

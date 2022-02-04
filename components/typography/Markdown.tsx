@@ -1,10 +1,11 @@
 import { FunctionComponent } from "react";
 import ReactMarkdown from "react-markdown";
-import { styled } from "../stitches.config";
+import { styled } from "../../stitches.config";
 import Text from "./Text";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import Header from "./Header";
 
 interface MarkdownProps {
   content?: string;
@@ -15,36 +16,6 @@ const Image = styled("img", {
   borderRadius: "10px",
   objectFit: "contain",
   margin: "1rem",
-});
-
-const H1 = styled("h1", {
-  fontWeight: "bold",
-  fontSize: "32px",
-});
-
-const H2 = styled("h2", {
-  fontWeight: "bold",
-  fontSize: "24px",
-});
-
-const H3 = styled("h3", {
-  fontWeight: "normal",
-  fontSize: "24px",
-});
-
-const H4 = styled("h4", {
-  fontWeight: "bold",
-  fontSize: "20px",
-});
-
-const H5 = styled("h5", {
-  fontWeight: "normal",
-  fontSize: "20px",
-});
-
-const H6 = styled("h6", {
-  fontWeight: "bold",
-  fontSize: "18px",
 });
 
 const Link = styled("a", {
@@ -91,22 +62,46 @@ const Markdown: FunctionComponent<MarkdownProps> = ({ content }) => {
       remarkPlugins={[remarkGfm]}
       components={{
         h1({ node, className, children, ...props }) {
-          return <H1>{children}</H1>;
+          return (
+            <Header className={className} variant={"h1"}>
+              {children}
+            </Header>
+          );
         },
         h2({ node, className, children, ...props }) {
-          return <H2>{children}</H2>;
+          return (
+            <Header className={className} variant={"h2"}>
+              {children}
+            </Header>
+          );
         },
         h3({ node, className, children, ...props }) {
-          return <H3>{children}</H3>;
+          return (
+            <Header className={className} variant={"h3"}>
+              {children}
+            </Header>
+          );
         },
         h4({ node, className, children, ...props }) {
-          return <H4>{children}</H4>;
+          return (
+            <Header className={className} variant={"h4"}>
+              {children}
+            </Header>
+          );
         },
         h5({ node, className, children, ...props }) {
-          return <H5>{children}</H5>;
+          return (
+            <Header className={className} variant={"h5"}>
+              {children}
+            </Header>
+          );
         },
         h6({ node, className, children, ...props }) {
-          return <H6>{children}</H6>;
+          return (
+            <Header className={className} variant={"h6"}>
+              {children}
+            </Header>
+          );
         },
         p(props) {
           return (

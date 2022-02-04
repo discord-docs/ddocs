@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { css, styled } from "../stitches.config";
-import Panel from "./Panel";
+import { css, styled } from "../../../stitches.config";
+import Panel from "../../util/Panel";
 import Image from "next/image";
-import Text from "./Text";
+import Text from "../../typography/Text";
 
 interface MetricProps {
   title: string;
