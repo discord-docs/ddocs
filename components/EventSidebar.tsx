@@ -107,8 +107,9 @@ const EventSidebar: FunctionComponent<EventSidebarProps> = ({
           </>
         ) : (
           <NoItemsFound>
-            After searching around we couldn&apost find any events matching your
-            query :(. Try searching with a different keyword instead!
+            {
+              "After searching around we couldn't find any events matching your query :(. Try searching with a different keyword instead!"
+            }
           </NoItemsFound>
         )}
       </SearchResultContainer>
