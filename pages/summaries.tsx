@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import CardList from "../components/CardList";
 import { AuthContext } from "../components/context/AuthContext";
 import DatePicker from "../components/DatePicker";
+import Scrollbar from "../components/Scrollbar";
 import API, { Routes } from "../lib/api";
 import PartialEvent from "../lib/api-models/partialEvent";
 import Summary from "../lib/api-models/summary";
@@ -14,6 +15,7 @@ import { css, styled } from "../stitches.config";
 const Banner = styled("div", {
   display: "flex",
   height: "35.2vh",
+  minHeight: "35.2vh",
   background:
     "url('/assets/images/summaries-banner.svg'), linear-gradient(90deg, #5865F2 0%, #414EDE 100%);",
   backgroundPosition: "bottom center",
@@ -53,8 +55,9 @@ const Summary = styled(Card, {
   width: 250,
 });
 
-const wrapper = css({
+const Wrapper = styled("div", {
   padding: 40,
+  overflowY: "auto",
 });
 
 const SummaryWrapper = styled("div", {
@@ -130,11 +133,11 @@ const Summaries: FC<SummaryProps> = ({ currentEvents }) => {
         </BannerContainer>
       </Banner>
 
-      <div className={wrapper()}>
+      <Wrapper className={`${Scrollbar("0.25rem", "0.25rem")}`}>
         <CardList>
           <SummaryElements />
         </CardList>
-      </div>
+      </Wrapper>
     </>
   );
 };

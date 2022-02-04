@@ -4,6 +4,7 @@ import PartialEvent from "../lib/api-models/partialEvent";
 import { styled } from "../stitches.config";
 import Card from "./Card";
 import { useAuth } from "./context/AuthContext";
+import Scrollbar from "./Scrollbar";
 import Searchbar from "./Searchbar";
 import SidebarEventCard from "./SidebarEventCard";
 
@@ -28,20 +29,6 @@ const Container = styled("div", {
   bottom: 0,
   top: 0,
   overflowY: "scroll",
-  "&::-webkit-scrollbar": {
-    width: "0.5rem",
-  },
-
-  "&::-webkit-scrollbar-track": {
-    background: "var(--ddocs-colors-backgroundSecondary)",
-    borderRadius: "0.25rem",
-    marginTop: "3.5rem",
-  },
-
-  "&::-webkit-scrollbar-thumb": {
-    background: "#202225",
-    borderRadius: "0.25rem",
-  },
 });
 
 const SearchResultContainer = styled("div", {
@@ -90,7 +77,7 @@ const EventSidebar: FunctionComponent<EventSidebarProps> = ({
   };
 
   return (
-    <Container>
+    <Container className={`${Scrollbar("3.5rem")}`}>
       <Searchbar
         loading={searching}
         onSearch={(v) => {

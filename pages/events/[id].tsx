@@ -13,6 +13,7 @@ import Summary from "../../components/Summary";
 import PartialEvent from "../../lib/api-models/partialEvent";
 import ApiSummary from "../../lib/api-models/summary";
 import ToggleableArrow from "../../components/ToggleableArrow";
+import Scrollbar from "../../components/Scrollbar";
 
 interface EventProps {
   event: Event;
@@ -84,21 +85,6 @@ const ScrollableContainer = styled("div", {
   marginBottom: "2rem",
   display: "flex",
   justifyContent: "center",
-
-  "&::-webkit-scrollbar": {
-    width: "0.5rem",
-  },
-
-  "&::-webkit-scrollbar-track": {
-    background: "var(--ddocs-colors-backgroundSecondary)",
-    borderRadius: "0.25rem",
-    margin: "2rem 0",
-  },
-
-  "&::-webkit-scrollbar-thumb": {
-    background: "#202225",
-    borderRadius: "0.25rem",
-  },
 });
 
 const AccountHeaderContainer = styled("div", {
@@ -149,7 +135,7 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
 
   return (
     <Container>
-      <ScrollableContainer>
+      <ScrollableContainer className={`${Scrollbar("2rem")}`}>
         <ContentContainer>
           <AccountHeaderContainer>
             <AccountHeader key={event.id} />

@@ -11,9 +11,10 @@ interface MarkdownProps {
 }
 
 const Image = styled("img", {
-  width: "100%",
+  width: "-moz-available;width:-webkit-fill-available",
   borderRadius: "10px",
   objectFit: "contain",
+  margin: "1rem",
 });
 
 const H1 = styled("h1", {
