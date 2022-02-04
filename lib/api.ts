@@ -1,5 +1,7 @@
 import AuthenticationContext from "../components/context/AuthContext";
 import CurrentUser from "./api-models/currentUser";
+import Event from "././api-models/event";
+import PartialEvent from "./api-models/partialEvent";
 
 export const BaseApiURL = "https://api.ddocs.io";
 
@@ -8,6 +10,7 @@ export const Routes = {
   Logout: "/auth/logout",
   Refresh: "/auth/refresh",
   CurrentUser: "/users/@me",
+  Events: "/events",
 };
 
 export default class API {
@@ -51,6 +54,47 @@ export default class API {
     }
 
     return (await result.json()).token;
+  }
+
+  public async getEvents(year: string): Promise<PartialEvent[]> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Events) + "?year=" + year
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return [];
+    }
+
+    return (await result.json()) as PartialEvent[];
+  }
+
+  public async getEvent(id: string): Promise<Event | undefined> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Events) + "/" + id
+    );
+
+    switch (result.status) {
+      case 200:
+        return (await result.json()) as Event;
+      case 404:
+        return undefined;
+      default:
+        this.handleUnknownError(result);
+    }
+  }
+
+  public async searchEvents(query: string): Promise<PartialEvent[]> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Events) + "?search=" + query
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return [];
+    }
+
+    return (await result.json()) as PartialEvent[];
   }
 
   public static getRoute(route: string) {

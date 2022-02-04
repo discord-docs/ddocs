@@ -1,14 +1,21 @@
-import React from "react";
+import axios from "axios";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
 import { AuthContext } from "../components/context/AuthContext";
 import DatePicker from "../components/DatePicker";
+import Scrollbar from "../components/Scrollbar";
+import API, { Routes } from "../lib/api";
+import PartialEvent from "../lib/api-models/partialEvent";
+import Summary from "../lib/api-models/summary";
 import { css, styled } from "../stitches.config";
 
 const Banner = styled("div", {
   display: "flex",
   height: "35.2vh",
+  minHeight: "35.2vh",
   background:
     "url('/assets/images/summaries-banner.svg'), linear-gradient(90deg, #5865F2 0%, #414EDE 100%);",
   backgroundPosition: "bottom center",
@@ -48,25 +55,62 @@ const Summary = styled(Card, {
   width: 250,
 });
 
-const wrapper = css({
+const Wrapper = styled("div", {
   padding: 40,
+  overflowY: "auto",
+});
+
+const SummaryWrapper = styled("div", {
+  userSelect: "none",
+  cursor: "pointer",
 });
 
 interface SummaryProps {
   description: string;
-  summaries: SummaryBody;
+  currentEvents: PartialEvent[];
 }
 
-const Summaries: FC<SummaryProps> = ({ summaries }) => {
-  const context = React.useContext(AuthContext);
-  console.log(context); // just a test of context
+interface LoadedEvents {
+  events: PartialEvent[];
+  year: string;
+}
+
+const Summaries: FC<SummaryProps> = ({ currentEvents }) => {
+  const [year, setYear] = useState<string>(`${new Date().getFullYear()}`);
+  const [events, setEvents] = useState<PartialEvent[]>(currentEvents);
+  const [loadedEvents, setLoadedEvents] = useState<LoadedEvents[]>([]);
+
+  const auth = React.useContext(AuthContext);
+
+  const getEvents = async () => {
+    console.log(loadedEvents);
+    if (loadedEvents?.some((x) => x.year === year)) {
+      setEvents(loadedEvents.find((x) => x.year === year)!.events);
+      return;
+    }
+
+    const events = await auth.Api!.getEvents(year);
+
+    setEvents(events);
+
+    const l = loadedEvents?.concat({ events, year });
+    setLoadedEvents(l);
+  };
+
+  useEffect(() => {
+    getEvents();
+  }, [year]);
 
   const SummaryElements = () => (
     <>
-      {summaries.items.map((i, idx) => (
-        <Summary key={idx} title={i.title} image={i.previewImage}>
-          {i.description}
-        </Summary>
+      {events.map((i, idx) => (
+        <Link key={i.id} href={`/events/${i.id}`}>
+          <SummaryWrapper>
+            <Summary key={idx} title={i.title} image={i.thumbnail}>
+              {i.description}
+            </Summary>
+          </SummaryWrapper>
+        </Link>
       ))}
     </>
   );
@@ -81,33 +125,22 @@ const Summaries: FC<SummaryProps> = ({ summaries }) => {
           </BannerSubtitle>
           <DatePicker
             onChange={(h) => {
-              console.log(h);
+              setYear(h);
             }}
-            current="2022"
+            current={year}
             values={["2019", "2020", "2021", "2022", "2023", "2024"]}
           />
         </BannerContainer>
       </Banner>
 
-      <div className={wrapper()}>
+      <Wrapper className={`${Scrollbar("0.25rem", "0.25rem")}`}>
         <CardList>
           <SummaryElements />
         </CardList>
-      </div>
+      </Wrapper>
     </>
   );
 };
-
-interface SummaryBody {
-  items: SummaryItem[];
-}
-
-interface SummaryItem {
-  title: string;
-  description: string;
-  id: string;
-  previewImage?: string;
-}
 
 export async function getServerSideProps() {
   // TODO: Use api
@@ -117,32 +150,14 @@ export async function getServerSideProps() {
   const yearsAvailable = [2021, 2022];
 
   // grab items from selected year
-  const response: SummaryBody = {
-    items: [
-      {
-        title: "This is a title",
-        description: "This is a description",
-        id: "100000",
-        previewImage: "/assets/images/sample-summary-preview.png",
-      },
-      {
-        title: "This is a title",
-        description: "This is a description",
-        id: "100000",
-      },
-      {
-        title: "This is a title",
-        description: "This is a description",
-        id: "100000",
-        previewImage: "/assets/images/sample-summary-preview.png",
-      },
-    ],
-  };
+  const result = await axios.get(
+    API.getRoute(Routes.Events + `?year=${new Date().getFullYear()}`)
+  );
 
   return {
     props: {
       description: `Stage Summaries`,
-      summaries: response,
+      currentEvents: result.status === 200 ? result.data : [],
     },
   };
 }

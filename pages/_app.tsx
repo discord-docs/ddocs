@@ -7,6 +7,7 @@ import Sidebar from "../components/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
 import { globalCss, styled } from "../stitches.config";
 import "../styles/global.css";
+import NextNprogress from "nextjs-progressbar";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -26,8 +27,14 @@ const ContentWrapper = styled("main", {
   minHeight: "min-content",
   // padding: "40px 40px 40px 40px",
   width: "100%",
-  overflowY: "auto",
-  height: "100%",
+  overflowY: "hidden",
+  height: "100vh",
+});
+
+const AccountHeaderContainer = styled("div", {
+  position: "absolute",
+  top: "40px",
+  right: "40px",
 });
 
 ContentWrapper.displayName = "ContentWrapper";
@@ -39,6 +46,8 @@ const globalStyles = globalCss({
 
 const dontRenderSidebarOn = ["/login"];
 
+const hideLoginButtonOn = ["/events/[id]"];
+
 function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   globalStyles();
 
@@ -47,8 +56,11 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   }`;
   const description = pageProps.description || "Discord Docs";
 
+  console.log(router);
+
   return (
     <AuthenticationContextProvider>
+      <NextNprogress color="#EB459E" />
       <Wrapper>
         <Head>
           <title>{title}</title>
@@ -57,15 +69,20 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
           <meta name="og:description" content={description} />
         </Head>
         {dontRenderSidebarOn.includes(router.pathname) ? undefined : (
-          <>
-            <Sidebar
-              items={[
-                ...DEFAULT_SIDEBAR_ITEMS,
-                ...(pageProps.sidebarItems || []),
-              ]}
-            />
+          <Sidebar
+            items={[
+              ...DEFAULT_SIDEBAR_ITEMS,
+              ...(pageProps.sidebarItems || []),
+            ]}
+          />
+        )}
+
+        {hideLoginButtonOn.includes(router.pathname) ? (
+          <></>
+        ) : (
+          <AccountHeaderContainer>
             <AccountHeader />
-          </>
+          </AccountHeaderContainer>
         )}
 
         <ContentWrapper>
