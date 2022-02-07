@@ -90,13 +90,13 @@ const FooterSection = styled("div", {
 const Footer: FunctionComponent<FooterProps> = () => {
   const renderSection = (title: string, content: FooterInnerContent[]) => {
     return (
-      <FooterSection>
+      <FooterSection key={title}>
         <Text weight={"bold"} size={"normal"}>
           {title}
         </Text>
         {content.map((item) => {
           return (
-            <>
+            <div key={item.url || item.content}>
               {item.url ? (
                 <Link
                   color="white"
@@ -109,7 +109,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
               ) : (
                 <Text size={"normal"}>{item.content}</Text>
               )}
-            </>
+            </div>
           );
         })}
       </FooterSection>

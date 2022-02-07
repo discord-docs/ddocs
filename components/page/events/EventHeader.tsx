@@ -4,6 +4,7 @@ import Author from "../../../lib/api-models/author";
 import Event from "../../../lib/api-models/event";
 import relativeDate from "../../../lib/relativeDate";
 import ReactTooltip from "react-tooltip";
+import GracefulImage from "../../util/GracefulImage";
 
 interface EventHeaderProps {
   event: Event;
@@ -99,7 +100,14 @@ const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
   return (
     <Container>
       <TopContent>
-        <AuthorAvatar src={event.author.avatar} />
+        <GracefulImage
+          id={event.author.avatar}
+          width={48}
+          height={48}
+          style={{
+            borderRadius: "24px",
+          }}
+        />
         <TopTextContainer>
           <strong>
             {event.author.username}#{event.author.discriminator}
@@ -133,7 +141,15 @@ const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
                     }}
                     key={contributor.id}
                   >
-                    <ContributorAvatar src={contributor.avatar} />
+                    <GracefulImage
+                      id={contributor.avatar}
+                      width={32}
+                      height={32}
+                      style={{
+                        borderRadius: "16px",
+                        margin: "0 0.25rem",
+                      }}
+                    />
                   </ContributorAvatarContainer>
                 );
               })}

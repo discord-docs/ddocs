@@ -11,6 +11,7 @@ import API, { Routes } from "../lib/api";
 import PartialEvent from "../lib/api-models/partialEvent";
 import Summary from "../lib/api-models/summary";
 import { css, styled } from "../stitches.config";
+import GracefulImage from "../components/util/GracefulImage";
 
 const Banner = styled("div", {
   display: "flex",
