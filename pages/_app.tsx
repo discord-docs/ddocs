@@ -3,7 +3,8 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import AccountHeader from "../components/AccountHeader";
 import AuthenticationContextProvider from "../components/context/AuthContext";
-import Sidebar from "../components/Sidebar";
+import WebsocketContextProvider from "../components/context/WebsocketContext";
+import Sidebar from "../components/layout/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
 import { globalCss, styled } from "../stitches.config";
 import "../styles/global.css";
@@ -56,39 +57,53 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   }`;
   const description = pageProps.description || "Discord Docs";
 
-  console.log(router);
-
   return (
     <AuthenticationContextProvider>
-      <NextNprogress color="#EB459E" />
-      <Wrapper>
-        <Head>
-          <title>{title}</title>
-          <meta name="description" content={description} />
-          <meta name="og:title" content={title} />
-          <meta name="og:description" content={description} />
-        </Head>
-        {dontRenderSidebarOn.includes(router.pathname) ? undefined : (
-          <Sidebar
-            items={[
-              ...DEFAULT_SIDEBAR_ITEMS,
-              ...(pageProps.sidebarItems || []),
-            ]}
-          />
-        )}
+      <WebsocketContextProvider>
+        <ThemeProvider
+          disableTransitionOnChange
+          attribute="class"
+          value={{ light: lightTheme.className, dark: "dark-theme" }}
+          defaultTheme="system"
+        >
+          <NextNprogress color="#5865f2" />
+          <Wrapper>
+            <Head>
+              <title>{title}</title>
+              <meta name="description" content={description} />
+              <meta name="og:title" content={title} />
+              <meta name="og:description" content={description} />
+            </Head>
+            {!dontRenderSidebarOn.includes(router.pathname) && (
+              <Sidebar
+                items={[
+                  ...DEFAULT_SIDEBAR_ITEMS,
+                  ...(pageProps.sidebarItems || []),
+                ]}
+              />
+            )}
 
-        {hideLoginButtonOn.includes(router.pathname) ? (
-          <></>
-        ) : (
-          <AccountHeaderContainer>
-            <AccountHeader />
-          </AccountHeaderContainer>
-        )}
-
-        <ContentWrapper>
-          <Component {...pageProps} />
-        </ContentWrapper>
-      </Wrapper>
+            <MainContentWrapper
+              className={`${ScrollBar()}`}
+              css={{
+                overflow: dontOverflowOn.includes(router.pathname)
+                  ? "hidden"
+                  : "auto",
+              }}
+            >
+              {!dontRenderLoginButtonOn.includes(router.pathname) && (
+                <AccountHeaderContainer>
+                  <AccountHeader />
+                </AccountHeaderContainer>
+              )}
+              <ContentWrapper>
+                <Component {...pageProps} />
+              </ContentWrapper>
+              {!dontRenderFooterOn.includes(router.pathname) && <Footer />}
+            </MainContentWrapper>
+          </Wrapper>
+        </ThemeProvider>
+      </WebsocketContextProvider>
     </AuthenticationContextProvider>
   );
 }
