@@ -1,6 +1,7 @@
-import { styled } from "@stitches/react";
+import { styled } from "../../../stitches.config";
 import { FunctionComponent, useEffect, useState } from "react";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
+import { useTheme } from "next-themes";
 
 interface SearchbarProps {
   onSearch?: (query: string) => void;
@@ -17,9 +18,18 @@ const Input = styled("input", {
   fontSize: "1rem",
   fontWeight: "400",
   fontFamily: "Whitney",
-
   "&:focus-visible": {
     outline: "none",
+  },
+  variants: {
+    backgroundColor: {
+      light: {
+        backgroundColor: "$backgroundSecondary",
+      },
+      dark: {
+        backgroundColor: "$headerPrimary",
+      },
+    },
   },
 });
 
@@ -40,7 +50,7 @@ const Container = styled("div", {
   width: "100%",
   top: "0",
   zIndex: "5",
-  background: "var(--ddocs-colors-backgroundPrimary)",
+  background: "$backgroundPrimary",
 });
 
 const Searchbar: FunctionComponent<SearchbarProps> = ({
@@ -49,6 +59,7 @@ const Searchbar: FunctionComponent<SearchbarProps> = ({
   loading,
 }) => {
   const [value, setValue] = useState("");
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (onChange) onChange(value);
@@ -57,6 +68,7 @@ const Searchbar: FunctionComponent<SearchbarProps> = ({
   return (
     <Container>
       <Input
+        backgroundColor={theme === "light" ? "light" : "dark"}
         type="text"
         placeholder="Search"
         value={value}

@@ -1,9 +1,10 @@
 import React, { FC, ReactChild } from "react";
 import Link from "next/link";
 
-import { styled } from "../stitches.config";
-import Icon from "./Icon";
+import { styled } from "../../stitches.config";
+import Icon from "../util/Icon";
 import { useRouter } from "next/dist/client/router";
+import ThemeToggle from "../util/ThemeToggle";
 
 const StyledSidebar = styled("aside", {
   flexBasis: 350,
@@ -41,7 +42,7 @@ const StyledSidebarNavBarItem = styled("a", {
   fontSize: 16,
   lineHeight: "20px",
   textDecoration: "none",
-  color: "#b9bbbe;",
+  color: "$itemUnactive",
   transition: "color .125s, background .125s",
   "&:hover": {
     color: "$headerPrimary",
@@ -49,9 +50,12 @@ const StyledSidebarNavBarItem = styled("a", {
   variants: {
     active: {
       true: {
-        color: "$headerPrimary",
+        color: "#eee",
         backgroundColor: "$brand",
         borderRadius: 3,
+        "&:hover": {
+          color: "white",
+        },
       },
     },
     size: {
@@ -79,6 +83,10 @@ const StyledSidebarSubheading = styled("h3", {
 
 StyledSidebarSubheading.displayName = "SidebarSubheading";
 
+const DiscordLogoWrapper = styled("div", {
+  color: "$textNormal",
+});
+
 export interface SidebarItem {
   icon: string;
   label: string;
@@ -100,12 +108,18 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
 
   return (
     <StyledSidebar>
-      <Link passHref href="/">
-        <StyledSidebarHeader>
-          <Icon icon="Discord-Logo-White" />
-          <strong>ddocs.io</strong>
-        </StyledSidebarHeader>
-      </Link>
+      <StyledSidebarHeader>
+        <Link passHref href="/">
+          <>
+            <DiscordLogoWrapper>
+              <Icon icon="Discord-Logo-White" />
+            </DiscordLogoWrapper>
+            <strong>ddocs.io</strong>
+          </>
+        </Link>
+        <ThemeToggle />
+      </StyledSidebarHeader>
+
       <StyledSidebarNavBar>
         {items.map((item) => {
           if (!item.hasOwnProperty("title")) {

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { styled } from "../stitches.config";
+import { styled } from "../../stitches.config";
 
 const StyledTable = styled("table", {
   borderCollapse: "collapse",

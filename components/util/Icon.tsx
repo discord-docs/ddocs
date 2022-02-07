@@ -8,7 +8,7 @@ const Icon: FC<IconProps> = ({ icon }) => {
   const [component, setComponent] = useState<JSX.Element | null>(null);
 
   useEffect(() => {
-    import(`../public/assets/icons/${icon}.svg`).then((module) => {
+    import(`../../public/assets/icons/${icon}.svg`).then((module) => {
       setComponent(module.default);
     });
   }, [icon]);

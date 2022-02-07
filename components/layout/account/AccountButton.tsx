@@ -6,18 +6,13 @@ import {
   useRef,
   useState,
 } from "react";
-import { styled } from "../stitches.config";
-import { Account, AuthContextType } from "./context/AuthContext";
+import { lightTheme, styled } from "../../../stitches.config";
+import { Account, AuthContextType } from "../../context/AuthContext";
+import GracefulImage from "../../util/GracefulImage";
 
 interface AccountButtonProps {
   account: Account;
 }
-
-const Avatar = styled("img", {
-  height: "40px",
-  margin: "0.75rem",
-  borderRadius: "32px",
-});
 
 const Container = styled("div", {
   display: "flex",
@@ -30,6 +25,7 @@ const Container = styled("div", {
   transition: "all 0.25s ease-in-out",
   overflow: "hidden",
   flexDirection: "row",
+  color: "white",
 });
 
 const OuterContentContainer = styled("div", {
@@ -98,7 +94,15 @@ const AccountButton: FunctionComponent<AccountButtonProps> = ({ account }) => {
       }}
     >
       <OuterContentContainer>
-        <Avatar src={account.avatar}></Avatar>
+        <GracefulImage
+          id={account.avatar}
+          width={40}
+          height={40}
+          style={{
+            margin: "0.75rem",
+            borderRadius: "32px",
+          }}
+        ></GracefulImage>
         <strong>{`${account.username}#${account.discriminator}`}</strong>
         <ArrowIcon
           viewBox="0 0 24 24"

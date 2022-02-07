@@ -1,9 +1,10 @@
-import { styled } from "@stitches/react";
+import { css, styled } from "../../../stitches.config";
 import { FunctionComponent, useState } from "react";
-import Author from "../lib/api-models/author";
-import Event from "../lib/api-models/event";
-import relativeDate from "../lib/relativeDate";
+import Author from "../../../lib/api-models/author";
+import Event from "../../../lib/api-models/event";
+import relativeDate from "../../../lib/relativeDate";
 import ReactTooltip from "react-tooltip";
+import GracefulImage from "../../util/GracefulImage";
 
 interface EventHeaderProps {
   event: Event;
@@ -41,7 +42,7 @@ const ContributorAvatarContainer = styled("div", {
   justifyContent: "center",
   alignItems: "center",
   borderRadius: "20px",
-  backgroundColor: "#36393f",
+  backgroundColor: "$backgroundPrimary",
   width: "40px",
   height: "40px",
   transition: "all 0.15s ease-in-out",
@@ -84,13 +85,29 @@ const AvatarsContainer = styled("div", {
   display: "flex",
 });
 
+const TooltipStyles = css({
+  padding: "5px 10px !important",
+  borderRadius: "5px !important",
+  background: "$backgroundSecondaryAlt !important",
+  color: "$textPrimary !important",
+  fontSize: "1rem !important",
+  opacity: "1 !important",
+});
+
 const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <Container>
       <TopContent>
-        <AuthorAvatar src={event.author.avatar} />
+        <GracefulImage
+          id={event.author.avatar}
+          width={48}
+          height={48}
+          style={{
+            borderRadius: "24px",
+          }}
+        />
         <TopTextContainer>
           <strong>
             {event.author.username}#{event.author.discriminator}
@@ -124,13 +141,21 @@ const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
                     }}
                     key={contributor.id}
                   >
-                    <ContributorAvatar src={contributor.avatar} />
+                    <GracefulImage
+                      id={contributor.avatar}
+                      width={32}
+                      height={32}
+                      style={{
+                        borderRadius: "16px",
+                        margin: "0 0.25rem",
+                      }}
+                    />
                   </ContributorAvatarContainer>
                 );
               })}
           </AvatarsContainer>
           <ReactTooltip
-            className="ddocs-tooltip"
+            className={TooltipStyles()}
             place="top"
             type="dark"
             effect="solid"

@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
-import PartialEvent from "../lib/api-models/partialEvent";
-import { styled } from "../stitches.config";
-import Panel from "./Panel";
-import Text from "./Text";
+import PartialEvent from "../../../lib/api-models/partialEvent";
+import { styled } from "../../../stitches.config";
+import Panel from "../../util/Panel";
+import Text from "../../typography/Text";
 
 interface SidebarEventCardProps {
   event: PartialEvent;

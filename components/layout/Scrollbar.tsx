@@ -1,4 +1,4 @@
-import { css } from "../stitches.config";
+import { css } from "../../stitches.config";
 
 export default function Scrollbar(marginTop?: string, marginBottom?: string) {
   return css({
@@ -7,14 +7,14 @@ export default function Scrollbar(marginTop?: string, marginBottom?: string) {
     },
 
     "&::-webkit-scrollbar-track": {
-      background: "var(--ddocs-colors-backgroundSecondary)",
+      background: "$scrollbarTrack",
       borderRadius: "0.25rem",
       marginTop,
       marginBottom,
     },
 
     "&::-webkit-scrollbar-thumb": {
-      background: "#202225",
+      background: "$scrollbarThumb",
       borderRadius: "0.25rem",
     },
   });

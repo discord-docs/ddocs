@@ -1,6 +1,6 @@
 import { keyframes } from "@stitches/react";
 import { FunctionComponent } from "react";
-import { styled } from "../stitches.config";
+import { styled } from "../../stitches.config";
 
 interface SpinnerProps {}
 
