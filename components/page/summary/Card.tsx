@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { css, styled } from "../stitches.config";
-import Panel from "./Panel";
+import { css, styled } from "../../../stitches.config";
+import Panel from "../../util/Panel";
 import Image from "next/image";
-import Text from "./Text";
+import Text from "../../typography/Text";
 
 interface MetricProps {
   title: string;
@@ -32,7 +32,7 @@ const Card: FC<MetricProps> = ({ title, className, children, image }) => {
   const lineClamp = css({ "-webkit-line-clamp": lines });
   const textStyle = [test(), lineClamp()].join(" ");
   return (
-    <Panel className={className} color="dark" padding="nopad">
+    <Panel className={className} padding="nopad">
       {image && <Image src={image} width={250} height={150} alt="card image" />}
       <Padding>
         <Header>{title}</Header>

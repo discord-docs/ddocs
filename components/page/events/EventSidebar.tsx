@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { FunctionComponent, useState } from "react";
-import PartialEvent from "../lib/api-models/partialEvent";
-import { styled } from "../stitches.config";
-import Card from "./Card";
-import { useAuth } from "./context/AuthContext";
-import Scrollbar from "./Scrollbar";
-import Searchbar from "./Searchbar";
+import PartialEvent from "../../../lib/api-models/partialEvent";
+import { styled } from "../../../stitches.config";
+import Card from "../summary/Card";
+import { useAuth } from "../../context/AuthContext";
+import Scrollbar from "../../layout/Scrollbar";
+import Searchbar from "../../util/form/Searchbar";
 import SidebarEventCard from "./SidebarEventCard";
 
 interface EventSidebarProps {

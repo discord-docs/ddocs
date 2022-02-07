@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { styled } from "../stitches.config";
+import { styled } from "../../stitches.config";
 
 interface ToggleableArrorProps {
   expanded: boolean;
@@ -9,7 +9,7 @@ interface ToggleableArrorProps {
 const ArrowIcon = styled("svg", {
   width: "24px",
   height: "24px",
-  fill: "white",
+  fill: "$textNormal",
   transition: "all 0.15s ease-in-out",
   marginLeft: "auto",
 });

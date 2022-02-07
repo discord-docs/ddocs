@@ -1,10 +1,16 @@
 import { FunctionComponent } from "react";
 import ReactMarkdown from "react-markdown";
-import { styled } from "../stitches.config";
+import { styled } from "../../stitches.config";
 import Text from "./Text";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import {
+  materialDark,
+  materialLight,
+} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import Header from "./Header";
+import Link from "./Link";
+import { useTheme } from "next-themes";
 
 interface MarkdownProps {
   content?: string;
@@ -17,46 +23,12 @@ const Image = styled("img", {
   margin: "1rem",
 });
 
-const H1 = styled("h1", {
-  fontWeight: "bold",
-  fontSize: "32px",
-});
-
-const H2 = styled("h2", {
-  fontWeight: "bold",
-  fontSize: "24px",
-});
-
-const H3 = styled("h3", {
-  fontWeight: "normal",
-  fontSize: "24px",
-});
-
-const H4 = styled("h4", {
-  fontWeight: "bold",
-  fontSize: "20px",
-});
-
-const H5 = styled("h5", {
-  fontWeight: "normal",
-  fontSize: "20px",
-});
-
-const H6 = styled("h6", {
-  fontWeight: "bold",
-  fontSize: "18px",
-});
-
-const Link = styled("a", {
-  color: "var(--ddocs-colors-brand)",
-});
-
 const Quote = styled("blockquote", {
-  borderLeft: "5px solid #444",
+  borderLeft: "5px solid $backgroundAccent",
   borderRadius: "5px",
   margin: "0.5rem 0.25rem",
   padding: "0.25rem 0.5rem",
-  background: "#222",
+  background: "$backgroundTeritialy",
 });
 
 const UnorderedList = styled("ul", {
@@ -86,43 +58,75 @@ const ListItem = styled("li", {
 });
 
 const Markdown: FunctionComponent<MarkdownProps> = ({ content }) => {
+  const { theme } = useTheme();
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       components={{
         h1({ node, className, children, ...props }) {
-          return <H1>{children}</H1>;
+          return (
+            <Header className={className} variant={"h1"}>
+              {children}
+            </Header>
+          );
         },
         h2({ node, className, children, ...props }) {
-          return <H2>{children}</H2>;
+          return (
+            <Header className={className} variant={"h2"}>
+              {children}
+            </Header>
+          );
         },
         h3({ node, className, children, ...props }) {
-          return <H3>{children}</H3>;
+          return (
+            <Header className={className} variant={"h3"}>
+              {children}
+            </Header>
+          );
         },
         h4({ node, className, children, ...props }) {
-          return <H4>{children}</H4>;
+          return (
+            <Header className={className} variant={"h4"}>
+              {children}
+            </Header>
+          );
         },
         h5({ node, className, children, ...props }) {
-          return <H5>{children}</H5>;
+          return (
+            <Header className={className} variant={"h5"}>
+              {children}
+            </Header>
+          );
         },
         h6({ node, className, children, ...props }) {
-          return <H6>{children}</H6>;
+          return (
+            <Header className={className} variant={"h6"}>
+              {children}
+            </Header>
+          );
         },
-        p(props) {
+        p({ node, className, children, ...props }) {
           return (
             <Text weight={"medium"} size={"medium"}>
-              {props.children}
+              {children}
             </Text>
           );
         },
-        ul({ children, ...props }) {
+        ul({ node, className, children, ...props }) {
           return <UnorderedList {...props}>{children}</UnorderedList>;
         },
-        ol({ children, ...props }) {
+        ol({ node, className, children, ...props }) {
           return <OrderedList {...props}>{children}</OrderedList>;
         },
         a({ node, className, children, ...props }) {
-          return <Link {...props}>{children}</Link>;
+          return (
+            <Link
+              external={!(props.href ?? "").startsWith("/")}
+              href={props.href ?? ""}
+            >
+              {children}
+            </Link>
+          );
         },
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
@@ -131,21 +135,21 @@ const Markdown: FunctionComponent<MarkdownProps> = ({ content }) => {
               children={String(children).replace(/\n$/, "")}
               language={match ? match[1] : undefined}
               PreTag="div"
-              style={atomDark}
+              style={theme == "light" ? materialLight : materialDark}
               {...props}
             />
           );
         },
-        li({ children, ...props }) {
+        li({ node, className, children, ...props }) {
           return <ListItem {...props}>{children}</ListItem>;
         },
-        blockquote({ children, ...props }) {
+        blockquote({ node, className, children, ...props }) {
           return <Quote {...props}>{children}</Quote>;
         },
-        img(props) {
+        img({ node, className, children, ...props }) {
           return <Image {...props} />;
         },
-        hr({ ...props }) {
+        hr({ node, className, children, ...props }) {
           return <HR {...props} />;
         },
       }}

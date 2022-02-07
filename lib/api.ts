@@ -3,7 +3,10 @@ import CurrentUser from "./api-models/currentUser";
 import Event from "././api-models/event";
 import PartialEvent from "./api-models/partialEvent";
 
-export const BaseApiURL = "https://api.ddocs.io";
+export const BaseApiURL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8080"
+    : "https://api.ddocs.io";
 
 export const Routes = {
   Login: "/auth/login",
@@ -11,6 +14,7 @@ export const Routes = {
   Refresh: "/auth/refresh",
   CurrentUser: "/users/@me",
   Events: "/events",
+  Assets: "/assets",
 };
 
 export default class API {

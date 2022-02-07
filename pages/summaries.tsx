@@ -2,15 +2,16 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FC } from "react";
-import Card from "../components/Card";
-import CardList from "../components/CardList";
+import Card from "../components/page/summary/Card";
+import CardList from "../components/page/summary/CardList";
 import { AuthContext } from "../components/context/AuthContext";
-import DatePicker from "../components/DatePicker";
-import Scrollbar from "../components/Scrollbar";
+import DatePicker from "../components/page/summary/DatePicker";
+import Scrollbar from "../components/layout/Scrollbar";
 import API, { Routes } from "../lib/api";
 import PartialEvent from "../lib/api-models/partialEvent";
 import Summary from "../lib/api-models/summary";
 import { css, styled } from "../stitches.config";
+import GracefulImage from "../components/util/GracefulImage";
 
 const Banner = styled("div", {
   display: "flex",
@@ -21,6 +22,7 @@ const Banner = styled("div", {
   backgroundPosition: "bottom center",
   overflow: "hidden",
   backgroundRepeat: "no-repeat",
+  color: "white",
 });
 
 const BannerContainer = styled("div", {
@@ -40,15 +42,6 @@ const BannerSubtitle = styled("h3", {
 });
 
 Banner.displayName = "Banner";
-
-const SummaryList = styled("div", {
-  position: "relative",
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, max-content))",
-  gridTemplateRows: "290px",
-  gap: 40,
-  width: "100%",
-});
 
 const Summary = styled(Card, {
   height: 290,

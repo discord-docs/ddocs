@@ -1,14 +1,17 @@
 import axios from "axios";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import AccountHeader from "../components/AccountHeader";
+import AccountHeader from "../components/layout/account/AccountHeader";
 import AuthenticationContextProvider from "../components/context/AuthContext";
 import WebsocketContextProvider from "../components/context/WebsocketContext";
 import Sidebar from "../components/layout/Sidebar";
 import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
-import { globalCss, styled } from "../stitches.config";
+import { globalCss, styled, lightTheme, css } from "../stitches.config";
 import "../styles/global.css";
 import NextNprogress from "nextjs-progressbar";
+import Footer from "../components/layout/footer/Footer";
+import ScrollBar from "../components/layout/Scrollbar";
+import { ThemeProvider } from "next-themes";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -28,14 +31,22 @@ const ContentWrapper = styled("main", {
   minHeight: "min-content",
   // padding: "40px 40px 40px 40px",
   width: "100%",
-  overflowY: "hidden",
-  height: "100vh",
+  position: "relative",
 });
 
 const AccountHeaderContainer = styled("div", {
   position: "absolute",
   top: "40px",
   right: "40px",
+  zIndex: "10",
+});
+
+const MainContentWrapper = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  height: "100vh",
+  position: "relative",
+  width: "100%",
 });
 
 ContentWrapper.displayName = "ContentWrapper";
@@ -47,7 +58,11 @@ const globalStyles = globalCss({
 
 const dontRenderSidebarOn = ["/login"];
 
-const hideLoginButtonOn = ["/events/[id]"];
+const dontRenderLoginButtonOn = ["/events/[id]"];
+
+const dontRenderFooterOn = ["/events/[id]"];
+
+const dontOverflowOn = ["/events/[id]"];
 
 function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   globalStyles();

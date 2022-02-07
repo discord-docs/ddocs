@@ -1,19 +1,19 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import { FunctionComponent, useState } from "react";
-import AccountHeader from "../../components/AccountHeader";
-import EventHeader from "../../components/EventHeader";
-import EventSidebar from "../../components/EventSidebar";
+import AccountHeader from "../../components/layout/account/AccountHeader";
+import EventHeader from "../../components/page/events/EventHeader";
+import EventSidebar from "../../components/page/events/EventSidebar";
 import API, { Routes } from "../../lib/api";
 import Event from "../../lib/api-models/event";
 import relativeDate from "../../lib/relativeDate";
 import { styled } from "../../stitches.config";
-import Text from "../../components/Text";
-import Summary from "../../components/Summary";
+import Text from "../../components/typography/Text";
+import Summary from "../../components/page/events/Summary";
 import PartialEvent from "../../lib/api-models/partialEvent";
 import ApiSummary from "../../lib/api-models/summary";
-import ToggleableArrow from "../../components/ToggleableArrow";
-import Scrollbar from "../../components/Scrollbar";
+import ToggleableArrow from "../../components/util/ToggleableArrow";
+import Scrollbar from "../../components/layout/Scrollbar";
 
 interface EventProps {
   event: Event;
@@ -22,9 +22,10 @@ interface EventProps {
 
 const Container = styled("div", {
   width: "100%",
-  height: "100%",
   display: "flex",
   flexDirection: "row",
+  marginBottom: "2rem",
+  height: "100vh",
 });
 
 const ContentContainer = styled("div", {
@@ -33,7 +34,6 @@ const ContentContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   maxWidth: "1100px",
-  marginBottom: "2rem",
   marginTop: "2rem",
 });
 
@@ -77,7 +77,6 @@ const SummaryHeading = styled("h4", {
 });
 
 const ScrollableContainer = styled("div", {
-  overflowY: "auto",
   width: "100%",
   marginRight: "1rem",
   paddingRight: "1rem",
@@ -85,6 +84,7 @@ const ScrollableContainer = styled("div", {
   marginBottom: "2rem",
   display: "flex",
   justifyContent: "center",
+  overflowY: "auto",
 });
 
 const AccountHeaderContainer = styled("div", {

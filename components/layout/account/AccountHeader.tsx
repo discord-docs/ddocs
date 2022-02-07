@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { CSSProperties, FunctionComponent, useEffect, useState } from "react";
-import { styled } from "../stitches.config";
+import { styled } from "../../../stitches.config";
 import AccountButton from "./AccountButton";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import LoginButton from "./LoginButton";
 
 interface AccountHeaderProps {}
