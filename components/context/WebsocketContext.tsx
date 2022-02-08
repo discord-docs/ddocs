@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import Author from "../../lib/api-models/author";
+import { ExtendedAuthor } from "../../lib/api-models/extendedAuthor";
 import { Intents } from "../../lib/packets/intents";
 import { OpCode } from "../../lib/packets/opcode";
 import { Packet } from "../../lib/packets/packet";
@@ -17,12 +18,9 @@ const SocketUrl: string = "ws://localhost:8080/socket";
 export type WebsocketContextType = {
   isConnected: boolean;
   send: (packet: Packet) => Promise<void>;
-  addIntentListener: (
-    intent: Intents,
-    callback: (packet: Packet) => void
-  ) => void;
-  removeIntentListener: (callback: (packet: Packet) => void) => void;
-  users: Author[];
+  addIntentListener: (intent: Intents, callback: (data: any) => void) => void;
+  removeIntentListener: (callback: (data: any) => void) => void;
+  users: ExtendedAuthor[];
 };
 
 export const SocketContext = React.createContext<WebsocketContextType>({
@@ -43,13 +41,39 @@ const WebsocketContext: FunctionComponent<WebsocketContextProps> = ({
   const [isConnected, setIsConnected] = useState(false);
   const [socket, setSocket] = useState<WebSocket | undefined>();
   const [intents, setIntents] = useState<Intents>(Intents.None);
-  const [users, setUsers] = useState<Author[]>([]);
+  const [users, setUsers] = useState<ExtendedAuthor[]>([]);
   const [eventListeners, setEventListeners] = useState<
     { intents: Intents; callback: (data: any) => void }[]
   >([]);
 
   const router = useRouter();
   const auth = useAuth();
+
+  const updateIntents = async () => {
+    if (socket) {
+      if (socket.readyState == socket.CONNECTING) {
+        const int = setInterval(async () => {
+          if (socket.readyState === socket.OPEN) {
+            await sendPacket({
+              op: OpCode.UpdateIntents,
+              p: {
+                intents,
+              },
+            });
+
+            clearInterval(int);
+          }
+        }, 100);
+      } else {
+        await sendPacket({
+          op: OpCode.UpdateIntents,
+          p: {
+            intents,
+          },
+        });
+      }
+    }
+  };
 
   const updateServer = async () => {
     if (isConnected) {
@@ -62,7 +86,9 @@ const WebsocketContext: FunctionComponent<WebsocketContextProps> = ({
 
       await sendPacket({
         op: OpCode.GetUsers,
-        p: {},
+        p: {
+          all: true,
+        },
       });
     }
   };
@@ -113,7 +139,6 @@ const WebsocketContext: FunctionComponent<WebsocketContextProps> = ({
     // start heartbeat
     heartbeat(ws);
 
-    ws.onmessage = handleMessage;
     ws.onclose = handleDisconnect;
 
     setIsConnected(true);
@@ -150,16 +175,19 @@ const WebsocketContext: FunctionComponent<WebsocketContextProps> = ({
 
   const handleMessage = async (data: MessageEvent<any>) => {
     const packet = JSON.parse(data.data) as Packet;
-
     switch (packet.op) {
       case OpCode.Event: {
+        console.log("got event", packet.p);
         eventListeners
-          .filter((x) => x.intents & packet.p.t)
+          .filter((x) => {
+            console.log(x);
+            return (x.intents & packet.p.t) > 0;
+          })
           .forEach((x) => x.callback(packet.p.p));
         break;
       }
       case OpCode.Users: {
-        setUsers(packet.p.users as Author[]);
+        setUsers(packet.p.users as ExtendedAuthor[]);
         break;
       }
     }
@@ -203,6 +231,14 @@ const WebsocketContext: FunctionComponent<WebsocketContextProps> = ({
       connect();
     }
   }, [auth.isAuthenticated]);
+
+  useEffect(() => {
+    updateIntents();
+  }, [intents]);
+
+  useEffect(() => {
+    if (socket) socket.onmessage = handleMessage;
+  }, [eventListeners]);
 
   return (
     <SocketContext.Provider

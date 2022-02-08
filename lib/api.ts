@@ -2,6 +2,9 @@ import AuthenticationContext from "../components/context/AuthContext";
 import CurrentUser from "./api-models/currentUser";
 import Event from "././api-models/event";
 import PartialEvent from "./api-models/partialEvent";
+import { Area } from "react-easy-crop/types";
+import { Draft } from "./api-models/draft";
+import { CreateDraft } from "./api-models/createDraft";
 
 export const BaseApiURL =
   process.env.NODE_ENV === "development"
@@ -14,6 +17,7 @@ export const Routes = {
   Refresh: "/auth/refresh",
   CurrentUser: "/users/@me",
   Events: "/events",
+  Drafts: "/drafts",
   Assets: "/assets",
 };
 
@@ -99,6 +103,60 @@ export default class API {
     }
 
     return (await result.json()) as PartialEvent[];
+  }
+
+  public async uploadAsset(file: File, cropArea?: Area): Promise<string> {
+    const formData = new FormData();
+    formData.append("content", file);
+
+    if (cropArea) {
+      formData.append("crop", JSON.stringify(cropArea));
+    }
+
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Assets),
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return "";
+    }
+
+    return (await result.json()).id;
+  }
+
+  public async createDraft(draft: CreateDraft): Promise<Draft | undefined> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Drafts),
+      {
+        method: "POST",
+        body: JSON.stringify(draft),
+      }
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return undefined;
+    }
+
+    return (await result.json()) as Draft;
+  }
+
+  public async getDrafts(): Promise<Draft[]> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Drafts)
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return [];
+    }
+
+    return (await result.json()) as Draft[];
   }
 
   public static getRoute(route: string) {

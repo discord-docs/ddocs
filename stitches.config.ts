@@ -11,9 +11,22 @@ const stitches = createStitches({
       backgroundSecondaryAlt: "rgb(24, 25, 28)",
       backgroundTeritialy: "#222",
       backgroundAccent: "#444",
-      scrollbarTrack: "#2f3136",
+      scrollbarTrack: "#262729",
       scrollbarThumb: "#1f2022",
       itemUnactive: "#b9bbbe",
+      textInput: "#212225",
+
+      buttonPrimary: "#5865f2",
+      buttonPrimaryHover: "#4752c4",
+
+      buttonSecondary: "#4f545c",
+      buttonSecondaryHover: "#72767d",
+
+      buttonSuccess: "#3ba55d",
+      buttonSuccessHover: "hsl(139,calc(1*47.1%),33.3%)",
+
+      buttonDanger: "#e53e3e",
+      buttonWarning: "#f5a623",
     },
   },
   prefix: "ddocs",
@@ -34,5 +47,18 @@ export const lightTheme = createTheme("light-theme", {
     scrollbarTrack: "#f2f3f5",
     scrollbarThumb: "#747f8d",
     itemUnactive: "#2e3338",
+    textInput: "#dfdfdf",
+
+    buttonPrimary: "#5865f2",
+    buttonPrimaryHover: "#4752c4",
+
+    buttonSecondary: "#4f545c",
+    buttonSecondaryHover: "#72767d",
+
+    buttonSuccess: "#3ba55d",
+    buttonSuccessHover: "hsl(139,calc(1*47.1%),33.3%)",
+
+    buttonDanger: "#e53e3e",
+    buttonWarning: "#f5a623",
   },
 });

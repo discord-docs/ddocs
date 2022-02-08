@@ -23,6 +23,14 @@ export const DEFAULT_SIDEBAR_ITEMS: SidebarItem[] = [
   },
 ];
 
+export const AUTHOR_SIDEBAR_ITEMS: SidebarItem[] = [
+  {
+    label: "Drafts",
+    href: "/drafts",
+    icon: "drafts",
+  },
+];
+
 export enum BuildDetailsTab {
   DETAILS,
   EXPERIMENTS,

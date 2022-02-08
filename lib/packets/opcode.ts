@@ -7,4 +7,5 @@ export enum OpCode {
   Event,
   GetUsers,
   Users,
+  UpdateIntents,
 }

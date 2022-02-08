@@ -24,6 +24,10 @@ export type AuthContextType = {
   loginCallback: (
     callback: (isAuthed: boolean, details?: Account) => void
   ) => void;
+
+  removeLoginCallback: (
+    callback: (isAuthed: boolean, details?: Account) => void
+  ) => void;
   Api?: API;
 };
 
@@ -33,6 +37,9 @@ export const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   clearUser: () => {},
   loginCallback: (_: (IsAuthed: boolean, details?: Account) => void) => {},
+  removeLoginCallback: (
+    _: (IsAuthed: boolean, details?: Account) => void
+  ) => {},
   hasChecked: false,
   Api: undefined,
 });
@@ -51,8 +58,9 @@ class AuthenticationContext extends React.Component<
   AuthenticationContextState
 > {
   public Api: API;
-  private loginCallback: (IsAuthed: boolean, details?: Account) => void =
-    () => {};
+  private loginCallbacks: {
+    callback: (IsAuthed: boolean, details?: Account) => void;
+  }[] = [];
   private hasCheckedInternal: boolean = false;
   private _jwt: string | undefined;
 
@@ -60,7 +68,9 @@ class AuthenticationContext extends React.Component<
     if (!this.isAuthed) {
       await this.refreshToken();
 
-      this.loginCallback(this.state.account !== undefined, this.state.account);
+      for (const callback of this.loginCallbacks) {
+        callback.callback(this.state.account !== undefined, this.state.account);
+      }
     }
 
     this.hasCheckedInternal = true;
@@ -165,9 +175,18 @@ class AuthenticationContext extends React.Component<
   };
 
   public setLoginCallback = (callback: (IsAuthed: boolean) => void) => {
-    this.loginCallback = callback;
-    if (this.hasCheckedInternal || this.state.hasChecked)
+    if (this.hasCheckedInternal || this.state.hasChecked) {
       callback(this.isAuthed);
+      return;
+    }
+
+    this.loginCallbacks.push({ callback });
+  };
+
+  public removeLoginCallback = (callback: (IsAuthed: boolean) => void) => {
+    this.loginCallbacks = this.loginCallbacks.filter(
+      (c) => c.callback !== callback
+    );
   };
 
   render() {
@@ -180,6 +199,7 @@ class AuthenticationContext extends React.Component<
           clearUser: this.clearUser,
           loginCallback: this.setLoginCallback,
           Api: this.Api,
+          removeLoginCallback: this.removeLoginCallback,
         }}
       >
         {this.props.children}

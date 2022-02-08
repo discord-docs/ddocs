@@ -2,16 +2,24 @@ import axios from "axios";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import AccountHeader from "../components/layout/account/AccountHeader";
-import AuthenticationContextProvider from "../components/context/AuthContext";
+import AuthenticationContextProvider, {
+  AuthContext,
+  useAuth,
+} from "../components/context/AuthContext";
 import WebsocketContextProvider from "../components/context/WebsocketContext";
 import Sidebar from "../components/layout/Sidebar";
-import { BuildDetailsTab, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
+import {
+  AUTHOR_SIDEBAR_ITEMS,
+  BuildDetailsTab,
+  DEFAULT_SIDEBAR_ITEMS,
+} from "../lib/constants";
 import { globalCss, styled, lightTheme, css } from "../stitches.config";
 import "../styles/global.css";
 import NextNprogress from "nextjs-progressbar";
 import Footer from "../components/layout/footer/Footer";
 import ScrollBar from "../components/layout/Scrollbar";
 import { ThemeProvider } from "next-themes";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -90,12 +98,21 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
               <meta name="og:description" content={description} />
             </Head>
             {!dontRenderSidebarOn.includes(router.pathname) && (
-              <Sidebar
-                items={[
-                  ...DEFAULT_SIDEBAR_ITEMS,
-                  ...(pageProps.sidebarItems || []),
-                ]}
-              />
+              <AuthContext.Consumer>
+                {(value) => {
+                  return (
+                    <Sidebar
+                      items={[
+                        ...DEFAULT_SIDEBAR_ITEMS,
+                        ...(pageProps.sidebarItems || []),
+                        ...(value.account?.isAuthor
+                          ? AUTHOR_SIDEBAR_ITEMS
+                          : []),
+                      ]}
+                    />
+                  );
+                }}
+              </AuthContext.Consumer>
             )}
 
             <MainContentWrapper
