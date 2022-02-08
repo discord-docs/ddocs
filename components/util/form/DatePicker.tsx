@@ -1,4 +1,12 @@
-import { forwardRef, FunctionComponent, useState } from "react";
+import React, {
+  Dispatch,
+  forwardRef,
+  ForwardRefRenderFunction,
+  FunctionComponent,
+  Ref,
+  SetStateAction,
+  useState,
+} from "react";
 import DatePickerComponent from "react-datepicker";
 import { css, styled } from "../../../stitches.config";
 import Header from "../../typography/Header";
@@ -108,6 +116,31 @@ const Input = styled("input", {
   height: "40px",
 });
 
+interface InputProps {
+  required: boolean;
+  title: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+const CustomInput: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { title, required, setOpen, ...props },
+  ref
+) => {
+  return (
+    <>
+      <FormItemTitle title={title} required={required} />
+      <Input
+        ref={ref}
+        {...props}
+        onClick={() => {
+          setOpen(true);
+        }}
+      />
+    </>
+  );
+};
+
+const CustomInputForwarded = forwardRef(CustomInput);
+
 const DatePicker: FunctionComponent<DatePickerProps> = ({
   title,
   required,
@@ -117,20 +150,6 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
   onChange,
 }) => {
   const [open, setOpen] = useState(false);
-
-  const CustomInput = forwardRef((props: any, ref) => {
-    return (
-      <>
-        <FormItemTitle title={title} required={required} />
-        <Input
-          {...props}
-          onClick={() => {
-            setOpen(true);
-          }}
-        />
-      </>
-    );
-  });
 
   return (
     <DatePickerContainer className={`${className || ""}`}>
@@ -151,7 +170,13 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
             onChange(e as Date);
           }
         }}
-        customInput={<CustomInput />}
+        customInput={
+          <CustomInputForwarded
+            title={title}
+            setOpen={setOpen}
+            required={required ?? false}
+          />
+        }
         popperPlacement="top"
         popperModifiers={[
           {

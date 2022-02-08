@@ -48,7 +48,6 @@ function DraftCard({ draft }: { draft: Draft }) {
   const router = useRouter();
   return (
     <Panel
-      key={draft.id}
       onClick={() => {
         router.push("/drafts/" + draft.id);
       }}
@@ -129,7 +128,7 @@ const Drafts: FunctionComponent<DraftsProps> = () => {
       </Button>
       <DraftsContainer>
         {drafts.map((draft) => (
-          <DraftCard draft={draft} />
+          <DraftCard key={draft.id} draft={draft} />
         ))}
       </DraftsContainer>
     </>
