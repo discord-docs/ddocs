@@ -27,6 +27,8 @@ const stitches = createStitches({
 
       buttonDanger: "#e53e3e",
       buttonWarning: "#f5a623",
+
+      errorRed: "rgb(237, 66, 69)",
     },
   },
   prefix: "ddocs",
@@ -60,5 +62,7 @@ export const lightTheme = createTheme("light-theme", {
 
     buttonDanger: "#e53e3e",
     buttonWarning: "#f5a623",
+
+    errorRed: "rgb(237, 66, 69)",
   },
 });

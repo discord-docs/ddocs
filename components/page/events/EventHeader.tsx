@@ -3,8 +3,8 @@ import { FunctionComponent, useState } from "react";
 import Author from "../../../lib/api-models/author";
 import Event from "../../../lib/api-models/event";
 import relativeDate from "../../../lib/relativeDate";
-import ReactTooltip from "react-tooltip";
 import GracefulImage from "../../util/GracefulImage";
+import Tooltip from "../../util/Tooltip";
 
 interface EventHeaderProps {
   event: Event;
@@ -85,15 +85,6 @@ const AvatarsContainer = styled("div", {
   display: "flex",
 });
 
-const TooltipStyles = css({
-  padding: "5px 10px !important",
-  borderRadius: "5px !important",
-  background: "$backgroundSecondaryAlt !important",
-  color: "$textPrimary !important",
-  fontSize: "1rem !important",
-  opacity: "1 !important",
-});
-
 const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -132,34 +123,35 @@ const EventHeader: FunctionComponent<EventHeaderProps> = ({ event }) => {
               .sort((a, b) => a.username.localeCompare(b.username))
               .map((contributor, i) => {
                 return (
-                  <ContributorAvatarContainer
-                    data-tip={`${contributor.username}#${contributor.discriminator}`}
-                    style={{
-                      zIndex: event.contributors.length - i,
-                      position: i === 0 ? "relative" : "absolute",
-                      left: `${i * (expanded ? 40 : 20)}px`,
-                    }}
-                    key={contributor.id}
+                  <Tooltip
+                    key={i}
+                    content={`${contributor.username}#${contributor.discriminator}`}
                   >
-                    <GracefulImage
-                      id={contributor.avatar}
-                      width={32}
-                      height={32}
-                      style={{
-                        borderRadius: "16px",
-                        margin: "0 0.25rem",
-                      }}
-                    />
-                  </ContributorAvatarContainer>
+                    {(ref: any) => (
+                      <ContributorAvatarContainer
+                        ref={ref}
+                        style={{
+                          zIndex: event.contributors.length - i,
+                          position: i === 0 ? "relative" : "absolute",
+                          left: `${i * (expanded ? 40 : 20)}px`,
+                        }}
+                        key={contributor.id}
+                      >
+                        <GracefulImage
+                          id={contributor.avatar}
+                          width={32}
+                          height={32}
+                          style={{
+                            borderRadius: "16px",
+                            margin: "0 0.25rem",
+                          }}
+                        />
+                      </ContributorAvatarContainer>
+                    )}
+                  </Tooltip>
                 );
               })}
           </AvatarsContainer>
-          <ReactTooltip
-            className={TooltipStyles()}
-            place="top"
-            type="dark"
-            effect="solid"
-          />
         </BottomContent>
       )}
     </Container>

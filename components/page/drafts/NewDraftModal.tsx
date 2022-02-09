@@ -14,6 +14,8 @@ interface NewDraftModalProps {
   open: boolean;
   onCancel: () => void;
   onSubmit: (draft: CreateDraft) => void;
+  clearOnCancel?: boolean;
+  clearOnSumbit?: boolean;
 }
 
 export interface NewDraftFormContents {
@@ -57,6 +59,8 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
   open,
   onCancel,
   onSubmit,
+  clearOnCancel,
+  clearOnSumbit,
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -65,7 +69,12 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
   const [thumbnail, setThumbnail] = useState<string>();
 
   const [titleInvalid, setTitleInvalid] = useState(false);
+  const [titleInvalidReason, setTitleInvalidReason] = useState("");
   const [descriptionInvalid, setDescriptionInvalid] = useState(false);
+  const [descriptionInvalidReason, setDescriptionInvalidReason] = useState("");
+
+  clearOnSumbit ??= true;
+  clearOnCancel ??= false;
 
   const getDate = () => {
     return new Date(
@@ -78,6 +87,7 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
 
     if (!title) {
       setTitleInvalid(true);
+      setTitleInvalidReason("Title is required");
       isValid = false;
     } else {
       setTitleInvalid(false);
@@ -85,6 +95,7 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
 
     if (!description) {
       setDescriptionInvalid(true);
+      setDescriptionInvalidReason("Description is required");
       isValid = false;
     } else {
       setDescriptionInvalid(false);
@@ -101,10 +112,21 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
     if (descriptionInvalid) setDescriptionInvalid(false);
   }, [description]);
 
+  const clearForm = () => {
+    setTitle("");
+    setDescription("");
+    setHeldAtDate(new Date(Date.now()));
+    setHeldAtTime(new Date(Date.now()));
+    setThumbnail("");
+  };
+
   const footer = (
     <ButtonContainer>
       <Button
-        onClick={() => onCancel()}
+        onClick={() => {
+          onCancel();
+          if (clearOnCancel) clearForm();
+        }}
         className={`${ButtonStyle}`}
         style="secondary"
       >
@@ -119,6 +141,10 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
               heldAt: getDate().toJSON(),
               thumbnail,
             });
+
+            if (clearOnSumbit) {
+              clearForm();
+            }
           }
         }}
         className={`${ButtonStyle}`}
@@ -140,6 +166,7 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
         shakeOnInvalid
         placeholder="Ian 2 deploy"
         invalid={titleInvalid}
+        invalidMessage={titleInvalidReason}
       />
 
       <TextInput
@@ -154,6 +181,7 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
         rows={5}
         shakeOnInvalid
         invalid={descriptionInvalid}
+        invalidMessage={descriptionInvalidReason}
       />
       <DateTimePickerContainer>
         <DatePicker

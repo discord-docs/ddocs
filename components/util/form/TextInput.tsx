@@ -2,6 +2,7 @@ import { CSSProperties } from "@stitches/react";
 import { createRef, FunctionComponent, useEffect } from "react";
 import { css, styled } from "../../../stitches.config";
 import Header from "../../typography/Header";
+import ErrorMessage from "./ErrorMessage";
 import FormItemTitle from "./FormItemTitle";
 
 interface TextboxProps {
@@ -25,6 +26,7 @@ interface TextboxProps {
   ) => void;
   invalid?: boolean;
   shakeOnInvalid?: boolean;
+  invalidMessage?: string;
 }
 
 const TextContainer = styled("div", {
@@ -85,6 +87,7 @@ const Textbox: FunctionComponent<TextboxProps> = ({
   onKeyDown,
   invalid,
   shakeOnInvalid,
+  invalidMessage,
 }) => {
   className ??= "";
 
@@ -121,6 +124,7 @@ const Textbox: FunctionComponent<TextboxProps> = ({
       <TextContainer ref={containerRef} css={{ ...css }}>
         {multiline ? (
           <TextArea
+            rows={rows}
             onKeyDown={onKeyDown}
             ref={inputRef}
             placeholder={placeholder}
@@ -152,6 +156,7 @@ const Textbox: FunctionComponent<TextboxProps> = ({
           ></Input>
         )}
       </TextContainer>
+      {invalid && invalidMessage && <ErrorMessage message={invalidMessage} />}
     </>
   );
 };

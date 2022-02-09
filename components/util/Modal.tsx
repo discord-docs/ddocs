@@ -16,10 +16,11 @@ const ModalContainer = styled("div", {
   left: 0,
   width: "100%",
   height: "100%",
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  transition: "background-color 0.1s ease-in-out",
   zIndex: "10",
   justifyContent: "center",
   alignItems: "center",
+  display: "flex",
 });
 
 const ModalContent = styled("div", {
@@ -56,15 +57,20 @@ const Modal: FunctionComponent<ModalProps> = ({
   return (
     <ModalContainer
       className={`${className ?? ""}`}
-      css={{ display: open ? "flex" : "none" }}
+      css={{
+        pointerEvents: open ? "all" : "none",
+        backgroundColor: open ? "rgba(0, 0, 0, 0.5)" : "rgba(0, 0, 0, 0)",
+      }}
     >
-      <ModalContent>
-        <Header variant="h3" className={`${HeaderStyle}`}>
-          {title ?? "Modal"}
-        </Header>
-        <ModalChildren className={`${Scrollbar()}`}>{children}</ModalChildren>
-        <FooterContainer>{footer}</FooterContainer>
-      </ModalContent>
+      {open && (
+        <ModalContent>
+          <Header variant="h3" className={`${HeaderStyle}`}>
+            {title ?? "Modal"}
+          </Header>
+          <ModalChildren className={`${Scrollbar()}`}>{children}</ModalChildren>
+          <FooterContainer>{footer}</FooterContainer>
+        </ModalContent>
+      )}
     </ModalContainer>
   );
 };

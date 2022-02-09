@@ -1,7 +1,14 @@
 import Link from "../../typography/Link";
-import { FunctionComponent } from "react";
-import { styled } from "../../../stitches.config";
+import { FunctionComponent, useEffect, useState } from "react";
+import { css, styled } from "../../../stitches.config";
 import Text from "../../typography/Text";
+import { GetServerSideProps } from "next";
+import axios from "axios";
+import API, { Routes } from "../../../lib/api";
+import Author from "../../../lib/api-models/author";
+import { useAuth } from "../../context/AuthContext";
+import Contributor from "./Contributor";
+import Tooltip from "../../util/Tooltip";
 
 interface FooterProps {}
 
@@ -71,10 +78,9 @@ const LeftContentContainer = styled("div", {
 
 const RightContentContainer = styled("div", {
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "row",
   marginLeft: "auto",
   marginRight: "2rem",
-  maxWidth: "300px",
 });
 
 const Heading = styled("h3", {});
@@ -87,7 +93,43 @@ const FooterSection = styled("div", {
   gap: "0.5rem",
 });
 
+const ContributorContainer = styled("div", {
+  display: "flex",
+  flexWrap: "wrap",
+  width: "106px",
+  gap: "5px",
+  margin: "1rem",
+});
+
+const AboutSection = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  maxWidth: "300px",
+  marginLeft: "2rem",
+  margin: "0.8rem",
+});
+
+const TooltipStyles = css({
+  padding: "5px 10px !important",
+  borderRadius: "5px !important",
+  background: "$backgroundSecondaryAlt !important",
+  color: "$textPrimary !important",
+  fontSize: "1rem !important",
+  opacity: "1 !important",
+});
+
 const Footer: FunctionComponent<FooterProps> = () => {
+  const auth = useAuth();
+  const [contributors, setContributors] = useState<Author[]>([]);
+
+  useEffect(() => {
+    async function getContributors() {
+      setContributors((await auth.Api?.getContributors()) ?? []);
+    }
+
+    getContributors();
+  }, []);
+
   const renderSection = (title: string, content: FooterInnerContent[]) => {
     return (
       <FooterSection key={title}>
@@ -120,16 +162,53 @@ const Footer: FunctionComponent<FooterProps> = () => {
     <Container>
       <LeftContentContainer>
         {sections.map((section) => renderSection(section.name, section.items))}
+        <FooterSection></FooterSection>
       </LeftContentContainer>
       <RightContentContainer>
-        <Heading>ddocs.io</Heading>
-        <Text>
-          Where we present to you our shi-<em>we mean ingenious</em> design to
-          your brittle eyes.
-          <br />
-          <br />
-          {"©️"} 2022 All rights are reserved.
-        </Text>
+        <ContributorContainer>
+          <Text
+            css={{
+              textAlign: "center",
+              marginBottom: "0.5rem",
+            }}
+            weight={"bold"}
+            size={"normal"}
+          >
+            Contributors
+          </Text>
+          {contributors.map((contributor, i) => (
+            <Tooltip
+              key={i}
+              content={`${contributor.username}#${contributor.discriminator}`}
+            >
+              {(ref: any) => (
+                <>
+                  <Contributor
+                    targetRef={ref}
+                    key={contributor.id}
+                    contributor={contributor}
+                  />
+                </>
+              )}
+            </Tooltip>
+          ))}
+        </ContributorContainer>
+        <AboutSection>
+          <Heading
+            css={{
+              margin: "0 0 0.5rem 0",
+            }}
+          >
+            ddocs.io
+          </Heading>
+          <Text>
+            Where we present to you our shi-<em>we mean ingenious</em> design to
+            your brittle eyes.
+            <br />
+            <br />
+            {"©️"} 2022 All rights are reserved.
+          </Text>
+        </AboutSection>
       </RightContentContainer>
     </Container>
   );

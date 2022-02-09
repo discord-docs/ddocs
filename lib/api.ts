@@ -5,6 +5,7 @@ import PartialEvent from "./api-models/partialEvent";
 import { Area } from "react-easy-crop/types";
 import { Draft } from "./api-models/draft";
 import { CreateDraft } from "./api-models/createDraft";
+import Author from "./api-models/author";
 
 export const BaseApiURL =
   process.env.NODE_ENV === "development"
@@ -16,6 +17,7 @@ export const Routes = {
   Logout: "/auth/logout",
   Refresh: "/auth/refresh",
   CurrentUser: "/users/@me",
+  Contributors: "/users/contributors",
   Events: "/events",
   Drafts: "/drafts",
   Assets: "/assets",
@@ -157,6 +159,19 @@ export default class API {
     }
 
     return (await result.json()) as Draft[];
+  }
+
+  public async getContributors(): Promise<Author[]> {
+    const result = await this._context.makeAuthedRequest(
+      API.getRoute(Routes.Contributors)
+    );
+
+    if (!result.ok) {
+      this.handleUnknownError(result);
+      return [];
+    }
+
+    return (await result.json()) as Author[];
   }
 
   public static getRoute(route: string) {

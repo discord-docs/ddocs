@@ -22,9 +22,9 @@ specifiers:
   react-dom: 17.0.2
   react-easy-crop: ^4.0.1
   react-markdown: ^8.0.0
+  react-popper-tooltip: ^4.3.1
   react-progressive-graceful-image: ^0.6.14
   react-syntax-highlighter: ^15.4.5
-  react-tooltip: ^4.2.21
   remark-gfm: ^3.0.1
   sharp: ^0.30.0
   typescript: 4.5.5
@@ -45,9 +45,9 @@ dependencies:
   react-dom: 17.0.2_react@17.0.2
   react-easy-crop: 4.0.1_react-dom@17.0.2+react@17.0.2
   react-markdown: 8.0.0_a0c521d4794c7ad97f5f4c1c4a7d5818
+  react-popper-tooltip: 4.3.1_react-dom@17.0.2+react@17.0.2
   react-progressive-graceful-image: 0.6.14_react-dom@17.0.2+react@17.0.2
   react-syntax-highlighter: 15.4.5_react@17.0.2
-  react-tooltip: 4.2.21_react-dom@17.0.2+react@17.0.2
   remark-gfm: 3.0.1
   sharp: 0.30.0
 
@@ -4219,6 +4219,19 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
+  /react-popper-tooltip/4.3.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-/Lj1vjAEFEFxKKWnxupeS9pRrXYQlJd++OAAj/Ht3uOSqjWLtYWDXKV99e+YO6b5hV3SgXbtkHFzHH4eqlMWJA==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.16.7
+      '@popperjs/core': 2.11.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-popper: 2.2.5_4d48938cec404f33c7375aa6b453941c
+    dev: false
+
   /react-popper/2.2.5_4d48938cec404f33c7375aa6b453941c:
     resolution: {integrity: sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==}
     peerDependencies:
@@ -4253,19 +4266,6 @@ packages:
       prismjs: 1.26.0
       react: 17.0.2
       refractor: 3.5.0
-    dev: false
-
-  /react-tooltip/4.2.21_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-zSLprMymBDowknr0KVDiJ05IjZn9mQhhg4PRsqln0OZtURAJ1snt1xi5daZfagsh6vfsziZrc9pErPTDY1ACig==}
-    engines: {npm: '>=6.13'}
-    peerDependencies:
-      react: '>=16.0.0'
-      react-dom: '>=16.0.0'
-    dependencies:
-      prop-types: 15.8.1
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      uuid: 7.0.3
     dev: false
 
   /react/17.0.2:
@@ -4914,11 +4914,6 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
-    dev: false
-
-  /uuid/7.0.3:
-    resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
-    hasBin: true
     dev: false
 
   /uvu/0.5.3:

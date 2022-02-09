@@ -4,15 +4,10 @@ import Head from "next/head";
 import AccountHeader from "../components/layout/account/AccountHeader";
 import AuthenticationContextProvider, {
   AuthContext,
-  useAuth,
 } from "../components/context/AuthContext";
 import WebsocketContextProvider from "../components/context/WebsocketContext";
 import Sidebar from "../components/layout/Sidebar";
-import {
-  AUTHOR_SIDEBAR_ITEMS,
-  BuildDetailsTab,
-  DEFAULT_SIDEBAR_ITEMS,
-} from "../lib/constants";
+import { AUTHOR_SIDEBAR_ITEMS, DEFAULT_SIDEBAR_ITEMS } from "../lib/constants";
 import { globalCss, styled, lightTheme, css } from "../stitches.config";
 import "../styles/global.css";
 import NextNprogress from "nextjs-progressbar";
@@ -20,6 +15,7 @@ import Footer from "../components/layout/footer/Footer";
 import ScrollBar from "../components/layout/Scrollbar";
 import { ThemeProvider } from "next-themes";
 import "react-datepicker/dist/react-datepicker.css";
+import "react-popper-tooltip/dist/styles.css";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -128,6 +124,7 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
                   <AccountHeader />
                 </AccountHeaderContainer>
               )}
+
               <ContentWrapper>
                 <Component {...pageProps} />
               </ContentWrapper>
