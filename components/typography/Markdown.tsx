@@ -113,10 +113,10 @@ const Markdown: FunctionComponent<MarkdownProps> = ({ content }) => {
           );
         },
         ul({ node, className, children, ...props }) {
-          return <UnorderedList {...props}>{children}</UnorderedList>;
+          return <UnorderedList>{children}</UnorderedList>;
         },
         ol({ node, className, children, ...props }) {
-          return <OrderedList {...props}>{children}</OrderedList>;
+          return <OrderedList>{children}</OrderedList>;
         },
         a({ node, className, children, ...props }) {
           return (
@@ -141,7 +141,7 @@ const Markdown: FunctionComponent<MarkdownProps> = ({ content }) => {
           );
         },
         li({ node, className, children, ...props }) {
-          return <ListItem {...props}>{children}</ListItem>;
+          return <ListItem>{children}</ListItem>;
         },
         blockquote({ node, className, children, ...props }) {
           return <Quote {...props}>{children}</Quote>;

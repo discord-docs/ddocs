@@ -1,3 +1,4 @@
+import React from "react";
 import { FunctionComponent } from "react";
 import { css, styled } from "../../stitches.config";
 import Scrollbar from "../layout/Scrollbar";
@@ -8,6 +9,7 @@ interface ModalProps {
   title?: string;
   className?: string;
   footer?: React.ReactNode;
+  onClickeOutside?: () => void;
 }
 
 const ModalContainer = styled("div", {
@@ -53,9 +55,26 @@ const Modal: FunctionComponent<ModalProps> = ({
   children,
   className,
   footer,
+  onClickeOutside,
 }) => {
+  const modalRef = React.createRef<HTMLDivElement>();
+
   return (
     <ModalContainer
+      onClick={(e) => {
+        if (modalRef.current && onClickeOutside) {
+          var rect = modalRef.current.getBoundingClientRect();
+          // check if the click was inside the modal
+          if (
+            e.clientX < rect.left ||
+            e.clientX > rect.right ||
+            e.clientY < rect.top ||
+            e.clientY > rect.bottom
+          ) {
+            onClickeOutside();
+          }
+        }
+      }}
       className={`${className ?? ""}`}
       css={{
         pointerEvents: open ? "all" : "none",
@@ -63,7 +82,7 @@ const Modal: FunctionComponent<ModalProps> = ({
       }}
     >
       {open && (
-        <ModalContent>
+        <ModalContent ref={modalRef}>
           <Header variant="h3" className={`${HeaderStyle}`}>
             {title ?? "Modal"}
           </Header>

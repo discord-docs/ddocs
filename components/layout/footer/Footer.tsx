@@ -170,6 +170,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
             css={{
               textAlign: "center",
               marginBottom: "0.5rem",
+              width: "100%",
             }}
             weight={"bold"}
             size={"normal"}
@@ -182,13 +183,11 @@ const Footer: FunctionComponent<FooterProps> = () => {
               content={`${contributor.username}#${contributor.discriminator}`}
             >
               {(ref: any) => (
-                <>
-                  <Contributor
-                    targetRef={ref}
-                    key={contributor.id}
-                    contributor={contributor}
-                  />
-                </>
+                <Contributor
+                  targetRef={ref}
+                  key={contributor.id}
+                  contributor={contributor}
+                />
               )}
             </Tooltip>
           ))}

@@ -31,6 +31,7 @@ const stitches = createStitches({
       errorRed: "rgb(237, 66, 69)",
     },
   },
+
   prefix: "ddocs",
 });
 

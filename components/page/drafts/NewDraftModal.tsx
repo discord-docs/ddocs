@@ -156,7 +156,12 @@ const NewDraftModal: FunctionComponent<NewDraftModalProps> = ({
   );
 
   return (
-    <Modal open={open} title="New draft" footer={footer}>
+    <Modal
+      open={open}
+      title="New draft"
+      footer={footer}
+      onClickeOutside={onCancel}
+    >
       <Text>Create a new draft for you and others to work on.</Text>
       <TextInput
         title="Title"
