@@ -75,8 +75,6 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
   }`;
   const description = pageProps.description || "Discord Docs";
 
-  console.log(router);
-
   return (
     <AuthenticationContextProvider>
       <ThemeProvider

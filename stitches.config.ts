@@ -24,7 +24,8 @@ const stitches = createStitches({
   prefix: "ddocs",
 });
 
-export const { getCssText, styled, globalCss, css, createTheme } = stitches;
+export const { getCssText, styled, globalCss, css, createTheme, config } =
+  stitches;
 
 export const lightTheme = createTheme("light-theme", {
   colors: {

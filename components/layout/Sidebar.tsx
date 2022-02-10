@@ -1,11 +1,12 @@
 import React, { FC, ReactChild, useEffect, useState } from "react";
 import Link from "next/link";
 
-import { css, styled } from "../../stitches.config";
+import { css, styled, config } from "../../stitches.config";
 import Icon from "../util/Icon";
 import { useRouter } from "next/dist/client/router";
 import ThemeToggle from "../util/ThemeToggle";
 import Hamburger from "../../public/assets/icons/hamburger.svg";
+import Draggable from "react-draggable";
 
 const StyledSidebar = styled("aside", {
   "@mobile": {
@@ -174,12 +175,35 @@ interface SidebarProps {
 const Sidebar: FC<SidebarProps> = ({ items }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const sidebarInnerRef = React.createRef<HTMLDivElement>();
+  const [sidebarWidth, setSidebarWidth] = React.useState(0);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   const router = useRouter();
+
+  const handleMediaCheck = (m: MediaQueryListEvent) => {
+    setIsMobile(m.matches);
+  };
 
   useEffect(() => {
     setSidebarOpen(false);
   }, [router.asPath]);
+
+  useEffect(() => {
+    if (sidebarInnerRef.current) {
+      setSidebarWidth(sidebarInnerRef.current.clientWidth);
+    }
+  }, [sidebarInnerRef]);
+
+  useEffect(() => {
+    const matchMedia = window.matchMedia(config.media.mobile);
+
+    matchMedia.addEventListener("change", handleMediaCheck);
+
+    return () => {
+      matchMedia.removeEventListener("change", handleMediaCheck);
+    };
+  }, []);
 
   return (
     <SidebarContainer
@@ -207,76 +231,93 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
         }
       }}
     >
-      <StyledSidebar
-        onDrag={() => {
-          console.log("s");
+      <StyledSidebarHeader>
+        <HamburgerWrapper onClick={() => setSidebarOpen(!sidebarOpen)}>
+          <Hamburger className={`${HamburgerStyles}`} />
+        </HamburgerWrapper>
+        <Link passHref href="/">
+          <>
+            <DiscordLogoWrapper>
+              <Icon icon="Discord-Logo-White" />
+            </DiscordLogoWrapper>
+            <strong>ddocs.io</strong>
+          </>
+        </Link>
+        <ThemeToggle
+          css={{
+            marginLeft: "auto",
+            "@mobile": {
+              marginLeft: "0",
+            },
+          }}
+        />
+      </StyledSidebarHeader>
+      <Draggable
+        disabled={!isMobile}
+        onStart={() => setIsDragging(true)}
+        onStop={(_, d) => {
+          setIsDragging(false);
+          if (d.x < -(sidebarWidth / 2)) {
+            setSidebarOpen(false);
+          }
         }}
-        ref={sidebarInnerRef}
-        css={{
-          left: sidebarOpen ? "0" : "-66%",
+        axis="x"
+        position={{
+          x: isMobile ? (sidebarOpen ? 0 : -sidebarWidth) : 0,
+          y: 0,
+        }}
+        defaultPosition={{ x: 0, y: 0 }}
+        bounds={{
+          right: 0,
+          left: -sidebarWidth,
         }}
       >
-        <StyledSidebarHeader>
-          <HamburgerWrapper onClick={() => setSidebarOpen(!sidebarOpen)}>
-            <Hamburger className={`${HamburgerStyles}`} />
-          </HamburgerWrapper>
-          <Link passHref href="/">
-            <>
-              <DiscordLogoWrapper>
-                <Icon icon="Discord-Logo-White" />
-              </DiscordLogoWrapper>
-              <strong>ddocs.io</strong>
-            </>
-          </Link>
-          <ThemeToggle
-            css={{
-              marginLeft: "auto",
-              "@mobile": {
-                marginLeft: "0",
-              },
-            }}
-          />
-        </StyledSidebarHeader>
+        <StyledSidebar
+          ref={sidebarInnerRef}
+          css={{
+            transition: isDragging ? "none" : "transform .125s ease-in-out",
+          }}
+        >
+          <StyledSidebarNavBar>
+            {items.map((item) => {
+              if (!item.hasOwnProperty("title")) {
+                const { href, label, icon, onClick, active } =
+                  item as SidebarItem;
 
-        <StyledSidebarNavBar>
-          {items.map((item) => {
-            if (!item.hasOwnProperty("title")) {
-              const { href, label, icon, onClick, active } =
-                item as SidebarItem;
+                const link = (
+                  <StyledSidebarNavBarItem
+                    onClick={onClick}
+                    active={active || router.asPath === href}
+                  >
+                    <Icon icon={icon} />
+                    {label}
+                  </StyledSidebarNavBarItem>
+                );
 
-              const link = (
-                <StyledSidebarNavBarItem
-                  onClick={onClick}
-                  active={active || router.asPath === href}
-                >
-                  <Icon icon={icon} />
-                  {label}
-                </StyledSidebarNavBarItem>
-              );
+                if (href) {
+                  return (
+                    <Link key={href} href={href} passHref>
+                      {link}
+                    </Link>
+                  );
+                }
 
-              if (href) {
+                return link;
+              } else if (React.isValidElement(item)) {
+                return item;
+              } else {
+                const { title } = item as SidebarSubheading;
+
                 return (
-                  <Link key={href} href={href} passHref>
-                    {link}
-                  </Link>
+                  <StyledSidebarSubheading key={title}>
+                    {title}
+                  </StyledSidebarSubheading>
                 );
               }
-
-              return link;
-            } else if (React.isValidElement(item)) {
-              return item;
-            } else {
-              const { title } = item as SidebarSubheading;
-
-              return (
-                <StyledSidebarSubheading key={title}>
-                  {title}
-                </StyledSidebarSubheading>
-              );
-            }
-          })}
-        </StyledSidebarNavBar>
-      </StyledSidebar>
+            })}
+          </StyledSidebarNavBar>
+        </StyledSidebar>
+      </Draggable>
     </SidebarContainer>
   );
 };

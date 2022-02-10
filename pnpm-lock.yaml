@@ -19,6 +19,7 @@ specifiers:
   prettier: ^2.5.1
   react: 17.0.2
   react-dom: 17.0.2
+  react-draggable: ^4.4.4
   react-markdown: ^8.0.0
   react-progressive-graceful-image: ^0.6.14
   react-syntax-highlighter: ^15.4.5
@@ -39,6 +40,7 @@ dependencies:
   nextjs-progressbar: 0.0.13_next@12.0.10+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-draggable: 4.4.4_react-dom@17.0.2+react@17.0.2
   react-markdown: 8.0.0_a0c521d4794c7ad97f5f4c1c4a7d5818
   react-progressive-graceful-image: 0.6.14_react-dom@17.0.2+react@17.0.2
   react-syntax-highlighter: 15.4.5_react@17.0.2
@@ -2067,6 +2069,11 @@ packages:
 
   /chownr/1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
+    dev: false
+
+  /clsx/1.1.1:
+    resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
+    engines: {node: '>=6'}
     dev: false
 
   /code-point-at/1.1.0:
@@ -4116,6 +4123,18 @@ packages:
       object-assign: 4.1.1
       react: 17.0.2
       scheduler: 0.20.2
+    dev: false
+
+  /react-draggable/4.4.4_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-6e0WdcNLwpBx/YIDpoyd2Xb04PB0elrDrulKUgdrIlwuYvxh5Ok9M+F8cljm8kPXXs43PmMzek9RrB1b7mLMqA==}
+    peerDependencies:
+      react: '>= 16.3.0'
+      react-dom: '>= 16.3.0'
+    dependencies:
+      clsx: 1.1.1
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /react-is/16.13.1:

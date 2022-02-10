@@ -35,6 +35,11 @@ const ContentContainer = styled("div", {
   flexDirection: "column",
   maxWidth: "1100px",
   marginTop: "2rem",
+
+  "@mobile": {
+    height: "min-content",
+    paddingBottom: "2rem",
+  },
 });
 
 const PageHeader = styled("h3", {
