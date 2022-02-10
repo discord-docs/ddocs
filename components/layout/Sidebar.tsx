@@ -1,4 +1,4 @@
-import React, { FC, ReactChild } from "react";
+import React, { FC, ReactChild, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { css, styled } from "../../stitches.config";
@@ -6,21 +6,6 @@ import Icon from "../util/Icon";
 import { useRouter } from "next/dist/client/router";
 import ThemeToggle from "../util/ThemeToggle";
 import Hamburger from "../../public/assets/icons/hamburger.svg";
-
-const Header = styled("header", {
-  display: "none",
-  height: "50px",
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: 100,
-  backgroundColor: "$backgroundTeritialy",
-
-  "@mobile": {
-    display: "flex",
-  },
-});
 
 const StyledSidebar = styled("aside", {
   "@mobile": {
@@ -195,8 +180,10 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
   return (
     <SidebarContainer
       css={{
-        backgroundColor: sidebarOpen ? "#0000007f" : "transparent",
-        height: sidebarOpen ? "100%" : "50px",
+        "@mobile": {
+          backgroundColor: sidebarOpen ? "#0000007f" : "transparent",
+          height: sidebarOpen ? "100%" : "50px",
+        },
       }}
       onClick={(e) => {
         const rect = sidebarInnerRef.current?.getBoundingClientRect();
@@ -217,6 +204,9 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
       }}
     >
       <StyledSidebar
+        onDrag={() => {
+          console.log("s");
+        }}
         ref={sidebarInnerRef}
         css={{
           left: sidebarOpen ? "0" : "-85%",
@@ -234,7 +224,14 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
               <strong>ddocs.io</strong>
             </>
           </Link>
-          <ThemeToggle />
+          <ThemeToggle
+            css={{
+              marginLeft: "auto",
+              "@mobile": {
+                marginLeft: "0",
+              },
+            }}
+          />
         </StyledSidebarHeader>
 
         <StyledSidebarNavBar>

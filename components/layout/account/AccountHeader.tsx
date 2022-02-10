@@ -9,6 +9,11 @@ interface AccountHeaderProps {}
 
 const Container = styled("div", {
   zIndex: 10,
+  "@mobile": {
+    position: "fixed",
+    top: 0,
+    right: 0,
+  },
 });
 
 const AccountHeader: FunctionComponent<AccountHeaderProps> = () => {

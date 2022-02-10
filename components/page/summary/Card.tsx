@@ -14,6 +14,11 @@ interface MetricProps {
 const Header = styled("header", {
   fontWeight: "700",
   fontSize: 20,
+
+  "@mobile": {
+    fontSize: 17,
+    marginBottom: "0.2rem",
+  },
 });
 
 const Padding = styled("div", {
@@ -25,6 +30,10 @@ const test = css({
   display: "-webkit-box",
   "-webkit-box-orient": "vertical",
   overflow: "hidden",
+
+  "@mobile": {
+    fontSize: "15px",
+  },
 });
 
 const Card: FC<MetricProps> = ({ title, className, children, image }) => {

@@ -1,4 +1,4 @@
-import { createStitches } from "@stitches/react";
+import { createStitches, CSS as CSSProperties } from "@stitches/react";
 
 const stitches = createStitches({
   theme: {
@@ -41,3 +41,5 @@ export const lightTheme = createTheme("light-theme", {
     itemUnactive: "#2e3338",
   },
 });
+
+export type CSS = CSSProperties<typeof stitches>;
