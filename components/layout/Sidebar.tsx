@@ -11,15 +11,14 @@ import Draggable from "react-draggable";
 const StyledSidebar = styled("aside", {
   "@mobile": {
     position: "fixed",
-    left: 0,
     top: 0,
     bottom: 0,
     zIndex: 25,
     width: "100%",
     maxWidth: "66%",
-    padding: "66 px 16px 16px 16px",
+    padding: "66px 10px 16px",
+    right: "100vw",
     backgroundColor: "$backgroundSecondary",
-    transition: "left 0.25s ease-in-out",
   },
 });
 
@@ -76,7 +75,6 @@ const StyledSidebarNavBar = styled("nav", {
   height: "100%",
 
   "@mobile": {
-    paddingTop: "66px",
     paddingLeft: "8px",
   },
 });
@@ -254,28 +252,30 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
         />
       </StyledSidebarHeader>
       <Draggable
+        nodeRef={sidebarInnerRef}
         disabled={!isMobile}
         onStart={() => setIsDragging(true)}
         onStop={(_, d) => {
           setIsDragging(false);
-          if (d.x < -(sidebarWidth / 2)) {
+          if (d.x < sidebarWidth / 2) {
             setSidebarOpen(false);
           }
         }}
         axis="x"
         position={{
-          x: isMobile ? (sidebarOpen ? 0 : -sidebarWidth) : 0,
+          x: isMobile ? (sidebarOpen ? sidebarWidth : 0) : 0,
           y: 0,
         }}
-        defaultPosition={isMobile ? { x: -sidebarWidth, y: 0 } : { x: 0, y: 0 }}
+        defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 0, y: 0 }}
         bounds={{
-          right: 0,
-          left: -sidebarWidth,
+          right: sidebarWidth,
+          left: 0,
         }}
       >
         <StyledSidebar
           ref={sidebarInnerRef}
           css={{
+            transform: `translateX(${sidebarOpen ? "100%" : "0"})`,
             transition: isDragging ? "none" : "transform .125s ease-in-out",
           }}
         >
