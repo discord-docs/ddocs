@@ -1,0 +1,13 @@
+{
+    "extends": ["config:base"],
+    "lockFileMaintenance": { "enabled": true },
+    "prHourlyLimit": 2,
+    "labels": ["dependencies"],
+    "packageRules": [
+      {
+        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+        "automerge": true
+      }
+    ]
+  }
+  
