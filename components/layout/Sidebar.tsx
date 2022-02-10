@@ -1,15 +1,58 @@
 import React, { FC, ReactChild } from "react";
 import Link from "next/link";
 
-import { styled } from "../../stitches.config";
+import { css, styled } from "../../stitches.config";
 import Icon from "../util/Icon";
 import { useRouter } from "next/dist/client/router";
 import ThemeToggle from "../util/ThemeToggle";
+import Hamburger from "../../public/assets/icons/hamburger.svg";
+
+const Header = styled("header", {
+  display: "none",
+  height: "50px",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 100,
+  backgroundColor: "$backgroundTeritialy",
+
+  "@mobile": {
+    display: "flex",
+  },
+});
 
 const StyledSidebar = styled("aside", {
+  "@mobile": {
+    position: "fixed",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    zIndex: 25,
+    width: "100%",
+    maxWidth: "85%",
+    padding: "66 px 16px 16px 16px",
+    backgroundColor: "$backgroundSecondary",
+    transition: "left 0.25s ease-in-out",
+  },
+});
+
+const SidebarContainer = styled("div", {
   flexBasis: 350,
   backgroundColor: "$backgroundSecondary",
   padding: 16,
+
+  "@mobile": {
+    position: "fixed",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 25,
+    width: "100%",
+    height: "100%",
+    transition: "background-color 0.15s ease-in-out",
+  },
 });
 
 StyledSidebar.displayName = "Sidebar";
@@ -23,6 +66,20 @@ const StyledSidebarHeader = styled("header", {
   marginBottom: 26,
   cursor: "pointer",
   userSelect: "none",
+
+  "@mobile": {
+    margin: 0,
+    height: "50px",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 100,
+    backgroundColor: "$backgroundTeritialy",
+    display: "flex",
+    alignItems: "center",
+    padding: "16px",
+  },
 });
 
 StyledSidebarHeader.displayName = "SidebarHeader";
@@ -31,6 +88,11 @@ const StyledSidebarNavBar = styled("nav", {
   display: "flex",
   flexDirection: "column",
   height: "100%",
+
+  "@mobile": {
+    paddingTop: "66px",
+    paddingLeft: "8px",
+  },
 });
 
 StyledSidebarNavBar.displayName = "SidebarNavBar";
@@ -83,8 +145,29 @@ const StyledSidebarSubheading = styled("h3", {
 
 StyledSidebarSubheading.displayName = "SidebarSubheading";
 
+const HamburgerWrapper = styled("div", {
+  display: "none",
+  marginRight: "1rem",
+  color: "$itemUnactive",
+  marginLeft: "-5px",
+  transition: "color .125s ease-in-out",
+
+  "@mobile": {
+    display: "flex",
+  },
+
+  "&:hover": {
+    color: "$headerPrimary",
+  },
+});
+
 const DiscordLogoWrapper = styled("div", {
   color: "$textNormal",
+});
+
+const HamburgerStyles = css({
+  width: "32px",
+  height: "32px",
 });
 
 export interface SidebarItem {
@@ -104,60 +187,96 @@ interface SidebarProps {
 }
 
 const Sidebar: FC<SidebarProps> = ({ items }) => {
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const sidebarInnerRef = React.createRef<HTMLDivElement>();
+
   const router = useRouter();
 
   return (
-    <StyledSidebar>
-      <StyledSidebarHeader>
-        <Link passHref href="/">
-          <>
-            <DiscordLogoWrapper>
-              <Icon icon="Discord-Logo-White" />
-            </DiscordLogoWrapper>
-            <strong>ddocs.io</strong>
-          </>
-        </Link>
-        <ThemeToggle />
-      </StyledSidebarHeader>
+    <SidebarContainer
+      css={{
+        backgroundColor: sidebarOpen ? "#0000007f" : "transparent",
+        height: sidebarOpen ? "100%" : "50px",
+      }}
+      onClick={(e) => {
+        const rect = sidebarInnerRef.current?.getBoundingClientRect();
 
-      <StyledSidebarNavBar>
-        {items.map((item) => {
-          if (!item.hasOwnProperty("title")) {
-            const { href, label, icon, onClick, active } = item as SidebarItem;
+        // check if we clicked anywhere but the sidebar
+        if (
+          rect &&
+          sidebarOpen &&
+          !(
+            rect.top <= e.clientY &&
+            e.clientY <= rect.bottom &&
+            rect.left <= e.clientX &&
+            e.clientX <= rect.right
+          )
+        ) {
+          setSidebarOpen(false);
+        }
+      }}
+    >
+      <StyledSidebar
+        ref={sidebarInnerRef}
+        css={{
+          left: sidebarOpen ? "0" : "-85%",
+        }}
+      >
+        <StyledSidebarHeader>
+          <HamburgerWrapper onClick={() => setSidebarOpen(!sidebarOpen)}>
+            <Hamburger className={`${HamburgerStyles}`} />
+          </HamburgerWrapper>
+          <Link passHref href="/">
+            <>
+              <DiscordLogoWrapper>
+                <Icon icon="Discord-Logo-White" />
+              </DiscordLogoWrapper>
+              <strong>ddocs.io</strong>
+            </>
+          </Link>
+          <ThemeToggle />
+        </StyledSidebarHeader>
 
-            const link = (
-              <StyledSidebarNavBarItem
-                onClick={onClick}
-                active={active || router.asPath === href}
-              >
-                <Icon icon={icon} />
-                {label}
-              </StyledSidebarNavBarItem>
-            );
+        <StyledSidebarNavBar>
+          {items.map((item) => {
+            if (!item.hasOwnProperty("title")) {
+              const { href, label, icon, onClick, active } =
+                item as SidebarItem;
 
-            if (href) {
+              const link = (
+                <StyledSidebarNavBarItem
+                  onClick={onClick}
+                  active={active || router.asPath === href}
+                >
+                  <Icon icon={icon} />
+                  {label}
+                </StyledSidebarNavBarItem>
+              );
+
+              if (href) {
+                return (
+                  <Link key={href} href={href} passHref>
+                    {link}
+                  </Link>
+                );
+              }
+
+              return link;
+            } else if (React.isValidElement(item)) {
+              return item;
+            } else {
+              const { title } = item as SidebarSubheading;
+
               return (
-                <Link key={href} href={href} passHref>
-                  {link}
-                </Link>
+                <StyledSidebarSubheading key={title}>
+                  {title}
+                </StyledSidebarSubheading>
               );
             }
-
-            return link;
-          } else if (React.isValidElement(item)) {
-            return item;
-          } else {
-            const { title } = item as SidebarSubheading;
-
-            return (
-              <StyledSidebarSubheading key={title}>
-                {title}
-              </StyledSidebarSubheading>
-            );
-          }
-        })}
-      </StyledSidebarNavBar>
-    </StyledSidebar>
+          })}
+        </StyledSidebarNavBar>
+      </StyledSidebar>
+    </SidebarContainer>
   );
 };
 

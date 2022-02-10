@@ -16,6 +16,11 @@ const stitches = createStitches({
       itemUnactive: "#b9bbbe",
     },
   },
+
+  media: {
+    mobile: "(max-width: 892px)",
+  },
+
   prefix: "ddocs",
 });
 
