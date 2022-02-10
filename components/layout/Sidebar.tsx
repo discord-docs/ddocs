@@ -7,6 +7,7 @@ import { useRouter } from "next/dist/client/router";
 import ThemeToggle from "../util/ThemeToggle";
 import Hamburger from "../../public/assets/icons/hamburger.svg";
 import Draggable from "react-draggable";
+import Logo from "../util/Logo";
 
 const StyledSidebar = styled("aside", {
   "@mobile": {
@@ -46,7 +47,7 @@ const StyledSidebarHeader = styled("header", {
   display: "flex",
   flexDirection: "row",
   columnGap: 12,
-  marginLeft: 12,
+  marginLeft: 2,
   marginTop: 13,
   marginBottom: 26,
   cursor: "pointer",
@@ -64,6 +65,7 @@ const StyledSidebarHeader = styled("header", {
     display: "flex",
     alignItems: "center",
     padding: "16px",
+    cursor: "default",
   },
 });
 
@@ -131,10 +133,10 @@ StyledSidebarSubheading.displayName = "SidebarSubheading";
 
 const HamburgerWrapper = styled("div", {
   display: "none",
-  marginRight: "1rem",
   color: "$itemUnactive",
   marginLeft: "-5px",
   transition: "color .125s ease-in-out",
+  cursor: "pointer",
 
   "@mobile": {
     display: "flex",
@@ -145,13 +147,27 @@ const HamburgerWrapper = styled("div", {
   },
 });
 
-const DiscordLogoWrapper = styled("div", {
+const LogoWrapper = styled("div", {
   color: "$textNormal",
+
+  marginTop: "-6px",
+
+  "@mobile": {
+    marginTop: "4px",
+  },
 });
 
 const HamburgerStyles = css({
   width: "32px",
   height: "32px",
+});
+
+const LinkWrapper = styled("section", {
+  display: "flex",
+
+  "@mobile": {
+    alignItems: "center",
+  },
 });
 
 export interface SidebarItem {
@@ -240,14 +256,17 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
         <HamburgerWrapper onClick={() => setSidebarOpen(!sidebarOpen)}>
           <Hamburger className={`${HamburgerStyles}`} />
         </HamburgerWrapper>
-        <Link passHref href="/">
-          <>
-            <DiscordLogoWrapper>
-              <Icon icon="Discord-Logo-White" />
-            </DiscordLogoWrapper>
-            <strong>ddocs.io</strong>
-          </>
-        </Link>
+        <LinkWrapper
+          style={{
+            display: "flex",
+          }}
+          onClick={() => router.push("/")}
+        >
+          <LogoWrapper>
+            <Logo width={32} height={32} />
+          </LogoWrapper>
+          <strong>ddocs.io</strong>
+        </LinkWrapper>
         <ThemeToggle
           css={{
             marginLeft: "auto",

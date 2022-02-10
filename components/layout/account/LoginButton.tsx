@@ -14,8 +14,8 @@ const Container = styled("div", {
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: "#18191C",
-  color: "$textNormal",
-  fill: "$textNormal",
+  color: "white",
+  fill: "white",
   padding: "1rem",
   fontSize: "18px",
   boxShadow: "0px 3px 5px 1px #0202024f",
@@ -23,8 +23,10 @@ const Container = styled("div", {
   userSelect: "none",
 
   "@mobile": {
+    color: "$textNormal",
+    fill: "$textNormal",
     backgroundColor: "transparent",
-    boxShadow: "none",
+    boxShadow: "none !important",
     height: "50px",
     margin: "0 1rem",
     padding: 0,

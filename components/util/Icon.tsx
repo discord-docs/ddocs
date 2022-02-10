@@ -1,15 +1,16 @@
+import React from "react";
 import { FC, useEffect, useState } from "react";
 
-interface IconProps {
+interface IconProps extends React.SVGAttributes<HTMLOrSVGElement> {
   icon: string;
 }
 
-const Icon: FC<IconProps> = ({ icon }) => {
+const Icon: FC<IconProps> = ({ icon, ...props }) => {
   const [component, setComponent] = useState<JSX.Element | null>(null);
 
   useEffect(() => {
     import(`../../public/assets/icons/${icon}.svg`).then((module) => {
-      setComponent(module.default);
+      setComponent((module.default as any)(props));
     });
   }, [icon]);
 
