@@ -5,7 +5,7 @@ import PartialEvent from "./api-models/partialEvent";
 
 export const BaseApiURL =
   process.env.NODE_ENV === "development"
-    ? "http://127.0.0.1:8080"
+    ? "http://localhost:8080"
     : "https://api.ddocs.io";
 
 export const Routes = {
