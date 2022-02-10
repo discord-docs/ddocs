@@ -190,6 +190,12 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
   useEffect(() => {
     if (sidebarInnerRef.current) {
       setSidebarWidth(sidebarInnerRef.current.clientWidth);
+
+      window.onresize = (e) => {
+        if (sidebarInnerRef.current) {
+          setSidebarWidth(sidebarInnerRef.current.clientWidth);
+        }
+      };
     }
   }, [sidebarInnerRef]);
 
