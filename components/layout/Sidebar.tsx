@@ -197,6 +197,7 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
 
   useEffect(() => {
     const matchMedia = window.matchMedia(config.media.mobile);
+    setIsMobile(matchMedia.matches);
 
     matchMedia.addEventListener("change", handleMediaCheck);
 
@@ -266,7 +267,7 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
           x: isMobile ? (sidebarOpen ? 0 : -sidebarWidth) : 0,
           y: 0,
         }}
-        defaultPosition={{ x: 0, y: 0 }}
+        defaultPosition={isMobile ? { x: -sidebarWidth, y: 0 } : { x: 0, y: 0 }}
         bounds={{
           right: 0,
           left: -sidebarWidth,
