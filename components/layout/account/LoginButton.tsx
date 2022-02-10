@@ -32,7 +32,7 @@ const LoginButton: FunctionComponent<LoginButtonProps> = (props) => {
     <Link
       href={
         process.env.NODE_ENV === "development"
-          ? "https://discord.com/api/oauth2/authorize?client_id=937229289882021969&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin&response_type=code&scope=identify"
+          ? "https://discord.com/api/oauth2/authorize?client_id=937229289882021969&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Flogin&response_type=code&scope=identify"
           : "https://discord.com/api/oauth2/authorize?client_id=937229289882021969&redirect_uri=https%3A%2F%2Ftest.ddocs.io%2Flogin&response_type=code&scope=identify"
       }
     >
