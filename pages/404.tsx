@@ -12,6 +12,12 @@ const HeadingContainer = styled("div", {
   marginTop: 40,
   position: "relative",
   zIndex: 1,
+
+  "@mobile": {
+    marginLeft: 0,
+    textAlign: "center",
+    height: "90vh",
+  },
 });
 
 const MainHeading = styled("h1", {
@@ -39,7 +45,14 @@ const WumpusWrapper = styled("div", {
   position: "absolute",
   bottom: 0,
   right: 40,
+
+  "@mobile": {
+    bottom: "-66px",
+    right: "-45px",
+  },
 });
+
+const Wumpus = styled(MissingWumpus, {});
 
 const NotFound: NextPage = () => {
   return (
@@ -52,7 +65,7 @@ const NotFound: NextPage = () => {
         </Link>
       </HeadingContainer>
       <WumpusWrapper>
-        <MissingWumpus />
+        <Wumpus />
       </WumpusWrapper>
     </PageWrapper>
   );

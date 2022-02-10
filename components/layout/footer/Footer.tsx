@@ -64,6 +64,8 @@ const Container = styled("div", {
   paddingBottom: "1rem",
   flexDirection: "row",
 
+  zIndex: 250,
+
   "@mobile": {
     flexDirection: "column-reverse",
   },

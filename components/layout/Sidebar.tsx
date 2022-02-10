@@ -15,7 +15,7 @@ const StyledSidebar = styled("aside", {
     bottom: 0,
     zIndex: 25,
     width: "100%",
-    maxWidth: "85%",
+    maxWidth: "66%",
     padding: "66 px 16px 16px 16px",
     backgroundColor: "$backgroundSecondary",
     transition: "left 0.25s ease-in-out",
@@ -33,10 +33,10 @@ const SidebarContainer = styled("div", {
     top: 0,
     bottom: 0,
     right: 0,
-    zIndex: 25,
     width: "100%",
     height: "100%",
     transition: "background-color 0.15s ease-in-out",
+    zIndex: 251,
   },
 });
 
@@ -177,6 +177,10 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [router.asPath]);
+
   return (
     <SidebarContainer
       css={{
@@ -209,7 +213,7 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
         }}
         ref={sidebarInnerRef}
         css={{
-          left: sidebarOpen ? "0" : "-85%",
+          left: sidebarOpen ? "0" : "-66%",
         }}
       >
         <StyledSidebarHeader>
