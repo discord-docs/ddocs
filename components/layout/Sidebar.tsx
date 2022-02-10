@@ -19,7 +19,6 @@ const StyledSidebar = styled("aside", {
     maxWidth: "66%",
     padding: "66 px 16px 16px 16px",
     backgroundColor: "$backgroundSecondary",
-    transition: "left 0.25s ease-in-out",
   },
 });
 
@@ -178,6 +177,7 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
   const [sidebarWidth, setSidebarWidth] = React.useState(0);
   const [isDragging, setIsDragging] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
+  const [init, setInit] = React.useState(false);
 
   const router = useRouter();
 
@@ -198,7 +198,13 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
   useEffect(() => {
     const matchMedia = window.matchMedia(config.media.mobile);
 
+    setIsMobile(matchMedia.matches);
+
     matchMedia.addEventListener("change", handleMediaCheck);
+
+    setTimeout(() => {
+      setInit(true);
+    }, 150);
 
     return () => {
       matchMedia.removeEventListener("change", handleMediaCheck);
@@ -266,7 +272,7 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
           x: isMobile ? (sidebarOpen ? 0 : -sidebarWidth) : 0,
           y: 0,
         }}
-        defaultPosition={{ x: 0, y: 0 }}
+        defaultPosition={isMobile ? { x: -sidebarWidth, y: 0 } : { x: 0, y: 0 }}
         bounds={{
           right: 0,
           left: -sidebarWidth,
@@ -275,7 +281,12 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
         <StyledSidebar
           ref={sidebarInnerRef}
           css={{
-            transition: isDragging ? "none" : "transform .125s ease-in-out",
+            transition:
+              init && !isDragging && isMobile
+                ? "transform .125s ease-in-out"
+                : "none",
+
+            opacity: init ? "1" : "0",
           }}
         >
           <StyledSidebarNavBar>
