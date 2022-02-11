@@ -38,3 +38,5 @@ yarn-error.log*
 
 .idea
 .env
+
+/standalone-test
