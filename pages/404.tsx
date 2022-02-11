@@ -48,11 +48,13 @@ const WumpusWrapper = styled("div", {
 
   "@mobile": {
     bottom: "-66px",
-    right: "-45px",
+    right: 0,
   },
 });
 
-const Wumpus = styled(MissingWumpus, {});
+const Wumpus = styled(MissingWumpus, {
+  width: "350px",
+});
 
 const NotFound: NextPage = () => {
   return (

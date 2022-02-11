@@ -277,6 +277,7 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
         />
       </StyledSidebarHeader>
       <Draggable
+        cancel=".nav-item"
         nodeRef={sidebarInnerRef}
         disabled={!isMobile}
         onStart={() => setIsDragging(true)}
@@ -312,6 +313,7 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
 
                 const link = (
                   <StyledSidebarNavBarItem
+                    className="nav-item"
                     onClick={onClick}
                     active={active || router.asPath === href}
                   >
