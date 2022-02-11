@@ -83,7 +83,12 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
         value={{ light: lightTheme.className, dark: "dark-theme" }}
         defaultTheme="system"
       >
-        <NextNprogress color="#5865f2" />
+        <NextNprogress
+          options={{
+            showSpinner: false,
+          }}
+          color="#5865f2"
+        />
         <Wrapper>
           <Head>
             <title>{title}</title>

@@ -20,6 +20,7 @@ const StyledSidebar = styled("aside", {
     padding: "66px 10px 16px",
     right: "100vw",
     backgroundColor: "$backgroundSecondary",
+    minWidth: "250px",
   },
 });
 
