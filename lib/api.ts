@@ -9,7 +9,7 @@ import Author from "./api-models/author";
 
 export const BaseApiURL =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:8080"
+    ? "http://127.0.0.1:8080"
     : "https://api.ddocs.io";
 
 export const Routes = {

@@ -1,22 +1,24 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@stitches/react': ^1.2.5
-  '@svgr/webpack': ^6.2.1
-  '@types/jsonwebtoken': ^8.5.8
-  '@types/luxon': ^2.0.7
-  '@types/node': 17.0.14
+  '@stitches/react': 1.2.6
+  '@svgr/webpack': 6.2.1
+  '@types/jsonwebtoken': 8.5.8
+  '@types/luxon': 2.0.9
+  '@types/node': 17.0.16
   '@types/react': 17.0.39
   '@types/react-datepicker': ^4.3.4
-  '@types/react-syntax-highlighter': ^13.5.2
-  axios: ^0.25.0
+  '@types/react-syntax-highlighter': 13.5.2
+  axios: 0.25.0
   eslint: 8.8.0
   eslint-config-next: 12.0.10
-  jsonwebtoken: ^8.5.1
-  luxon: ^2.1.1
-  next: ^12.0.10
-  next-themes: ^0.0.15
-  nextjs-progressbar: ^0.0.13
+  jsonwebtoken: 8.5.1
+  luxon: 2.3.0
+  next: 12.0.10
+  next-themes: 0.0.15
+  nextjs-progressbar: 0.0.13
+  object-assign: ^4.1.1
+  prettier: 2.5.1
   react: 17.0.2
   react-datepicker: ^4.6.0
   react-dom: 17.0.2
@@ -40,6 +42,7 @@ dependencies:
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
   next-themes: 0.0.15_61390be992b634a688f7c2555547b55b
   nextjs-progressbar: 0.0.13_next@12.0.10+react@17.0.2
+  object-assign: 4.1.1
   react: 17.0.2
   react-datepicker: 4.6.0_react-dom@17.0.2+react@17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -54,10 +57,11 @@ dependencies:
 devDependencies:
   '@svgr/webpack': 6.2.1
   '@types/luxon': 2.0.9
-  '@types/node': 17.0.14
+  '@types/node': 17.0.16
   '@types/react': 17.0.39
   eslint: 8.8.0
   eslint-config-next: 12.0.10_9534215cc73b6f260bf33f1b86e3ae0e
+  prettier: 2.5.1
   typescript: 4.5.5
 
 packages:
@@ -1676,7 +1680,7 @@ packages:
   /@types/jsonwebtoken/8.5.8:
     resolution: {integrity: sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==}
     dependencies:
-      '@types/node': 17.0.14
+      '@types/node': 17.0.16
     dev: false
 
   /@types/luxon/2.0.9:
@@ -1697,8 +1701,8 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: false
 
-  /@types/node/17.0.14:
-    resolution: {integrity: sha512-SbjLmERksKOGzWzPNuW7fJM7fk3YXVTFiZWB/Hs99gwhk+/dnrQRPBQjPW9aO+fi1tAffi9PrwFvsmOKmDTyng==}
+  /@types/node/17.0.16:
+    resolution: {integrity: sha512-ydLaGVfQOQ6hI1xK2A5nVh8bl0OGoIfYMxPWHqqYe9bTkWCfqiVvZoh2I/QF2sNSkZzZyROBoTefIEI+PB6iIA==}
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -2362,7 +2366,7 @@ packages:
   /ecdsa-sig-formatter/1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
     dependencies:
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
 
   /electron-to-chromium/1.4.57:
@@ -3238,14 +3242,14 @@ packages:
     dependencies:
       buffer-equal-constant-time: 1.0.1
       ecdsa-sig-formatter: 1.0.11
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
 
   /jws/3.2.2:
     resolution: {integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==}
     dependencies:
       jwa: 1.4.1
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
 
   /kleur/4.1.4:
@@ -4075,6 +4079,12 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier/2.5.1:
+    resolution: {integrity: sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /prismjs/1.25.0:
