@@ -6,3 +6,14 @@ This repository contains an example script where standalone mode works with pnpm
 2. `pnpm i`
 3. `pnpm build`
 4. run script
+
+## Reproduce the issue locally
+
+Replace the `-rP` flag on copy with `-r`.
+
+```diff
+-cp -rP ../.next/standalone/. ./
++cp -r ../.next/standalone/. ./
+-cp -rP ../.next/static/. ./.next/static/
++cp -r ../.next/static/. ./.next/static/
+```
