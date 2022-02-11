@@ -11,26 +11,50 @@ const styles = {
   h1: css({
     fontWeight: "bold",
     fontSize: "32px",
+
+    "@mobile": {
+      fontSize: "28px",
+    },
   }),
   h2: css({
     fontWeight: "bold",
     fontSize: "24px",
+
+    "@mobile": {
+      fontSize: "20px",
+    },
   }),
   h3: css({
     fontWeight: "normal",
     fontSize: "24px",
+
+    "@mobile": {
+      fontSize: "20px",
+    },
   }),
   h4: css({
     fontWeight: "bold",
     fontSize: "20px",
+
+    "@mobile": {
+      fontSize: "16px",
+    },
   }),
   h5: css({
     fontWeight: "normal",
     fontSize: "20px",
+
+    "@mobile": {
+      fontSize: "16px",
+    },
   }),
   h6: css({
     fontWeight: "bold",
     fontSize: "18px",
+
+    "@mobile": {
+      fontSize: "16px",
+    },
   }),
 };
 

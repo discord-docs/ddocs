@@ -49,7 +49,9 @@ const PageHeader = styled("h3", {
   margin: "2rem 0",
 
   "@mobile": {
-    fontSize: "36px",
+    fontSize: "32px",
+    lineHeight: "36px",
+    marginBottom: "1rem",
   },
 });
 
@@ -101,6 +103,8 @@ const ScrollableContainer = styled("div", {
 
   "@mobile": {
     marginRight: "0",
+    marginLeft: "0.75rem",
+    paddingRight: "0.75rem",
   },
 });
 

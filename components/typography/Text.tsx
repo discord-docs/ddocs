@@ -81,15 +81,27 @@ const Text = styled("div", {
         lineHeight: 1,
       },
       normal: {
-        fontSize: "initial",
+        fontSize: "16px",
         lineHeight: 1.2,
+
+        "@mobile": {
+          fontSize: "14px",
+        },
       },
       medium: {
         fontSize: 20,
+
+        "@mobile": {
+          fontSize: "18px",
+        },
       },
       large: {
         fontSize: 28,
         lineHeight: "34px",
+
+        "@mobile": {
+          fontSize: "24px",
+        },
       },
     },
   },
