@@ -30,6 +30,10 @@ const SummaryBody = styled("div", {
   backgroundColor: "$backgroundSecondaryAlt",
   padding: "1rem 2rem",
   borderRadius: "0px 0px 6px 6px",
+
+  "@mobile": {
+    padding: "1rem 0.75rem",
+  },
 });
 
 const Details = styled("details", {});

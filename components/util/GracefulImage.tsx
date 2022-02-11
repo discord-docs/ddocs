@@ -12,6 +12,7 @@ interface GracefulImageProps {
   className?: string;
   alt?: string;
   style?: CSSProperties;
+  onClick?: () => void;
 }
 const GracefulImage: FunctionComponent<GracefulImageProps> = ({
   id,
@@ -21,6 +22,7 @@ const GracefulImage: FunctionComponent<GracefulImageProps> = ({
   className,
   alt,
   style,
+  onClick,
 }) => {
   const imageUrl = API.getRoute(Routes.Assets + `/${id}`);
   return (
@@ -34,6 +36,7 @@ const GracefulImage: FunctionComponent<GracefulImageProps> = ({
               alt={alt}
               height={height}
               width={width}
+              onClick={onClick}
               style={{
                 ...style,
                 transition: `all 250ms ease-in-out`,
@@ -45,6 +48,7 @@ const GracefulImage: FunctionComponent<GracefulImageProps> = ({
       )}
       {!hasThumbnail && (
         <img
+          onClick={onClick}
           src={imageUrl}
           className={className}
           alt={alt}

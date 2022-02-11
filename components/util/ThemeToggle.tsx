@@ -1,20 +1,22 @@
 import { useTheme } from "next-themes";
 import { FunctionComponent } from "react";
-import { styled } from "../../stitches.config";
+import { styled, CSS } from "../../stitches.config";
 import Icon from "../../public/assets/images/theme-change.svg";
 
-interface ThemeToggleProps {}
+interface ThemeToggleProps {
+  css?: CSS;
+}
 
 const ThemeToggleButton = styled("div", {
   cursor: "pointer",
-  marginLeft: "auto",
 });
 
-const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
+const ThemeToggle: FunctionComponent<ThemeToggleProps> = ({ css }) => {
   const { theme, setTheme } = useTheme();
 
   return (
     <ThemeToggleButton
+      css={css}
       onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}
     >
       <Icon />

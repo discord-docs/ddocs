@@ -62,11 +62,23 @@ const Container = styled("div", {
   display: "flex",
   backgroundColor: "$backgroundSecondaryAlt",
   paddingBottom: "1rem",
+  flexDirection: "row",
+
+  zIndex: 250,
+
+  "@mobile": {
+    flexDirection: "column-reverse",
+  },
 });
 
 const LeftContentContainer = styled("div", {
   display: "flex",
   margin: "1rem",
+
+  "@mobile": {
+    flexWrap: "wrap",
+    margin: "1rem 2rem",
+  },
 });
 
 const RightContentContainer = styled("div", {
@@ -75,6 +87,14 @@ const RightContentContainer = styled("div", {
   marginLeft: "auto",
   marginRight: "2rem",
   maxWidth: "300px",
+
+  "@mobile": {
+    margin: "0rem",
+    padding: "0 2rem 1rem 2rem",
+    width: "100%",
+    maxWidth: "100%",
+    alignSelf: "center",
+  },
 });
 
 const Heading = styled("h3", {});
@@ -85,6 +105,15 @@ const FooterSection = styled("div", {
   display: "flex",
   flexDirection: "column",
   gap: "0.5rem",
+
+  "@mobile": {
+    width: "50%",
+    margin: 0,
+    "&:last-child": {
+      minWidth: "100%",
+      margin: "2rem 0 0 0",
+    },
+  },
 });
 
 const Footer: FunctionComponent<FooterProps> = () => {

@@ -1,4 +1,4 @@
-import { createStitches } from "@stitches/react";
+import { createStitches, CSS as CSSProperties } from "@stitches/react";
 
 const stitches = createStitches({
   theme: {
@@ -16,10 +16,16 @@ const stitches = createStitches({
       itemUnactive: "#b9bbbe",
     },
   },
+
+  media: {
+    mobile: "(max-width: 892px)",
+  },
+
   prefix: "ddocs",
 });
 
-export const { getCssText, styled, globalCss, css, createTheme } = stitches;
+export const { getCssText, styled, globalCss, css, createTheme, config } =
+  stitches;
 
 export const lightTheme = createTheme("light-theme", {
   colors: {
@@ -36,3 +42,5 @@ export const lightTheme = createTheme("light-theme", {
     itemUnactive: "#2e3338",
   },
 });
+
+export type CSS = CSSProperties<typeof stitches>;

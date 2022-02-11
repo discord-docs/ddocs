@@ -81,7 +81,7 @@ const AvatarsContainer = styled("div", {
     borderLeft: "3px solid #747F8D",
   },
   position: "relative",
-  marginLeft: "56px",
+  marginLeft: "55px",
   display: "flex",
 });
 

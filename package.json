@@ -20,12 +20,13 @@
     "nextjs-progressbar": "0.0.13",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-markdown": "8.0.0",
-    "react-progressive-graceful-image": "0.6.14",
-    "react-syntax-highlighter": "15.4.5",
-    "react-tooltip": "4.2.21",
-    "remark-gfm": "3.0.1",
-    "sharp": "0.30.1"
+    "react-draggable": "^4.4.4",
+    "react-markdown": "^8.0.0",
+    "react-progressive-graceful-image": "^0.6.14",
+    "react-syntax-highlighter": "^15.4.5",
+    "react-tooltip": "^4.2.21",
+    "remark-gfm": "^3.0.1",
+    "sharp": "^0.30.0"
   },
   "devDependencies": {
     "@svgr/webpack": "6.2.1",
