@@ -36,13 +36,17 @@ const ContentWrapper = styled("main", {
   // padding: "40px 40px 40px 40px",
   width: "100%",
   position: "relative",
+
+  "@mobile": {
+    marginTop: "50px",
+  },
 });
 
 const AccountHeaderContainer = styled("div", {
   position: "absolute",
   top: "40px",
   right: "40px",
-  zIndex: "10",
+  zIndex: "25519",
 });
 
 const MainContentWrapper = styled("div", {
@@ -85,7 +89,12 @@ function DiscordDocsApp({ Component, pageProps, router }: AppProps) {
           value={{ light: lightTheme.className, dark: "dark-theme" }}
           defaultTheme="system"
         >
-          <NextNprogress color="#5865f2" />
+          <NextNprogress
+            options={{
+              showSpinner: false,
+            }}
+            color="#5865f2"
+          />
           <Wrapper>
             <Head>
               <title>{title}</title>

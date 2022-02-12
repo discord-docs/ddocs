@@ -23,22 +23,43 @@ const Banner = styled("div", {
   overflow: "hidden",
   backgroundRepeat: "no-repeat",
   color: "white",
+
+  "@mobile": {
+    height: "min-content",
+    minHeight: "min-content",
+    padding: "1rem 0",
+  },
 });
 
 const BannerContainer = styled("div", {
   alignSelf: "flex-end",
-  margin: "auto auto auto 2.5%",
+  margin: "auto 2.5% auto 2.5%",
 });
 
 const BannerTitle = styled("h1", {
   fontWeight: "bold",
   fontSize: "5em",
   margin: 0,
+
+  "@mobile": {
+    fontSize: "3rem",
+  },
+  "@media (max-width: 400px)": {
+    fontSize: "2.5rem",
+  },
+
+  "@media (max-width: 300px)": {
+    fontSize: "2rem",
+  },
 });
 
 const BannerSubtitle = styled("h3", {
   fontWeight: "normal",
   fontSize: "2em",
+
+  "@mobile": {
+    fontSize: "1.5em",
+  },
 });
 
 Banner.displayName = "Banner";
@@ -46,16 +67,29 @@ Banner.displayName = "Banner";
 const Summary = styled(Card, {
   height: 290,
   width: 250,
+
+  "@mobile": {
+    width: "auto",
+    height: 250,
+  },
 });
 
 const Wrapper = styled("div", {
   padding: 40,
   overflowY: "auto",
+
+  "@mobile": {
+    padding: "16px 0",
+  },
 });
 
 const SummaryWrapper = styled("div", {
   userSelect: "none",
   cursor: "pointer",
+
+  "@mobile": {
+    padding: "8px",
+  },
 });
 
 interface SummaryProps {

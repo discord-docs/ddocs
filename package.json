@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:ci": "CI=true npm run build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -21,20 +22,22 @@
     "react": "17.0.2",
     "react-datepicker": "^4.6.0",
     "react-dom": "17.0.2",
+    "react-draggable": "4.4.4",
     "react-easy-crop": "^4.0.1",
     "react-markdown": "^8.0.0",
     "react-popper-tooltip": "^4.3.1",
-    "react-progressive-graceful-image": "^0.6.14",
-    "react-syntax-highlighter": "^15.4.5",
-    "remark-gfm": "^3.0.1",
-    "sharp": "^0.30.0"
+    "react-progressive-graceful-image": "0.6.14",
+    "react-syntax-highlighter": "15.4.5",
+    "react-tooltip": "4.2.21",
+    "remark-gfm": "3.0.1",
+    "sharp": "0.30.1"
   },
   "devDependencies": {
     "@svgr/webpack": "6.2.1",
     "@types/luxon": "2.0.9",
     "@types/node": "17.0.16",
     "@types/react": "17.0.39",
-    "eslint": "8.8.0",
+    "eslint": "8.9.0",
     "eslint-config-next": "12.0.10",
     "prettier": "2.5.1",
     "typescript": "4.5.5"

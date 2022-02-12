@@ -35,6 +35,11 @@ const ContentContainer = styled("div", {
   flexDirection: "column",
   maxWidth: "1100px",
   marginTop: "2rem",
+
+  "@mobile": {
+    height: "min-content",
+    paddingBottom: "2rem",
+  },
 });
 
 const PageHeader = styled("h3", {
@@ -42,6 +47,12 @@ const PageHeader = styled("h3", {
   fontSize: "50px",
   lineHeight: "55px",
   margin: "2rem 0",
+
+  "@mobile": {
+    fontSize: "32px",
+    lineHeight: "36px",
+    marginBottom: "1rem",
+  },
 });
 
 const EventBanner = styled("img", {
@@ -60,6 +71,10 @@ const EventSidebarContainer = styled("div", {
   marginRight: "1rem",
   minWidth: "316px",
   position: "unset",
+
+  "@mobile": {
+    display: "none",
+  },
 });
 
 const SummaryItemContainer = styled("div", {
@@ -85,12 +100,19 @@ const ScrollableContainer = styled("div", {
   display: "flex",
   justifyContent: "center",
   overflowY: "auto",
+
+  "@mobile": {
+    marginRight: "0",
+    marginLeft: "0.75rem",
+    paddingRight: "0.75rem",
+  },
 });
 
 const AccountHeaderContainer = styled("div", {
   position: "absolute",
   top: "0",
   right: "0",
+  zIndex: "25519",
 });
 
 const Event: FunctionComponent<EventProps> = ({ event, related }) => {
@@ -135,7 +157,9 @@ const Event: FunctionComponent<EventProps> = ({ event, related }) => {
 
   return (
     <Container>
-      <ScrollableContainer className={`${Scrollbar("2rem")}`}>
+      <ScrollableContainer
+        className={`${Scrollbar("2rem", undefined, "0rem")}`}
+      >
         <ContentContainer>
           <AccountHeaderContainer>
             <AccountHeader key={event.id} />

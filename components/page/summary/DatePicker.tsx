@@ -11,6 +11,10 @@ const DatePickerContainer = styled("div", {
   width: 288,
   overflow: "hidden",
   userSelect: "none",
+
+  "@mobile": {
+    width: "70%",
+  },
 });
 
 DatePickerContainer.displayName = "DatePicker";
