@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { styled } from "../../../stitches.config";
-import Icon from "../../util/Icon";
+import Icon from "../../Icons/Icon";
 
 const DatePickerContainer = styled("div", {
   display: "grid",

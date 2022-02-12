@@ -104,10 +104,7 @@ class AuthenticationContext extends React.Component<
       },
     });
 
-    if (
-      r.status == 401 &&
-      (await r.json())?.reason == "Invalid authorization"
-    ) {
+    if (r.status === 401 || r.status === 403) {
       if (returnOn401) {
         return r;
       }

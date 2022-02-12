@@ -121,7 +121,11 @@ const Textbox: FunctionComponent<TextboxProps> = ({
   return (
     <>
       <FormItemTitle title={title} required={required} />
-      <TextContainer ref={containerRef} css={{ ...css }}>
+      <TextContainer
+        className="modal-ignore"
+        ref={containerRef}
+        css={{ ...css }}
+      >
         {multiline ? (
           <TextArea
             rows={rows}

@@ -46,7 +46,7 @@ const Slider: FunctionComponent<SliderProps> = ({
   max ??= 100;
 
   return (
-    <SliderContainer>
+    <SliderContainer className="modal-ignore">
       <SliderInput
         type="range"
         min={min}

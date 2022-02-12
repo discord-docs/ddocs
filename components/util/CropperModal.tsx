@@ -21,6 +21,11 @@ const CropperContainer = styled("div", {
   position: "relative",
   width: "500px",
   height: "500px",
+
+  "@mobile": {
+    width: "100%",
+    height: "100%",
+  },
 });
 
 const ButtonContainer = styled("div", {
@@ -91,7 +96,7 @@ const CropperModal: FunctionComponent<CropperModalProps> = ({
       <CropperContainer>
         <Cropper
           classes={{
-            containerClassName: `${CropperStyles}`,
+            containerClassName: `${CropperStyles} modal-ignore`,
           }}
           image={image}
           aspect={aspect}

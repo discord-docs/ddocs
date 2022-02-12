@@ -2,12 +2,12 @@ import React, { FC, ReactChild, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { css, styled, config } from "../../stitches.config";
-import Icon from "../util/Icon";
+import Icon from "../Icons/Icon";
 import { useRouter } from "next/dist/client/router";
 import ThemeToggle from "../util/ThemeToggle";
 import Hamburger from "../../public/assets/icons/hamburger.svg";
 import Draggable from "react-draggable";
-import Logo from "../util/Logo";
+import Logo from "../Icons/Logo";
 
 const StyledSidebar = styled("aside", {
   "@mobile": {

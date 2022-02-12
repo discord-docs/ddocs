@@ -139,6 +139,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
         <Input
           ref={ref}
           {...props}
+          className="modal-ignore"
           onClick={() => {
             setOpen(true);
           }}
@@ -150,6 +151,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
   return (
     <DatePickerContainer className={`${className || ""}`}>
       <DatePickerComponent
+        calendarClassName="modal-ignore"
         open={open}
         showTimeSelect={
           type === "datetime" || type === "time" ? true : undefined

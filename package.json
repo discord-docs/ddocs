@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "7.0.0",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.4.1",
+    "@mui/material": "^5.4.1",
     "@stitches/react": "1.2.6",
     "@types/jsonwebtoken": "8.5.8",
     "@types/react-datepicker": "^4.3.4",

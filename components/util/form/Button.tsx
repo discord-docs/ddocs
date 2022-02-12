@@ -63,6 +63,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   return (
     <div
+      className="modal-ignore"
       style={{
         cursor: disabled ? "not-allowed" : "pointer",
         width: "fit-content",
