@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import { FunctionComponent } from "react";
 import { css, styled } from "../../stitches.config";
 import Scrollbar from "../layout/Scrollbar";
@@ -19,7 +19,7 @@ const ModalContainer = styled("div", {
   width: "100%",
   height: "100%",
   transition: "background-color 0.1s ease-in-out",
-  zIndex: "10",
+  zIndex: "25520",
   justifyContent: "center",
   alignItems: "center",
   display: "flex",
@@ -58,19 +58,18 @@ const Modal: FunctionComponent<ModalProps> = ({
   onClickeOutside,
 }) => {
   const modalRef = React.createRef<HTMLDivElement>();
-
+  const containerRef = React.createRef<HTMLDivElement>();
   return (
     <ModalContainer
+      ref={containerRef}
       onClick={(e) => {
-        if (modalRef.current && onClickeOutside) {
-          var rect = modalRef.current.getBoundingClientRect();
+        if (
+          modalRef.current &&
+          onClickeOutside &&
+          e.target === containerRef.current
+        ) {
           // check if the click was inside the modal
-          if (
-            e.clientX < rect.left ||
-            e.clientX > rect.right ||
-            e.clientY < rect.top ||
-            e.clientY > rect.bottom
-          ) {
+          if (e.target === containerRef.current) {
             onClickeOutside();
           }
         }

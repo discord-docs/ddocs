@@ -9,6 +9,7 @@ import GracefulImage from "../../util/GracefulImage";
 import Header from "../../typography/Header";
 import Button from "../../util/form/Button";
 import { CreateDraft } from "../../../lib/api-models/createDraft";
+import FormItemTitle from "../../util/form/FormItemTitle";
 
 interface NewDraftModalProps {
   open: boolean;

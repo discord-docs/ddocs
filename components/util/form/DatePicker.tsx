@@ -121,25 +121,6 @@ interface InputProps {
   title: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
-const CustomInput: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { title, required, setOpen, ...props },
-  ref
-) => {
-  return (
-    <>
-      <FormItemTitle title={title} required={required} />
-      <Input
-        ref={ref}
-        {...props}
-        onClick={() => {
-          setOpen(true);
-        }}
-      />
-    </>
-  );
-};
-
-const CustomInputForwarded = forwardRef(CustomInput);
 
 const DatePicker: FunctionComponent<DatePickerProps> = ({
   title,
@@ -150,6 +131,21 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
   onChange,
 }) => {
   const [open, setOpen] = useState(false);
+
+  const CustomInput = forwardRef((props, ref: any) => {
+    return (
+      <>
+        <FormItemTitle title={title} required={required} />
+        <Input
+          ref={ref}
+          {...props}
+          onClick={() => {
+            setOpen(true);
+          }}
+        />
+      </>
+    );
+  });
 
   return (
     <DatePickerContainer className={`${className || ""}`}>
@@ -170,13 +166,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
             onChange(e as Date);
           }
         }}
-        customInput={
-          <CustomInputForwarded
-            title={title}
-            setOpen={setOpen}
-            required={required ?? false}
-          />
-        }
+        customInput={<CustomInput />}
         popperPlacement="top"
         popperModifiers={[
           {
