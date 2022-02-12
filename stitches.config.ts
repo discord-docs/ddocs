@@ -34,6 +34,7 @@ const stitches = createStitches({
 
   media: {
     mobile: "(max-width: 892px)",
+    footerBreak1: "(max-width: 1450px)",
   },
 
   prefix: "ddocs",

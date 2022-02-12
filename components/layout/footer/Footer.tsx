@@ -70,8 +70,11 @@ const Container = styled("div", {
   backgroundColor: "$backgroundSecondaryAlt",
   paddingBottom: "1rem",
   flexDirection: "row",
-
   zIndex: 250,
+
+  "@footerBreak1": {
+    flexDirection: "column",
+  },
 
   "@mobile": {
     flexDirection: "column-reverse",
@@ -84,7 +87,11 @@ const LeftContentContainer = styled("div", {
 
   "@mobile": {
     flexWrap: "wrap",
-    margin: "1rem 2rem",
+    margin: "0 2rem 1rem 2rem",
+  },
+
+  "&:last-child": {
+    width: "100% !important",
   },
 });
 
@@ -93,7 +100,7 @@ const RightContentContainer = styled("div", {
   flexDirection: "row",
   marginLeft: "auto",
   marginRight: "2rem",
-  maxWidth: "300px",
+  maxWidth: "500px",
 
   "@mobile": {
     margin: "0rem",
@@ -101,6 +108,12 @@ const RightContentContainer = styled("div", {
     width: "100%",
     maxWidth: "100%",
     alignSelf: "center",
+  },
+
+  "@footerBreak1": {
+    maxWidth: "100%",
+    marginLeft: "2rem",
+    marginRight: "2rem",
   },
 });
 
@@ -113,6 +126,10 @@ const FooterSection = styled("div", {
   flexDirection: "column",
   gap: "0.5rem",
 
+  "@footerBreak1": {
+    minWidth: "20%",
+  },
+
   "@mobile": {
     width: "50%",
     margin: 0,
@@ -124,11 +141,15 @@ const FooterSection = styled("div", {
 });
 
 const ContributorContainer = styled("div", {
+  flexDirection: "column",
   display: "flex",
-  flexWrap: "wrap",
-  width: "106px",
-  gap: "5px",
+  maxWidth: "108px",
+  minWidth: "108px",
   margin: "1rem",
+
+  "@mobile": {
+    margin: "1rem 1rem 1rem 0",
+  },
 });
 
 const AboutSection = styled("div", {
@@ -137,15 +158,16 @@ const AboutSection = styled("div", {
   maxWidth: "300px",
   marginLeft: "2rem",
   margin: "0.8rem",
+
+  "@footerBreak1": {
+    maxWidth: "100%",
+  },
 });
 
-const TooltipStyles = css({
-  padding: "5px 10px !important",
-  borderRadius: "5px !important",
-  background: "$backgroundSecondaryAlt !important",
-  color: "$textPrimary !important",
-  fontSize: "1rem !important",
-  opacity: "1 !important",
+const ContributorIconContainer = styled("div", {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "5px",
 });
 
 const Footer: FunctionComponent<FooterProps> = () => {
@@ -192,7 +214,6 @@ const Footer: FunctionComponent<FooterProps> = () => {
     <Container>
       <LeftContentContainer>
         {sections.map((section) => renderSection(section.name, section.items))}
-        <FooterSection></FooterSection>
       </LeftContentContainer>
       <RightContentContainer>
         <ContributorContainer>
@@ -207,20 +228,22 @@ const Footer: FunctionComponent<FooterProps> = () => {
           >
             Contributors
           </Text>
-          {contributors.map((contributor, i) => (
-            <Tooltip
-              key={i}
-              content={`${contributor.username}#${contributor.discriminator}`}
-            >
-              {(ref: any) => (
-                <Contributor
-                  targetRef={ref}
-                  key={contributor.id}
-                  contributor={contributor}
-                />
-              )}
-            </Tooltip>
-          ))}
+          <ContributorIconContainer>
+            {contributors.map((contributor, i) => (
+              <Tooltip
+                key={i}
+                content={`${contributor.username}#${contributor.discriminator}`}
+              >
+                {(ref: any) => (
+                  <Contributor
+                    targetRef={ref}
+                    key={contributor.id}
+                    contributor={contributor}
+                  />
+                )}
+              </Tooltip>
+            ))}
+          </ContributorIconContainer>
         </ContributorContainer>
         <AboutSection>
           <Heading
