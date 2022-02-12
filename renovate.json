@@ -1,14 +1,14 @@
 {
-    "extends": ["config:base"],
-    "lockFileMaintenance": { "enabled": true },
-    "prHourlyLimit": 2,
-    "labels": ["dependencies"],
-    "assignees": ["lhjt"],
-    "packageRules": [
-      {
-        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-        "automerge": true
-      }
-    ]
-  }
-  
+  "extends": ["config:base"],
+  "lockFileMaintenance": { "enabled": true },
+  "prHourlyLimit": 2,
+  "labels": ["dependencies"],
+  "assignees": ["lhjt"],
+  "reviewers": ["lhjt"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
+}
