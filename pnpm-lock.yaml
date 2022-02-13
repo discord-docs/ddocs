@@ -8,7 +8,7 @@ specifiers:
   '@types/node': 17.0.16
   '@types/react': 17.0.39
   '@types/react-syntax-highlighter': 13.5.2
-  axios: 0.25.0
+  axios: 0.26.0
   eslint: 8.9.0
   eslint-config-next: 12.0.10
   jsonwebtoken: 8.5.1
@@ -32,7 +32,7 @@ dependencies:
   '@stitches/react': 1.2.6_react@17.0.2
   '@types/jsonwebtoken': 8.5.8
   '@types/react-syntax-highlighter': 13.5.2
-  axios: 0.25.0
+  axios: 0.26.0
   jsonwebtoken: 8.5.1
   luxon: 2.3.0
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
@@ -1919,8 +1919,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /axios/0.25.0:
-    resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==}
+  /axios/0.26.0:
+    resolution: {integrity: sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==}
     dependencies:
       follow-redirects: 1.14.8
     transitivePeerDependencies:
