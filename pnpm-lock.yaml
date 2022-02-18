@@ -10,7 +10,7 @@ specifiers:
   '@types/react-syntax-highlighter': 13.5.2
   axios: 0.26.0
   eslint: 8.9.0
-  eslint-config-next: 12.0.10
+  eslint-config-next: 12.1.0
   jsonwebtoken: 8.5.1
   luxon: 2.3.0
   next: 12.1.0
@@ -54,7 +54,7 @@ devDependencies:
   '@types/node': 17.0.16
   '@types/react': 17.0.39
   eslint: 8.9.0
-  eslint-config-next: 12.0.10_05da38aa0d7c6b76490c613c98841282
+  eslint-config-next: 12.1.0_05da38aa0d7c6b76490c613c98841282
   prettier: 2.5.1
   typescript: 4.5.5
 
@@ -1369,8 +1369,8 @@ packages:
     resolution: {integrity: sha512-nrIgY6t17FQ9xxwH3jj0a6EOiQ/WDHUos35Hghtr+SWN/ntHIQ7UpuvSi0vaLzZVHQWaDupKI+liO5vANcDeTQ==}
     dev: false
 
-  /@next/eslint-plugin-next/12.0.10:
-    resolution: {integrity: sha512-PbGRnV5HGSfRGLjf8uTh1MaWgLwnjKjWiGVjK752ifITJbZ28/5AmLAFT2shDYeux8BHgpgVll5QXu7GN3YLFw==}
+  /@next/eslint-plugin-next/12.1.0:
+    resolution: {integrity: sha512-WFiyvSM2G5cQmh32t/SiQuJ+I2O+FHVlK/RFw5b1565O2kEM/36EXncjt88Pa+X5oSc+1SS+tWxowWJd1lqI+g==}
     dependencies:
       glob: 7.1.7
     dev: true
@@ -2453,8 +2453,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /eslint-config-next/12.0.10_05da38aa0d7c6b76490c613c98841282:
-    resolution: {integrity: sha512-l1er6mwSo1bltjLwmd71p5BdT6k/NQxV1n4lKZI6xt3MDMrq7ChUBr+EecxOry8GC/rCRUtPpH8Ygs0BJc5YLg==}
+  /eslint-config-next/12.1.0_05da38aa0d7c6b76490c613c98841282:
+    resolution: {integrity: sha512-tBhuUgoDITcdcM7xFvensi9I5WTI4dnvH4ETGRg1U8ZKpXrZsWQFdOKIDzR3RLP5HR3xXrLviaMM4c3zVoE/pA==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
       next: '>=10.2.0'
@@ -2463,7 +2463,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@next/eslint-plugin-next': 12.0.10
+      '@next/eslint-plugin-next': 12.1.0
       '@rushstack/eslint-patch': 1.1.0
       '@typescript-eslint/parser': 5.11.0_eslint@8.9.0+typescript@4.5.5
       eslint: 8.9.0
