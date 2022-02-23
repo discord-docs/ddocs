@@ -12,7 +12,7 @@ specifiers:
   eslint: 8.9.0
   eslint-config-next: 12.1.0
   jsonwebtoken: 8.5.1
-  luxon: 2.3.0
+  luxon: 2.3.1
   next: 12.1.0
   next-themes: 0.0.15
   nextjs-progressbar: 0.0.13
@@ -34,7 +34,7 @@ dependencies:
   '@types/react-syntax-highlighter': 13.5.2
   axios: 0.26.0
   jsonwebtoken: 8.5.1
-  luxon: 2.3.0
+  luxon: 2.3.1
   next: 12.1.0_react-dom@17.0.2+react@17.0.2
   next-themes: 0.0.15_caa633a00319350dbda42996613fe26c
   nextjs-progressbar: 0.0.13_next@12.1.0+react@17.0.2
@@ -3337,8 +3337,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /luxon/2.3.0:
-    resolution: {integrity: sha512-gv6jZCV+gGIrVKhO90yrsn8qXPKD8HYZJtrUDSfEbow8Tkw84T9OnCyJhWvnJIaIF/tBuiAjZuQHUt1LddX2mg==}
+  /luxon/2.3.1:
+    resolution: {integrity: sha512-I8vnjOmhXsMSlNMZlMkSOvgrxKJl0uOsEzdGgGNZuZPaS9KlefpE9KV95QFftlJSC+1UyCC9/I69R02cz/zcCA==}
     engines: {node: '>=12'}
     dev: false
 
