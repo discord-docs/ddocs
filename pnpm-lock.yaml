@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@stitches/react': 1.2.6
+  '@stitches/react': 1.2.7
   '@svgr/webpack': 6.2.1
   '@types/jsonwebtoken': 8.5.8
   '@types/luxon': 2.0.9
@@ -29,7 +29,7 @@ specifiers:
   typescript: 4.5.5
 
 dependencies:
-  '@stitches/react': 1.2.6_react@17.0.2
+  '@stitches/react': 1.2.7_react@17.0.2
   '@types/jsonwebtoken': 8.5.8
   '@types/react-syntax-highlighter': 13.5.2
   axios: 0.26.0
@@ -1510,8 +1510,8 @@ packages:
     resolution: {integrity: sha512-JLo+Y592QzIE+q7Dl2pMUtt4q8SKYI5jDrZxrozEQxnGVOyYE+GWK9eLkwTaeN9DDctlaRAQ3TBmzZ1qdLE30A==}
     dev: true
 
-  /@stitches/react/1.2.6_react@17.0.2:
-    resolution: {integrity: sha512-gRVITYj8W4jJmoiVxWDv72yCvd12VvtUUAnTzs07EqmtvGCVgKZu3Dx0x5KVCcb0b6tfgvvNH2L84YrzdM4Mag==}
+  /@stitches/react/1.2.7_react@17.0.2:
+    resolution: {integrity: sha512-6AxpUag7OW55ANzRnuy7R15FEyQeZ66fytVo3BBilFIU0mfo3t49CAMcEAL/A1SbhSj/FCdWkn/XrbjGBTJTzg==}
     peerDependencies:
       react: '>= 16.3.0'
     dependencies:
