@@ -17,7 +17,7 @@
     "luxon": "2.3.1",
     "next": "12.1.0",
     "next-themes": "0.0.15",
-    "nextjs-progressbar": "0.0.13",
+    "nextjs-progressbar": "0.0.14",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-draggable": "4.4.4",

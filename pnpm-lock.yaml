@@ -15,7 +15,7 @@ specifiers:
   luxon: 2.3.1
   next: 12.1.0
   next-themes: 0.0.15
-  nextjs-progressbar: 0.0.13
+  nextjs-progressbar: 0.0.14
   prettier: 2.5.1
   react: 17.0.2
   react-dom: 17.0.2
@@ -37,7 +37,7 @@ dependencies:
   luxon: 2.3.1
   next: 12.1.0_react-dom@17.0.2+react@17.0.2
   next-themes: 0.0.15_caa633a00319350dbda42996613fe26c
-  nextjs-progressbar: 0.0.13_next@12.1.0+react@17.0.2
+  nextjs-progressbar: 0.0.14_next@12.1.0+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-draggable: 4.4.4_react-dom@17.0.2+react@17.0.2
@@ -3830,11 +3830,11 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /nextjs-progressbar/0.0.13_next@12.1.0+react@17.0.2:
-    resolution: {integrity: sha512-vuE9/j1yaFyHhMVwdlPZbGbcwnvoZZMH8fXUG+HCa+w5uojRNOMO43EL+o9YZ53QwQHsjWdfUapz+J8D/u3jFw==}
+  /nextjs-progressbar/0.0.14_next@12.1.0+react@17.0.2:
+    resolution: {integrity: sha512-AXYXHDN6M52AwFnGqH/vlwyo0gbC9zM7QS/4ryOTI0RUqfze5FJl8uSrxKJMzK6hGFdDeQXcZoWsLGXeCVtTwg==}
     peerDependencies:
-      next: '>= 6.0.0 <=12.x.x'
-      react: '>= 16.0.0 <= 17.x.x'
+      next: '>= 6.0.0'
+      react: '>= 16.0.0'
     dependencies:
       next: 12.1.0_react-dom@17.0.2+react@17.0.2
       nprogress: 0.2.0
