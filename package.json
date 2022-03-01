@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@stitches/react": "1.2.6",
+    "@stitches/react": "1.2.7",
     "@types/jsonwebtoken": "8.5.8",
     "@types/react-syntax-highlighter": "13.5.2",
     "axios": "0.26.0",
