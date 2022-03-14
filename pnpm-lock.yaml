@@ -22,7 +22,7 @@ specifiers:
   react-draggable: 4.4.4
   react-markdown: 8.0.1
   react-progressive-graceful-image: 0.6.14
-  react-syntax-highlighter: 15.4.5
+  react-syntax-highlighter: 15.5.0
   react-tooltip: 4.2.21
   remark-gfm: 3.0.1
   sharp: 0.30.3
@@ -43,7 +43,7 @@ dependencies:
   react-draggable: 4.4.4_react-dom@17.0.2+react@17.0.2
   react-markdown: 8.0.1_00d6772dea80510e818fd171caaa025a
   react-progressive-graceful-image: 0.6.14_react-dom@17.0.2+react@17.0.2
-  react-syntax-highlighter: 15.4.5_react@17.0.2
+  react-syntax-highlighter: 15.5.0_react@17.0.2
   react-tooltip: 4.2.21_react-dom@17.0.2+react@17.0.2
   remark-gfm: 3.0.1
   sharp: 0.30.3
@@ -4189,8 +4189,8 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /react-syntax-highlighter/15.4.5_react@17.0.2:
-    resolution: {integrity: sha512-RC90KQTxZ/b7+9iE6s9nmiFLFjWswUcfULi4GwVzdFVKVMQySkJWBuOmJFfjwjMVCo0IUUuJrWebNKyviKpwLQ==}
+  /react-syntax-highlighter/15.5.0_react@17.0.2:
+    resolution: {integrity: sha512-+zq2myprEnQmH5yw6Gqc8lD55QHnpKaU8TOcFeC/Lg/MQSs8UknEA0JC4nTZGFAXC2J2Hyj/ijJ7NlabyPi2gg==}
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
