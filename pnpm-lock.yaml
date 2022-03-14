@@ -20,7 +20,7 @@ specifiers:
   react: 17.0.2
   react-dom: 17.0.2
   react-draggable: 4.4.4
-  react-markdown: 8.0.0
+  react-markdown: 8.0.1
   react-progressive-graceful-image: 0.6.14
   react-syntax-highlighter: 15.4.5
   react-tooltip: 4.2.21
@@ -41,7 +41,7 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-draggable: 4.4.4_react-dom@17.0.2+react@17.0.2
-  react-markdown: 8.0.0_00d6772dea80510e818fd171caaa025a
+  react-markdown: 8.0.1_00d6772dea80510e818fd171caaa025a
   react-progressive-graceful-image: 0.6.14_react-dom@17.0.2+react@17.0.2
   react-syntax-highlighter: 15.4.5_react@17.0.2
   react-tooltip: 4.2.21_react-dom@17.0.2+react@17.0.2
@@ -4151,13 +4151,14 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
-  /react-markdown/8.0.0_00d6772dea80510e818fd171caaa025a:
-    resolution: {integrity: sha512-qbrWpLny6Ef2xHqnYqtot948LXP+4FtC+MWIuaN1kvSnowM+r1qEeEHpSaU0TDBOisQuj+Qe6eFY15cNL3gLAw==}
+  /react-markdown/8.0.1_00d6772dea80510e818fd171caaa025a:
+    resolution: {integrity: sha512-g78B0KtUk8oDRt59fX9SWhMikn3/qYcQW+aVMxdIulcjCNeecAZNOmR8uXy5p4bhbuPIS8gZly81bF4pAQWYXw==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
     dependencies:
       '@types/hast': 2.3.4
+      '@types/prop-types': 15.7.4
       '@types/react': 17.0.40
       '@types/unist': 2.0.6
       comma-separated-tokens: 2.0.2
