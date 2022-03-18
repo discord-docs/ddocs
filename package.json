@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "6.2.1",
-    "@types/luxon": "2.3.0",
+    "@types/luxon": "2.3.1",
     "@types/node": "17.0.16",
     "@types/react": "17.0.40",
     "eslint": "8.11.0",
