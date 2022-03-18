@@ -4,7 +4,7 @@ specifiers:
   '@stitches/react': 1.2.7
   '@svgr/webpack': 6.2.1
   '@types/jsonwebtoken': 8.5.8
-  '@types/luxon': 2.3.0
+  '@types/luxon': 2.3.1
   '@types/node': 17.0.16
   '@types/react': 17.0.40
   '@types/react-syntax-highlighter': 13.5.2
@@ -50,7 +50,7 @@ dependencies:
 
 devDependencies:
   '@svgr/webpack': 6.2.1
-  '@types/luxon': 2.3.0
+  '@types/luxon': 2.3.1
   '@types/node': 17.0.16
   '@types/react': 17.0.40
   eslint: 8.11.0
@@ -1696,8 +1696,8 @@ packages:
       '@types/node': 17.0.16
     dev: false
 
-  /@types/luxon/2.3.0:
-    resolution: {integrity: sha512-mWXdRlg+5dWvxU+uaijB2RY5NrJtMEXR6j+D6W66hPuezSVXrQqQvWa/JNHntgEYgjzeoVRrQVmMWAbKjUJiFQ==}
+  /@types/luxon/2.3.1:
+    resolution: {integrity: sha512-nAPUltOT28fal2eDZz8yyzNhBjHw1NEymFBP7Q9iCShqpflWPybxHbD7pw/46jQmT+HXOy1QN5hNTms8MOTlOQ==}
     dev: true
 
   /@types/mdast/3.0.10:
