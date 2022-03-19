@@ -6,7 +6,7 @@ specifiers:
   '@types/jsonwebtoken': 8.5.8
   '@types/luxon': 2.3.1
   '@types/node': 17.0.16
-  '@types/react': 17.0.40
+  '@types/react': 17.0.41
   '@types/react-syntax-highlighter': 13.5.2
   axios: 0.26.1
   eslint: 8.11.0
@@ -41,7 +41,7 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-draggable: 4.4.4_react-dom@17.0.2+react@17.0.2
-  react-markdown: 8.0.1_00d6772dea80510e818fd171caaa025a
+  react-markdown: 8.0.1_6acae0b0a4a23c4372144902affe8735
   react-progressive-graceful-image: 0.6.14_react-dom@17.0.2+react@17.0.2
   react-syntax-highlighter: 15.5.0_react@17.0.2
   react-tooltip: 4.2.21_react-dom@17.0.2+react@17.0.2
@@ -52,7 +52,7 @@ devDependencies:
   '@svgr/webpack': 6.2.1
   '@types/luxon': 2.3.1
   '@types/node': 17.0.16
-  '@types/react': 17.0.40
+  '@types/react': 17.0.41
   eslint: 8.11.0
   eslint-config-next: 12.1.0_3ac81353fe98918efb885c3e6be622c2
   prettier: 2.6.0
@@ -1727,11 +1727,11 @@ packages:
   /@types/react-syntax-highlighter/13.5.2:
     resolution: {integrity: sha512-sRZoKZBGKaE7CzMvTTgz+0x/aVR58ZYUTfB7HN76vC+yQnvo1FWtzNARBt0fGqcLGEVakEzMu/CtPzssmanu8Q==}
     dependencies:
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
     dev: false
 
-  /@types/react/17.0.40:
-    resolution: {integrity: sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ==}
+  /@types/react/17.0.41:
+    resolution: {integrity: sha512-chYZ9ogWUodyC7VUTRBfblysKLjnohhFY9bGLwvnUFFy48+vB9DikmB3lW0qTFmBcKSzmdglcvkHK71IioOlDA==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
@@ -4151,7 +4151,7 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
-  /react-markdown/8.0.1_00d6772dea80510e818fd171caaa025a:
+  /react-markdown/8.0.1_6acae0b0a4a23c4372144902affe8735:
     resolution: {integrity: sha512-g78B0KtUk8oDRt59fX9SWhMikn3/qYcQW+aVMxdIulcjCNeecAZNOmR8uXy5p4bhbuPIS8gZly81bF4pAQWYXw==}
     peerDependencies:
       '@types/react': '>=16'
@@ -4159,7 +4159,7 @@ packages:
     dependencies:
       '@types/hast': 2.3.4
       '@types/prop-types': 15.7.4
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
       '@types/unist': 2.0.6
       comma-separated-tokens: 2.0.2
       hast-util-whitespace: 2.0.0
