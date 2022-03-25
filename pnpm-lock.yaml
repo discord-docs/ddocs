@@ -16,7 +16,7 @@ specifiers:
   next: 12.1.0
   next-themes: 0.0.15
   nextjs-progressbar: 0.0.14
-  prettier: 2.6.0
+  prettier: 2.6.1
   react: 17.0.2
   react-dom: 17.0.2
   react-draggable: 4.4.4
@@ -55,7 +55,7 @@ devDependencies:
   '@types/react': 17.0.43
   eslint: 8.11.0
   eslint-config-next: 12.1.0_1c876b55ab9e55803db03bd129e85c98
-  prettier: 2.6.0
+  prettier: 2.6.1
   typescript: 4.6.3
 
 packages:
@@ -4070,8 +4070,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.6.0:
-    resolution: {integrity: sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==}
+  /prettier/2.6.1:
+    resolution: {integrity: sha512-8UVbTBYGwN37Bs9LERmxCPjdvPxlEowx2urIL6urHzdb3SDq4B/Z6xLFCblrSnE4iKWcS6ziJ3aOYrc1kz/E2A==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
