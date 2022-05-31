@@ -47,11 +47,11 @@ const sections = [
     ],
   },
   {
-    name: "Disclamer",
+    name: "Disclaimer",
     items: [
       {
         content:
-          "ddocs.io is not affiliated, associated, authorized, endorsed by, or in anyway officially connected with Discord Inc. or any of its subsidiaries or its affiliates.",
+          "ddocs.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Discord Inc. or any of its subsidiaries or its affiliates.",
       },
     ],
   },
@@ -157,7 +157,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
           your brittle eyes.
           <br />
           <br />
-          {"©️"} 2022 All rights are reserved.
+          {"©️"} 2022 All rights reserved.
         </Text>
       </RightContentContainer>
     </Container>
