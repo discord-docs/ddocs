@@ -3,8 +3,6 @@
   "lockFileMaintenance": { "enabled": true },
   "prHourlyLimit": 2,
   "labels": ["dependencies"],
-  "assignees": ["lhjt"],
-  "reviewers": ["lhjt"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
