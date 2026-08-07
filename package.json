@@ -26,7 +26,7 @@
     "react-syntax-highlighter": "15.5.0",
     "react-tooltip": "4.2.21",
     "remark-gfm": "3.0.1",
-    "sharp": "0.30.3"
+    "sharp": "0.32.6"
   },
   "devDependencies": {
     "@svgr/webpack": "6.2.1",
