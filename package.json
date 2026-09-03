@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@stitches/react": "1.2.7",
-    "@types/jsonwebtoken": "8.5.8",
+    "@types/jsonwebtoken": "8.5.9",
     "@types/react-syntax-highlighter": "13.5.2",
     "axios": "0.26.1",
     "jsonwebtoken": "8.5.1",
